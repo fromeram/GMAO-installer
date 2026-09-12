@@ -31,10 +31,10 @@ class MaintenanceRequest(Base):
     work_order_id = Column(Integer, ForeignKey("work_orders.id"), nullable=True)
 
     # Relaciones
-    reported_by = relationship("User", foreign_keys=[reported_by_id], back_populates="maintenance_requests")
+    reported_by = relationship("User", foreign_keys=[reported_by_id])
     reviewed_by = relationship("User", foreign_keys=[reviewed_by_id])
-    machine = relationship("Machine", back_populates="maintenance_requests")
-    work_order = relationship("WorkOrder", back_populates="maintenance_request_origin")
+    machine = relationship("Machine", foreign_keys=[machine_id])
+    work_order = relationship("WorkOrder", foreign_keys=[work_order_id], back_populates="maintenance_request_origin")
 
     def __repr__(self):
         return f"<MaintenanceRequest(id={self.id}, title='{self.title}', status='{self.status}')>"
