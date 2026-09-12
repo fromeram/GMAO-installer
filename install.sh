@@ -100,8 +100,15 @@ SUGGESTED_ADMIN_PASS=$(openssl rand -base64 10 2>/dev/null | tr -dc 'a-zA-Z0-9' 
 read -r -p "  🔐 Contraseña del Administrador [$SUGGESTED_ADMIN_PASS]: " INPUT_ADMIN_PASS
 INITIAL_ADMIN_PASSWORD="${INPUT_ADMIN_PASS:-$SUGGESTED_ADMIN_PASS}"
 
-echo ""
-read -r -p "  🤖 URL del servicio Ollama (IA) [http://localhost:11434]: " INPUT_OLLAMA
+echo -e "\n  ${YELLOW}🤖 Inteligencia Artificial (Mantenimiento Predictivo y Chat con Ollama):${NC}"
+echo -e "  El GMAO incluye análisis de riesgo, predicciones automáticas y chat con IA local."
+echo -e "  Para estas funciones se requiere un servidor Ollama (en este equipo o en otro de la red)."
+echo -e "  ${CYAN}💡 Si aún no tienes Ollama, puedes instalarlo en Linux con:${NC}"
+echo -e "     ${BOLD}curl -fsSL https://ollama.com/install.sh | sh && ollama run qwen2.5-coder:14b${NC}"
+echo -e "     (O modelos ligeros: qwen2.5:7b, llama3.2:3b)"
+echo -e "  • Si ya tienes Ollama en la red, escribe su IP (ej: http://192.168.1.50:11434)."
+echo -e "  • Si lo instalarás en este servidor, presiona Enter para usar [http://localhost:11434]."
+read -r -p "  🤖 Dirección URL de Ollama [http://localhost:11434]: " INPUT_OLLAMA
 OLLAMA_URL="${INPUT_OLLAMA:-http://localhost:11434}"
 
 JWT_SECRET_KEY=$(openssl rand -hex 32 2>/dev/null || echo "4f8a3c9b7e1d5a2f6c8e0b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f3a")

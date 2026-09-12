@@ -170,6 +170,13 @@ def ensure_database_initialized():
             else:
                 logger.info(f"ℹ️ Usuario administrador '{admin_username}' ya presente en la base de datos.")
 
+            # 4. Asegurar logros de gamificación y perfiles de usuario
+            try:
+                from src.gamification.achievements_setup import setup_default_achievements
+                setup_default_achievements(db)
+            except Exception as e_gam:
+                logger.warning(f"⚠️ Aviso al inicializar gamificación en startup: {e_gam}")
+
         finally:
             db.close()
     except Exception as e:

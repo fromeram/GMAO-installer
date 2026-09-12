@@ -67,6 +67,34 @@ O directamente mediante comandos rápidos:
 
 ---
 
+## 🤖 Módulo de Inteligencia Artificial (Ollama)
+
+El sistema GMAO incluye módulos de última generación impulsados por **Inteligencia Artificial 100% privada y local** (sin enviar datos a la nube):
+- **Mantenimiento Predictivo**: Evaluación periódica del riesgo de avería de cada máquina según su historial y condiciones.
+- **Asistente de Fallas y Chat Técnico**: Sugerencias de diagnóstico, causas probables y repuestos recomendados en lenguaje natural.
+- **Análisis de Formatos y Optimización**: Métricas de rendimiento y sugerencias de mejora de procesos.
+
+### ⚙️ ¿Cómo preparar Ollama?
+Para que estas funciones estén activas, el GMAO necesita conectarse a un servidor **Ollama** (puede estar en la misma máquina o en cualquier otro equipo o servidor de la red local).
+
+1. **Instalar Ollama en Linux (servidor local o remoto)**:
+   ```bash
+   curl -fsSL https://ollama.com/install.sh | sh
+   ```
+2. **Descargar los modelos recomendados**:
+   ```bash
+   # Modelo recomendado para análisis técnico y chat (14B):
+   ollama run qwen2.5-coder:14b
+
+   # O para equipos con menos recursos / RAM (7B o 3B):
+   ollama run qwen2.5:7b
+   ollama run llama3.2:3b
+   ```
+3. **Durante la instalación (`install.sh`)**:
+   Introduce la URL de tu Ollama (por ejemplo: `http://localhost:11434` o `http://192.168.1.50:11434`). El GMAO detectará automáticamente los modelos disponibles y comenzará a generar predicciones periódicas.
+
+---
+
 ## 🏗️ Arquitectura del Sistema
 
 ```
