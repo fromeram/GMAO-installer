@@ -4,6 +4,7 @@ backend/.env
 *.env
 .env.*
 !.env.example
+!frontend/.env
 
 # Conexiones remotas y configuración del IDE
 sftp.json

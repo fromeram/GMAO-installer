@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // --- LÓGICA ANTIGUA (Se mantiene intacta para que el resto del GMAO funcione) ---
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || "";
+const API_BASE_URL = process.env.REACT_APP_API_URL || "/api";
 
 export const fetchWithAuth = async (endpoint, options = {}) => {
   try {

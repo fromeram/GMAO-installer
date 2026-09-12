@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         return;
       }
       
-      const response = await fetch(`${API_BASE_URL || ''}/users/me`, {
+      const response = await fetch(`${API_BASE_URL || '/api'}/users/me`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   // ✅ --- FUNCIÓN DE LOGIN CORREGIDA PARA ENVIAR JSON ---
   const login = async (username, password) => {
     try {
-      const response = await fetch(`${API_BASE_URL || ''}/token`, {
+      const response = await fetch(`${API_BASE_URL || '/api'}/token`, {
         method: "POST",
         headers: {
           // Volvemos a usar JSON, que es lo que tu backend espera
