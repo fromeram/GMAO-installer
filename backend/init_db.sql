@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS machines (
+    id SERIAL PRIMARY KEY,
+    serial_number VARCHAR(50) NOT NULL UNIQUE,
+    brand VARCHAR(100) NOT NULL,
+    model VARCHAR(100) NOT NULL,
+    section VARCHAR(100) NOT NULL,
+    line VARCHAR(100) NOT NULL
+);

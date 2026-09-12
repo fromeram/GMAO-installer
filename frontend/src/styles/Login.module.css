@@ -1,0 +1,35 @@
+/* frontend/src/styles/Login.module.css */
+.container {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.error {
+  color: red;
+  margin-bottom: 15px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #61dafb;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

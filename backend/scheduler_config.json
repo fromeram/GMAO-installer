@@ -1,0 +1,57 @@
+{
+    "email": {
+        "enabled": false,
+        "smtp_server": "smtp.gmail.com",
+        "smtp_port": 587,
+        "username": "your_email@gmail.com",
+        "password": "your_app_password",
+        "sender": "GMAO System <your_email@gmail.com>"
+    },
+    "tasks": {
+        "generate_orders": {
+            "enabled": true,
+            "cron": "0 0 * * *",
+            "advance_days": 0,
+            "description": "Generaci\u00f3n autom\u00e1tica de \u00f3rdenes de trabajo"
+        },
+        "check_upcoming": {
+            "enabled": true,
+            "cron": "0 8 * * *",
+            "advance_days": 7,
+            "description": "Verificaci\u00f3n de mantenimientos pr\u00f3ximos"
+        },
+        "check_stock": {
+            "enabled": true,
+            "cron": "0 9 * * *",
+            "description": "Verificaci\u00f3n de stock m\u00ednimo"
+        },
+        "check_overdue": {
+            "enabled": true,
+            "cron": "0 10 * * *",
+            "description": "Verificaci\u00f3n de \u00f3rdenes vencidas"
+        },
+        "generate_metrics": {
+            "enabled": true,
+            "cron": "0 1 * * 1",
+            "description": "Generaci\u00f3n de m\u00e9tricas semanales"
+        },
+        "maintenance_backup": {
+            "enabled": true,
+            "cron": "0 23 * * 6",
+            "description": "Actualizaci\u00f3n de backlog de mantenimiento"
+        },
+        "ai_predictions": {
+            "enabled": true,
+            "cron": "*/10 * * * *",
+            "description": "Predicciones autom\u00e1ticas de IA basadas en datos reales"
+        }
+    },
+    "ai_predictions": {
+        "max_machines_per_cycle": 1,
+        "cooldown_minutes": 5,
+        "analysis_depth": "standard",
+        "confidence_threshold": 70,
+        "auto_retry_failed": true,
+        "priority_sections": "1,4,7"
+    }
+}

@@ -1,0 +1,42 @@
+# Entorno y Secretos
+.env
+backend/.env
+*.env
+.env.*
+!.env.example
+
+# Conexiones remotas y configuración del IDE
+sftp.json
+.vscode/
+.idea/
+.DS_Store
+
+# Certificados SSL privados
+nginx/certs/*.key
+nginx/certs/*.crt
+!nginx/certs/ssl-params.conf
+
+# Copias de seguridad y volcados de BD
+backups/
+*.sql.gz
+*.bak
+
+# Python y entornos virtuales
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+backend/venv/
+.gemini_venv/
+
+# Node.js y Builds
+node_modules/
+frontend/node_modules/
+frontend/build/
+dist/
+
+# Logs y temporales
+*.log
+app.log
+scratch/

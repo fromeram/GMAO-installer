@@ -1,0 +1,86 @@
+# ==============================================================================
+# GMAO SYSTEM - Docker Compose
+# ==============================================================================
+services:
+  db:
+    image: postgres:17.2
+    container_name: gmao-project-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - TZ=Europe/Madrid
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+    volumes:
+      - gmao-db-data:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+    container_name: gmao-project-backend
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - OLLAMA_URL=${OLLAMA_URL}
+      - INITIAL_ADMIN_USERNAME=${INITIAL_ADMIN_USERNAME:-admin}
+      - INITIAL_ADMIN_PASSWORD=${INITIAL_ADMIN_PASSWORD:-admin}
+      - JWT_ACCESS_TOKEN_EXPIRE_MINUTES=${JWT_ACCESS_TOKEN_EXPIRE_MINUTES:-60}
+      - TZ=Europe/Madrid
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    networks:
+      - default
+    volumes:
+      - ./backend/src:/app/src
+      - ./alembic:/app/alembic
+      - ./alembic.ini:/app/alembic.ini
+    command: ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: gmao-project-nginx
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Madrid
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - default
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - ./backend/src/storage/documents/attachments:/file_storage:ro
+      - ./nginx/gmao.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+
+volumes:
+  gmao-db-data:
+    name: gmao-db-data
+    external: false
+
+networks:
+  default:
+    name: gmao-network
