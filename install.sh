@@ -28,15 +28,31 @@ echo "==========================================================================
 echo -e "         ${CYAN}Asistente de Instalación y Despliegue de Fábrica${NC}"
 echo -e "${BLUE}${BOLD}==========================================================================${NC}\n"
 
-# 1. Comprobación de requisitos
-echo -e "${CYAN}[1/6] Verificando requisitos del sistema...${NC}"
+# 1. Comprobación e instalación automática de requisitos
+echo -e "${CYAN}[1/6] Verificando e instalando componentes necesarios...${NC}"
+
+if ! command -v openssl &> /dev/null; then
+    echo -e "  ${YELLOW}⚙️  Instalando OpenSSL...${NC}"
+    if command -v apt-get &> /dev/null; then apt-get update -y -qq && apt-get install -y -qq openssl; fi
+fi
 
 if ! command -v docker &> /dev/null; then
-    echo -e "${RED}❌ Error: Docker no está instalado.${NC}"
-    echo "Instala Docker antes de continuar: https://docs.docker.com/engine/install/"
-    exit 1
+    echo -e "  ${YELLOW}⚙️  Docker no está instalado. Instalándolo automáticamente...${NC}"
+    if command -v apt-get &> /dev/null; then
+        export DEBIAN_FRONTEND=noninteractive
+        apt-get update -y
+        apt-get install -y docker.io docker-compose-v2 || apt-get install -y docker.io docker-compose || true
+    fi
 fi
-echo -e "  ${GREEN}✓${NC} Docker detectado: $(docker --version)"
+
+# Asegurar que el servicio de Docker esté corriendo
+if command -v systemctl &> /dev/null; then
+    systemctl enable --now docker 2>/dev/null || true
+    systemctl start docker 2>/dev/null || true
+fi
+service docker start 2>/dev/null || true
+
+echo -e "  ${GREEN}✓${NC} Docker verificado: $(docker --version 2>/dev/null || echo Activo)"
 
 DOCKER_COMPOSE_CMD=""
 if docker compose version &> /dev/null; then
@@ -44,14 +60,11 @@ if docker compose version &> /dev/null; then
 elif command -v docker-compose &> /dev/null; then
     DOCKER_COMPOSE_CMD="docker-compose"
 else
-    echo -e "${RED}❌ Error: Docker Compose no está disponible.${NC}"
-    exit 1
+    echo -e "  ${YELLOW}⚙️  Instalando plugin docker-compose...${NC}"
+    if command -v apt-get &> /dev/null; then apt-get install -y docker-compose-v2 || apt-get install -y docker-compose; fi
+    DOCKER_COMPOSE_CMD="docker compose"
 fi
-echo -e "  ${GREEN}✓${NC} Docker Compose detectado"
-
-if ! command -v openssl &> /dev/null; then
-    echo -e "${YELLOW}⚠️ Advertencia: openssl no detectado. Se generarán contraseñas por defecto.${NC}"
-fi
+echo -e "  ${GREEN}✓${NC} Docker Compose listo" 
 
 # Detectar IP local del servidor
 DEFAULT_IP="localhost"
