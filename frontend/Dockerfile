@@ -28,7 +28,7 @@
     # Copiar tu configuración personalizada de Nginx (CORREGIR RUTA)
     # Asegúrate que el archivo existe en frontend/nginx/nginx.conf
     #COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-    RUN rm /etc/nginx/conf.d/default.conf
+    RUN rm -f /etc/nginx/conf.d/default.conf
 
     # Exponer puerto y comando por defecto de Nginx
     EXPOSE 80
