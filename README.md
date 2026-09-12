@@ -11,25 +11,19 @@ Incluye gestión completa de activos, órdenes de trabajo (correctivas, preventi
 
 ---
 
-## 🚀 Despliegue Rápido (Autoinstalable)
+## 🚀 Despliegue Todo en Uno (100% Automático)
 
-Este repositorio está preparado para que cualquier operador o empresa pueda desplegarlo en su propio servidor o máquina virtual en cuestión de minutos.
+En un servidor Linux, máquina virtual o contenedor Proxmox recién creado y completamente limpio, **solo tienes que pegar este único comando**:
 
-### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/fromeram/gmao-installer.git
-cd gmao-installer
+apt update && apt install -y curl && bash <(curl -fsSL https://raw.githubusercontent.com/fromeram/GMAO-installer/main/setup.sh)
 ```
 
-### 2. Dar permisos de ejecución
-```bash
-chmod +x install.sh gmao.sh
-```
-
-### 3. Ejecutar el asistente de instalación
-```bash
-./install.sh
-```
+Este comando se encarga de todo el aprovisionamiento:
+1. Instala automáticamente `Docker`, `Docker Compose`, `Git` y `OpenSSL`.
+2. Inicia los servicios del sistema operativo.
+3. Descarga el repositorio.
+4. Lanza de inmediato el **menú interactivo** con el asistente de preguntas de fábrica.
 
 ---
 
