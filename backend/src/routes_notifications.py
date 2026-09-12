@@ -46,7 +46,8 @@ async def get_pending_maintenances(
             )
         """)
         
-        is_admin = current_user.get('role', {}).get('nombre') in ["Administrador", "Jefe de Mantenimiento", "Calidad"]
+        role_nombre = getattr(getattr(current_user, 'role', None), 'nombre', None)
+        is_admin = role_nombre in ["Administrador", "Jefe de Mantenimiento", "Calidad"]
         
         result = db.execute(query, {
             'is_admin': is_admin,
