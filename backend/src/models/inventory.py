@@ -7,6 +7,7 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey, Numeric # Imp
 from sqlalchemy.orm import relationship
 from src.models.base import Base
 from .associations import MachinePartAssociation
+from .work_order_material import WorkOrderMaterial # Añadido
 # Importar otros modelos si son necesarios para relaciones (Warehouse, Supplier ya están en las relaciones)
 # from .warehouse import Warehouse
 # from .supplier import Supplier
@@ -33,7 +34,8 @@ class Inventory(Base):
     supplier = relationship("Supplier", back_populates="inventory_items")
     warehouse = relationship("Warehouse", back_populates="inventory_items")
     # Asegúrate que WorkOrder tiene la relación inversa con back_populates="repuesto"
-    work_orders = relationship("WorkOrder", back_populates="repuesto")
+    # work_orders = relationship("WorkOrder", back_populates="repuesto") # DEPRECADO
+    work_order_materials = relationship("WorkOrderMaterial", back_populates="inventory")
     machine_associations = relationship(
         "MachinePartAssociation",
         back_populates="part", # 'part' es como llamamos a la relación en MachinePartAssociation

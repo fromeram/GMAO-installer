@@ -6,7 +6,7 @@ campos detallados de finalización Y nuevos campos para cambios de formato.
 """
 
 from sqlalchemy import (
-    Column, Integer, String, ForeignKey, DateTime, CheckConstraint, Text, Float, JSON, Boolean
+    Column, Integer, String, ForeignKey, DateTime, CheckConstraint, Text, Float, JSON, Boolean, Numeric
 )
 from sqlalchemy.orm import relationship
 from .base import Base
@@ -55,10 +55,9 @@ class WorkOrder(Base):
     finished_at = Column(DateTime, nullable=True)
     
     # ✅ LÍNEAS CORREGIDAS Y AÑADIDAS
-    # Este campo es la columna física en la base de datos que conecta con TaskList.
     task_list_id = Column(Integer, ForeignKey("task_lists.id"), nullable=True)
     generated_from_maintenance_id = Column(Integer, ForeignKey("maintenances.id"), nullable=True, index=True)
-    repuesto_id = Column(Integer, ForeignKey("inventory.id"), nullable=True)
+    # repuesto_id = Column(Integer, ForeignKey("inventory.id"), nullable=True) # DEPRECADO: Usar materials
     failure_code_id = Column(Integer, ForeignKey("failure_codes.id"), nullable=True)
     cause_code_id = Column(Integer, ForeignKey("cause_codes.id"), nullable=True)
     remedy_code_id = Column(Integer, ForeignKey("remedy_codes.id"), nullable=True)
@@ -66,8 +65,13 @@ class WorkOrder(Base):
     format_from_id = Column(Integer, ForeignKey("formats.id"), nullable=True)
     format_to_id = Column(Integer, ForeignKey("formats.id"), nullable=True)
     
+    # --- GESTIÓN ECONÓMICA (TCO) ---
+    total_material_cost = Column(Numeric(10, 2), default=0.0)
+    total_labor_cost = Column(Numeric(10, 2), default=0.0)
+    total_external_cost = Column(Numeric(10, 2), default=0.0)
+    
     # Campos adicionales
-    quantity_used = Column(Integer, default=0)
+    # quantity_used = Column(Integer, default=0) # DEPRECADO: Usar materials
     actual_start_time = Column(DateTime, nullable=True)
     actual_end_time = Column(DateTime, nullable=True)
     downtime_hours = Column(Float, nullable=True)
@@ -88,7 +92,7 @@ class WorkOrder(Base):
     line = relationship("Line")
     machine_obj = relationship("Machine", foreign_keys=[machine_id])
     assigned_to = relationship("User", foreign_keys=[assigned_to_id])
-    repuesto = relationship("Inventory")
+    # repuesto = relationship("Inventory") # DEPRECADO
     failure_code = relationship("FailureCode", back_populates="work_orders")
     cause_code = relationship("CauseCode", back_populates="work_orders")
     remedy_code = relationship("RemedyCode", back_populates="work_orders")
@@ -97,6 +101,8 @@ class WorkOrder(Base):
     format_to_obj = relationship("Format", foreign_keys=[format_to_id], back_populates="work_orders_as_to")
     technicians = relationship("WorkOrderTechnician", back_populates="work_order", cascade="all, delete-orphan")
     checklist_progress = relationship("ChecklistProgress", back_populates="work_order", cascade="all, delete-orphan")
+    materials = relationship("WorkOrderMaterial", back_populates="work_order", cascade="all, delete-orphan")
+    maintenance_request_origin = relationship("MaintenanceRequest", back_populates="work_order", uselist=False)
 
     generated_from_maintenance = relationship(
         "Maintenance",
@@ -122,6 +128,14 @@ class WorkOrder(Base):
         if self.estimated_setup_duration and self.setup_duration and self.setup_duration > 0:
             return (self.estimated_setup_duration / self.setup_duration) * 100
         return None
+
+    @property
+    def total_cost(self):
+        """Calcula el coste total de la orden de trabajo"""
+        mat = float(self.total_material_cost or 0.0)
+        lab = float(self.total_labor_cost or 0.0)
+        ext = float(self.total_external_cost or 0.0)
+        return mat + lab + ext
 
     @property
     def affected_machines_count(self):

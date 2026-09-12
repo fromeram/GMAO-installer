@@ -37,4 +37,5 @@ from .gamification import (
 
 # ✅ AÑADIDOS LOS DOS IMPORTS QUE FALTABAN PARA SOLUCIONAR EL ERROR
 from .audit_log import AuditLog
-from .checklist_progress import ChecklistProgress
+from .checklist_progress import ChecklistProgressfrom .work_order_material import WorkOrderMaterial
+from .maintenance_request import MaintenanceRequest
