@@ -47,7 +47,7 @@ Cuando termine la instalación:
 Para que los mecánicos y electricistas trabajen a pie de máquina escaneando códigos QR:
 
 1. **Descarga el archivo APK en el teléfono**:  
-   👉 [Descargar GMAOv2.2.1.apk](https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.1.apk)
+   👉 [Descargar GMAOv2.2.2.apk](https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.2.apk)
 2. Instala la aplicación en el móvil Android.
 3. Pulsa en **⚙️ "Configurar Servidor"** en la pantalla de inicio y escribe la IP de tu servidor GMAO (ejemplo: `http://192.168.1.50:8000`).
 4. Pulsa **"Probar Conexión"** y **"Guardar"**. ¡Listo! Inicia sesión con tu usuario.
