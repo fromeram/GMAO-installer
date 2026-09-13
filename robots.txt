@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fromeram.github.io/GMAO-installer/sitemap.xml

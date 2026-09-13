@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GMAO Cerámico — Software de Mantenimiento para Fábricas de Azulejos y Cerámica</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="GMAO industrial especializado en fábricas de azulejos y cerámica. Control de hornos, prensas, líneas de esmaltado y clasificación. Incluye App Android e IA predictiva local. En funcionamiento real. Prueba gratis 3 meses.">
+  <meta name="keywords" content="gmao ceramica, gmao azulejos, software mantenimiento industrial, cmms ceramica, mantenimiento hornos ceramicos, prensas hidraulicas azulejos, app mantenimiento mecanicos, mantenimiento preventivo azulejos">
+  <meta name="author" content="Fran Romera">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Redes Sociales (LinkedIn, WhatsApp) -->
+  <meta property="og:title" content="GMAO Cerámico — Mantenimiento Industrial para Fábricas de Azulejos">
+  <meta property="og:description" content="Minimiza las paradas de hornos y prensas. En funcionamiento real en planta de producción. Incluye App Android e IA predictiva. Prueba gratis 3 meses.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fromeram.github.io/GMAO-installer/">
+  <meta property="og:image" content="https://fromeram.github.io/GMAO-installer/android/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #07090E;
+      --bg-card: rgba(18, 24, 38, 0.7);
+      --bg-card-hover: rgba(26, 35, 55, 0.85);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(249, 115, 22, 0.4);
+      --primary-orange: #F97316;
+      --primary-orange-glow: rgba(249, 115, 22, 0.25);
+      --accent-cyan: #38BDF8;
+      --accent-emerald: #10B981;
+      --text-white: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 20% 15%, rgba(249, 115, 22, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(56, 189, 248, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header / Navbar */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 9, 14, 0.85);
+    }
+    .nav-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-white);
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .logo-badge {
+      background: linear-gradient(135deg, var(--primary-orange), #EA580C);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-link:hover {
+      color: var(--primary-orange);
+    }
+    .btn-header {
+      background: rgba(249, 115, 22, 0.15);
+      color: var(--primary-orange);
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-header:hover {
+      background: var(--primary-orange);
+      color: white;
+      box-shadow: 0 0 15px var(--primary-orange-glow);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+    }
+    .hero-badge-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-emerald);
+      animation: pulse 2.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+    .hero h1 span.gradient {
+      background: linear-gradient(135deg, #F97316 20%, #FBBF24 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p.subtitle {
+      font-size: 20px;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin: 0 auto 36px;
+      font-weight: 400;
+    }
+
+    /* Terminal Command Box */
+    .terminal-box {
+      max-width: 780px;
+      margin: 0 auto 40px;
+      background: #0D1117;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      overflow: hidden;
+      text-align: left;
+    }
+    .terminal-header {
+      background: #161B22;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #FF5F56; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #27C93F; }
+    .terminal-title {
+      font-family: var(--font-code);
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .terminal-body {
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .terminal-code {
+      font-family: var(--font-code);
+      font-size: 13.5px;
+      color: #38BDF8;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .terminal-prompt {
+      color: #F97316;
+      margin-right: 6px;
+      user-select: none;
+    }
+    .btn-copy {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-white);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-copy:hover {
+      background: var(--primary-orange);
+      border-color: var(--primary-orange);
+    }
+
+    /* CTA Buttons Row */
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #F97316, #EA580C);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px var(--primary-orange-glow);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(249, 115, 22, 0.4);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-white);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Trust Stats Bar */
+    .trust-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 30px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      margin-bottom: 80px;
+      backdrop-filter: blur(12px);
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-white);
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 60px 0;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .section-tag {
+      color: var(--primary-orange);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .section-title h2 {
+      font-family: var(--font-heading);
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+    .section-title p {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Ceramics Equipment Grid */
+    .machines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .machine-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .machine-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.4);
+      background: var(--bg-card-hover);
+    }
+    .machine-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-size: 24px;
+    }
+    .icon-orange { background: rgba(249, 115, 22, 0.15); color: #F97316; }
+    .icon-blue { background: rgba(56, 189, 248, 0.15); color: #38BDF8; }
+    .icon-green { background: rgba(16, 185, 129, 0.15); color: #10B981; }
+    .icon-purple { background: rgba(168, 85, 247, 0.15); color: #A855F7; }
+    .machine-card h3 {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .machine-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+    .machine-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .m-tag {
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    /* Features 2-column Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 28px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.25s;
+    }
+    .feature-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.4);
+    }
+    .feature-card h3 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .feature-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Mobile App Showcase */
+    .app-banner {
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(56, 189, 248, 0.1) 100%);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      border-radius: 20px;
+      padding: 44px 36px;
+      margin: 60px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+    .app-content {
+      flex: 1;
+      min-width: 320px;
+    }
+    .app-content h3 {
+      font-family: var(--font-heading);
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .app-content p {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+    .app-features-list {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .app-features-list li {
+      font-size: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #E2E8F0;
+    }
+    .app-features-list li span {
+      color: var(--accent-emerald);
+      font-weight: bold;
+    }
+
+    /* Steps Section */
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 30px;
+    }
+    .step-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 28px;
+      position: relative;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-orange);
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      margin-bottom: 18px;
+      font-family: var(--font-heading);
+    }
+    .step-box h4 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .step-box p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* CTA Bottom */
+    .cta-bottom {
+      background: linear-gradient(180deg, rgba(18, 24, 38, 0) 0%, rgba(249, 115, 22, 0.12) 100%);
+      border-top: 1px solid var(--border-color);
+      padding: 90px 0;
+      text-align: center;
+    }
+    .cta-bottom h2 {
+      font-family: var(--font-heading);
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 36px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    footer a:hover {
+      color: var(--primary-orange);
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero h1 { font-size: 38px; }
+      .hero p.subtitle { font-size: 17px; }
+      .trust-bar { grid-template-columns: repeat(2, 1fr); }
+      .steps-row { grid-template-columns: 1fr; }
+      .terminal-body { flex-direction: column; align-items: stretch; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-wrap">
+      <a href="#" class="logo">
+        🏭 GMAO Cerámico
+        <span class="logo-badge">Edición Azulejos</span>
+      </a>
+      <div class="nav-links">
+        <a href="#maquinaria" class="nav-link">Maquinaria Cerámica</a>
+        <a href="#modulos" class="nav-link">Funciones</a>
+        <a href="#app-movil" class="nav-link">App Móvil</a>
+        <a href="#instalacion" class="nav-link">Instalación</a>
+        <a href="https://github.com/fromeram/GMAO-installer" class="btn-header" target="_blank">
+          ⭐ Ver en GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      
+      <!-- Badge de Estado Real -->
+      <div class="hero-badge-wrap">
+        <span class="status-dot"></span>
+        <span>En funcionamiento real en planta de producción industrial</span>
+      </div>
+
+      <h1>
+        El Software GMAO especializado en<br>
+        <span class="gradient">Fábricas de Azulejos y Cerámica</span>
+      </h1>
+
+      <p class="subtitle">
+        Minimiza paradas imprevistas en <strong>hornos de rodillos continuos, prensas hidráulicas de gran tonelaje, líneas de esmaltado e impresión digital</strong>. Gestión de repuestos críticos, técnicos a pie de máquina con App Android e Inteligencia Artificial predictiva.
+      </p>
+
+      <!-- Terminal Command -->
+      <div class="terminal-box">
+        <div class="terminal-header">
+          <div class="terminal-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <span class="terminal-title">Instalación automática en 1 línea (Servidor Linux / VM)</span>
+          <span></span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-code">
+            <span class="terminal-prompt">#</span>apt update && apt install -y curl && bash &lt;(curl -fsSL https://raw.githubusercontent.com/fromeram/GMAO-installer/main/setup.sh)
+          </div>
+          <button class="btn-copy" id="copyBtn" onclick="copyCommand()">
+            📋 <span id="copyText">Copiar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Hero Actions -->
+      <div class="hero-actions">
+        <a href="#instalacion" class="btn-primary">
+          🚀 Probar 3 Meses Gratis (Sin Tarjeta)
+        </a>
+        <a href="https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.1.apk" class="btn-secondary">
+          📲 Descargar App Android (APK v2.2.1)
+        </a>
+      </div>
+
+      <!-- Trust Stats Bar -->
+      <div class="trust-bar">
+        <div class="stat-item">
+          <div class="stat-num">90 Días</div>
+          <div class="stat-label">Prueba Gratuita Completa</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Datos Privados On-Premise</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">1 Minuto</div>
+          <div class="stat-label">Despliegue con Docker</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">Ollama IA</div>
+          <div class="stat-label">Predicción Local de Averías</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Maquinaria Cerámica -->
+  <section id="maquinaria">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-tag">Sector Cerámico Especializado</span>
+        <h2>Diseñado para el ritmo 24/7 del azulejo</h2>
+        <p>Una parada de horno o rotura en prensa cuesta miles de euros por hora. El GMAO incorpora protocolos específicos para activos críticos cerámicos:</p>
+      </div>
+
+      <div class="machines-grid">
+        <div class="machine-card">
+          <div class="machine-icon icon-orange">🔥</div>
+          <h3>Hornos de Rodillos</h3>
+          <p>Supervisión preventiva de motores de tracción, cadenas, rodillos cerámicos, quemadores de gas y calibración periódica de termopares.</p>
+          <div class="machine-tags">
+            <span class="m-tag">Temperatura</span>
+            <span class="m-tag">Tracción</span>
+            <span class="m-tag">Quemadores</span>
+          </div>
+        </div>
+
+        <div class="machine-card">
+          <div class="machine-icon icon-blue">⚙️</div>
+          <h3>Prensas Hidráulicas</h3>
+          <p>Control de ciclos de prensado, cambios de moldes, estados de sellos y retenes, nivel y refrigeración de aceite hidráulico de alta presión.</p>
+          <div class="machine-tags">
+            <span class="m-tag">Presión</span>
+            <span class="m-tag">Moldes</span>
+            <span class="m-tag">Válvulas</span>
+          </div>
+        </div>
+
+        <div class="machine-card">
+          <div class="machine-icon icon-green">🎨</div>
+          <h3>Líneas de Esmaltado</h3>
+          <p>Mantenimiento de campanas de esmaltar, bombas de barbotina, cabezales de impresión digital inkjet, secaderos y variadores de velocidad.</p>
+          <div class="machine-tags">
+            <span class="m-tag">Inkjet</span>
+            <span class="m-tag">Bombas</span>
+            <span class="m-tag">Secaderos</span>
+          </div>
+        </div>
+
+        <div class="machine-card">
+          <div class="machine-icon icon-purple">📦</div>
+          <h3>Clasificación y Empaque</h3>
+          <p>Mantenimiento de líneas de selección óptica de calidades, apiladores, encartonadoras automáticas y robots de paletizado final.</p>
+          <div class="machine-tags">
+            <span class="m-tag">Robótica</span>
+            <span class="m-tag">Sensores</span>
+            <span class="m-tag">Paletizado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Módulos Principales -->
+  <section id="modulos">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-tag">Capacidades Industriales</span>
+        <h2>Todo lo que tu equipo técnico necesita</h2>
+        <p>Desde el mecánico de turno hasta el jefe de mantenimiento de planta.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>📋 Órdenes de Trabajo Ágiles</h3>
+          <p>Apertura instantánea de partes correctivos, asignación a técnicos por especialidad (mecánica, eléctrica, automatización) y registro de tiempos y piezas consumidas.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>📦 Repuestos & Almacén Crítico</h3>
+          <p>Control de stock de rodillos refractarios, electroválvulas, boquillas, rodamientos de alta temperatura y alertas automáticas de reposición antes de roturas.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>🤖 Inteligencia Artificial Predictiva (Ollama)</h3>
+          <p>Conexión directa con modelos locales de IA. Analiza las vibraciones y el historial para predecir cuándo va a fallar un motor o sugerir la solución a averías complejas.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>🏆 Gamificación para Técnicos</h3>
+          <p>Sistema pionero en la industria: asigna puntos por orden completada, logros técnicos y ranking de rendimiento para motivar a la plantilla y evitar descuidos.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>⚖️ Mantenimiento Legal & Auditorías</h3>
+          <p>Control de revisiones reglamentarias de recipientes a presión, depósitos de gas, transformadores eléctricos y planes preventivos con firma técnica.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3>🏷️ Códigos QR en cada Máquina</h3>
+          <p>Genera e imprime etiquetas QR directamente para pegar en cada motor, reductor o máquina. El técnico escanea el código con el móvil y entra a la ficha al segundo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Móvil Banner -->
+  <section id="app-movil">
+    <div class="container">
+      <div class="app-banner">
+        <div class="app-content">
+          <h3>📱 App Móvil Android Nativa para Técnicos</h3>
+          <p>Diseñada específicamente para llevar en el bolsillo del mono de trabajo. Los técnicos no necesitan ir a la oficina a apuntar nada:</p>
+          <ul class="app-features-list">
+            <li><span>✓</span> Escaneo de códigos QR a pie de máquina en plena fábrica.</li>
+            <li><span>✓</span> Apertura y cierre de partes de trabajo en menos de 10 segundos.</li>
+            <li><span>✓</span> Adjunta fotografías directas de roturas y averías con la cámara del móvil.</li>
+            <li><span>✓</span> Selector dinámico de servidor: funciona con la IP local de tu planta o con VPN.</li>
+          </ul>
+          <a href="https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.1.apk" class="btn-primary">
+            📲 Descargar GMAOv2.2.1.apk (9.2 MB)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instalación en 3 Pasos -->
+  <section id="instalacion">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-tag">Despliegue Sin Complicaciones</span>
+        <h2>¿Cómo ponerlo en marcha en tu fábrica?</h2>
+        <p>No necesitas ser informático. El script instala automáticamente Docker y todas las herramientas.</p>
+      </div>
+
+      <div class="steps-row">
+        <div class="step-box">
+          <div class="step-number">1</div>
+          <h4>Pega el Comando</h4>
+          <p>En cualquier servidor Linux, máquina virtual o contenedor Proxmox limpio, ejecuta la línea de instalación como usuario root.</p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-number">2</div>
+          <h4>Responde al Asistente</h4>
+          <p>El asistente en español te preguntará la IP de tu planta, contraseñas y te permitirá cargar la plantilla de fábrica con 1 clic.</p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-number">3</div>
+          <h4>¡Listo para Usar!</h4>
+          <p>Entra desde el navegador de la oficina con HTTPS y descarga la app en los teléfonos móviles de los mecánicos para empezar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Bottom -->
+  <section class="cta-bottom">
+    <div class="container">
+      <h2>Prueba el GMAO durante 3 meses sin coste</h2>
+      <p style="color: var(--text-muted); font-size: 18px; max-width: 650px; margin: 0 auto 36px;">
+        Descubre cómo las plantas cerámicas reducen hasta un 35% las paradas no programadas. Sin compromiso ni tarjeta de crédito.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="copyCommand()">
+          📋 Copiar Comando de Instalación
+        </button>
+        <a href="https://github.com/fromeram/GMAO-installer" class="btn-secondary" target="_blank">
+          ⭐ Ver Código e Instrucciones en GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 12px;"><strong>GMAO System</strong> — Mantenimiento Inteligente para Fábricas de Cerámica y Azulejos.</p>
+      <p>
+        Desarrollado por <strong>Fran Romera</strong> · 
+        <a href="https://github.com/fromeram/GMAO-installer">Repositorio GitHub</a> · 
+        <a href="https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.1.apk">Descargar APK Android</a> · 
+        <a href="https://github.com/fromeram">Contacto</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function copyCommand() {
+      const cmd = "apt update && apt install -y curl && bash <(curl -fsSL https://raw.githubusercontent.com/fromeram/GMAO-installer/main/setup.sh)";
+      navigator.clipboard.writeText(cmd).then(() => {
+        const copyText = document.getElementById("copyText");
+        const copyBtn = document.getElementById("copyBtn");
+        if (copyText) copyText.innerText = "¡Copiado!";
+        if (copyBtn) copyBtn.style.background = "#10B981";
+        setTimeout(() => {
+          if (copyText) copyText.innerText = "Copiar";
+          if (copyBtn) copyBtn.style.background = "";
+        }, 2500);
+      }).catch(err => {
+        alert("Comando copiado al portapapeles: " + cmd);
+      });
+    }
+  </script>
+</body>
+</html>
