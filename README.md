@@ -2,7 +2,8 @@
 
 [![License: Proprietary](https://img.shields.io/badge/Licencia-Prueba_Gratuita_3_Meses-blue.svg)](https://github.com/fromeram/GMAO-installer)
 [![Docker: Pre-built](https://img.shields.io/badge/Docker-Imágenes_Listas_(GHCR)-success.svg)](https://github.com/fromeram/GMAO-installer/pkgs/container/gmao-backend)
-[![Android App](https://img.shields.io/badge/📲_Android_App-v2.2.2_(Descarga_Directa)-brightgreen.svg)](https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.3.apk)
+[![Android App](https://img.shields.io/badge/📲_Android_App-v2.2.3_(Descarga_Directa)-brightgreen.svg)](https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.3.apk)
+[![Documentación](https://img.shields.io/badge/📖_Manual-Usuario_y_Soporte-blue.svg)](MANUAL_DE_USUARIO_Y_SOPORTE.md)
 [![Seguridad: RSA-2048](https://img.shields.io/badge/Seguridad-RSA_2048_Machine_ID-orange.svg)](https://github.com/fromeram/GMAO-installer)
 [![AI: Ollama Ready](https://img.shields.io/badge/IA-Ollama_Local_&_Privada-purple.svg)](https://ollama.com)
 
@@ -18,13 +19,28 @@ Permite digitalizar y optimizar el ciclo de vida completo de los activos de fáb
 
 ---
 
+
+---
+
+## 📖 Manual de Usuario, Instalación y Soporte Técnico
+
+Dispones de una guía completa y detallada paso a paso que cubre toda la operativa del sistema:
+- 👉 **[Ver Manual Integral de Usuario y Soporte (MANUAL_DE_USUARIO_Y_SOPORTE.md)](MANUAL_DE_USUARIO_Y_SOPORTE.md)**
+
+Incluye:
+1. **Guía de Instalación**: Requisitos, ejecución de `install.sh` y puesta en marcha de servicios Docker.
+2. **Configuración Móvil Android**: Emparejamiento por IP, permisos y escaneo de códigos QR en planta.
+3. **Manual Operativo por Módulos**: Estructura de planta, OTs, preventivos, inventario, cuadrantes de turnos e IA.
+4. **Administración y Backups**: Programador nocturno (Scheduler), avisos SMTP y clonación/restauración de base de datos.
+5. **Guía Exhaustiva de Resolución de Problemas (Troubleshooting)**: Solución a más de 8 incidencias comunes documentadas.
+
 ## 📲 App Móvil Android para Técnicos (Descarga Directa)
 
 Para que los mecánicos y electricistas trabajen directamente en planta desde su teléfono móvil o tablet:
 
-[![Descargar APK Android](https://img.shields.io/badge/📲_DESCARGAR_APP_ANDROID_(APK)-VERSIÓN_2.2.2-success?style=for-the-badge&logo=android)](https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.3.apk)
+[![Descargar APK Android](https://img.shields.io/badge/📲_DESCARGAR_APP_ANDROID_(APK)-VERSIÓN_2.2.3-success?style=for-the-badge&logo=android)](https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.3.apk)
 
-> 👉 **Enlace directo de descarga**: [Descargar GMAOv2.2.3.apk](https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.3.apk) *(Solo 9.2 MB)*
+> 👉 **Enlace directo de descarga**: [Descargar GMAOv2.2.3.apk](https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.3.apk) *(Versión 2.2.3 corregida y optimizada)*
 
 ### Cómo ponerla en marcha en 30 segundos:
 1. Descarga e instala el archivo `.apk` en cualquier móvil o tablet Android (permite la instalación de aplicaciones de origen desconocido si el móvil te lo pide).
