@@ -95,6 +95,23 @@ Para que estas funciones estén activas, el GMAO necesita conectarse a un servid
 
 ---
 
+## 📜 Periodo de Evaluación Gratuito (3 Meses) y Licenciamiento
+
+El sistema incluye por defecto un **Periodo de Evaluación de 3 Meses (90 días)** con **todas las funcionalidades activadas al 100%**:
+- Gestión de activos, órdenes de trabajo, planes preventivos y almacén de repuestos sin restricciones.
+- Módulo de inteligencia artificial, matriz de riesgo de averías y predicciones activas.
+- Creación de usuarios y control de roles para todo el equipo técnico de la fábrica.
+
+Esto permite a cualquier planta industrial probar el software en condiciones reales, cargar sus máquinas y comprobar el ahorro de costes y tiempos de respuesta.
+
+### 🔑 Activación de Licencia Permanente
+Al concluir los 3 meses (o en cualquier momento desde el botón de licencia en la barra superior):
+1. La aplicación muestra el **ID Único de tu Servidor (Machine ID)**.
+2. Contacta con **Fran Romera** (a través de GitHub o email) para solicitar tu clave de activación.
+3. Introduce la clave en el panel de la aplicación web para desbloquear el sistema de por vida o extender el soporte.
+
+---
+
 ## 🏗️ Arquitectura del Sistema
 
 ```

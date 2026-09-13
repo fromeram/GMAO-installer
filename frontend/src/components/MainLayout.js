@@ -13,6 +13,7 @@ import Sidebar from './Sidebar';
 import AlertsSidebar from './AlertsSidebar';
 import '../styles/MainLayout.css';
 import NotificationCenter from './NotificationCenter';
+import LicenseManager from './LicenseManager';
 
 const { Content, Header } = Layout;
 const { Title } = Typography;
@@ -297,6 +298,7 @@ const MainLayout = ({ children }) => {
           
           {/* Perfil usuario mejorado */}
           <div style={{ display: 'flex', alignItems: 'center' }}>
+            <LicenseManager isMobile={isMobile} />
             {!isMobile && <AlertsSidebar />}
             <Dropdown overlay={userMenu} trigger={['click']} placement="bottomRight">
               <div style={{ 

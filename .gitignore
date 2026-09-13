@@ -41,3 +41,8 @@ dist/
 *.log
 app.log
 scratch/
+
+# Claves privadas de firma criptográfica
+*.pem
+private_key.*
+licensing/private_key.pem

@@ -21,7 +21,10 @@ from .routers.communication_routes import router as communication_router
 from src.routes_ai import initialize_real_models, AI_STATE
 from .routes_notifications import router as notifications_router
 from .routes_plan_anual import router as plan_anual_router 
-from .routes_legal import router as legal_router 
+from .routes_legal import router as legal_router
+from .routers.license import router as license_router
+from .middleware.license_middleware import LicenseEnforcementMiddleware
+from .licensing.license_manager import ensure_license_record, get_license_status 
 
 # ✅ USAR SOLO EL SCHEDULER DE scheduler.py, NO CREAR UNO NUEVO
 from .scheduler import scheduler, schedule_tasks
@@ -61,6 +64,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Control de Periodo de Prueba de 3 Meses y Licenciamiento
+app.add_middleware(LicenseEnforcementMiddleware)
+
 # ✅ CONFIGURACIÓN CORREGIDA BASADA EN NGINX ANÁLISIS:
 # Nginx elimina "/api/" de TODAS las rutas con "proxy_pass http://backend:8000/;"
 # Algunos endpoints del frontend tienen /api/ duplicado, así que registramos ambas versiones
@@ -87,6 +93,9 @@ app.include_router(gamification_router, tags=["Gamification"])
 app.include_router(communication_router, tags=["Communications"])
 
 # 4. ✅ Router principal SIN PREFIX (DEBE IR AL FINAL PARA NO INTERFERIR)
+app.include_router(license_router, prefix="", tags=["Licenciamiento"])
+app.include_router(license_router, prefix="/api", tags=["Licenciamiento - Compat"])
+
 app.include_router(router)
 
 # --- Endpoints Raíz / Health ---
@@ -176,6 +185,35 @@ def ensure_database_initialized():
                 setup_default_achievements(db)
             except Exception as e_gam:
                 logger.warning(f"⚠️ Aviso al inicializar gamificación en startup: {e_gam}")
+
+            # 5. Asegurar tabla y registro de licenciamiento (Trial de 3 meses)
+            try:
+                db.execute(text("""
+                    CREATE TABLE IF NOT EXISTS system_licenses (
+                        id SERIAL PRIMARY KEY,
+                        machine_id VARCHAR(100) UNIQUE NOT NULL,
+                        installed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+                        trial_days INTEGER DEFAULT 90,
+                        license_key TEXT,
+                        license_type VARCHAR(50) DEFAULT 'trial',
+                        licensed_to VARCHAR(255),
+                        expires_at TIMESTAMP WITH TIME ZONE,
+                        activated_at TIMESTAMP WITH TIME ZONE,
+                        is_active BOOLEAN DEFAULT TRUE,
+                        extra_data JSONB DEFAULT '{}'::jsonb
+                    );
+                """))
+                db.commit()
+                lic_rec = ensure_license_record(db)
+                lic_stat = get_license_status(db)
+                if lic_stat.get("status") == "trial":
+                    logger.info(f"🟢 GMAO en Evaluación: {lic_stat.get('days_remaining')} días restantes. ID Servidor: {lic_rec.machine_id}")
+                elif lic_stat.get("status") == "licensed":
+                    logger.info(f"🛡️ GMAO Licenciado: {lic_stat.get('licensed_to')} ({lic_stat.get('license_type')})")
+                else:
+                    logger.warning(f"⚠️ Periodo de prueba de 3 meses EXPIRADO. ID Servidor: {lic_rec.machine_id}")
+            except Exception as e_lic:
+                logger.warning(f"⚠️ Error al inicializar control de licencia: {e_lic}")
 
         finally:
             db.close()

@@ -4187,3 +4187,20 @@ ALTER TABLE ONLY public.work_orders
 -- PostgreSQL database dump complete
 --
 
+
+-- ==============================================================================
+-- Tabla de Control de Licenciamiento y Periodo de Evaluación (Trial 90 Días)
+-- ==============================================================================
+CREATE TABLE IF NOT EXISTS public.system_licenses (
+    id SERIAL PRIMARY KEY,
+    machine_id VARCHAR(100) UNIQUE NOT NULL,
+    installed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    trial_days INTEGER DEFAULT 90,
+    license_key TEXT,
+    license_type VARCHAR(50) DEFAULT 'trial',
+    licensed_to VARCHAR(255),
+    expires_at TIMESTAMP WITH TIME ZONE,
+    activated_at TIMESTAMP WITH TIME ZONE,
+    is_active BOOLEAN DEFAULT TRUE,
+    extra_data JSONB DEFAULT '{}'::jsonb
+);
