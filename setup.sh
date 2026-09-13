@@ -18,6 +18,9 @@ echo -e "${BLUE}${BOLD}=========================================================
 echo -e "${CYAN}${BOLD}       GMAO SYSTEM - Preparando el Sistema Operativo (Automático)         ${NC}"
 echo -e "${BLUE}${BOLD}==========================================================================${NC}\n"
 
+# Forzar preferencia IPv4 para evitar fallos de conectividad en redes sin enrutamiento IPv6
+sed -i 's/^#precedence ::ffff:0:0\/96  100/precedence ::ffff:0:0\/96  100/' /etc/gai.conf 2>/dev/null || true
+
 echo -e "${YELLOW}⚙️  Instalando dependencias necesarias (Git, Docker, Compose, OpenSSL)...${NC}"
 
 if command -v apt-get &> /dev/null; then
