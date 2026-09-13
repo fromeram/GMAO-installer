@@ -135,4 +135,5 @@ En la carpeta donde se instala el programa dispones de un menú de control rápi
 
 ¿Deseas solicitar una licencia comercial permanente, soporte para la implantación en tu planta o adaptaciones a medida?
 - **Desarrollador**: Fran Romera
+- **Email de Contacto**: [fromeram@gmail.com](mailto:fromeram@gmail.com)
 - **GitHub**: [github.com/fromeram](https://github.com/fromeram)

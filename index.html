@@ -6,8 +6,8 @@
   <title>GMAO Cerámico — Software de Mantenimiento para Fábricas de Azulejos y Cerámica</title>
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="GMAO industrial especializado en fábricas de azulejos y cerámica. Control de hornos, prensas, líneas de esmaltado y clasificación. Incluye App Android e IA predictiva local. En funcionamiento real. Prueba gratis 3 meses.">
-  <meta name="keywords" content="gmao ceramica, gmao azulejos, software mantenimiento industrial, cmms ceramica, mantenimiento hornos ceramicos, prensas hidraulicas azulejos, app mantenimiento mecanicos, mantenimiento preventivo azulejos">
+  <meta name="description" content="GMAO industrial especializado en fábricas de azulejos y cerámica. Control de hornos, prensas hidráulicas, líneas de esmaltado y clasificación. Incluye App Android, IA predictiva local, calendario de turnos y mantenimiento legal. En funcionamiento real. Prueba gratis 3 meses.">
+  <meta name="keywords" content="gmao ceramica, gmao azulejos, software mantenimiento industrial, cmms ceramica, mantenimiento hornos ceramicos, prensas hidraulicas azulejos, app mantenimiento mecanicos, mantenimiento preventivo azulejos, calendario turnos gmao, comparador proveedores gmao">
   <meta name="author" content="Fran Romera">
   <meta name="robots" content="index, follow">
   
@@ -16,7 +16,7 @@
   <meta property="og:description" content="Minimiza las paradas de hornos y prensas. En funcionamiento real en planta de producción. Incluye App Android e IA predictiva. Prueba gratis 3 meses.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fromeram.github.io/GMAO-installer/">
-  <meta property="og:image" content="https://fromeram.github.io/GMAO-installer/android/logo.png">
+  <meta property="og:image" content="https://fromeram.github.io/GMAO-installer/img/fabrica_azulejos_horno.jpg">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,14 +26,15 @@
   <style>
     :root {
       --bg-dark: #07090E;
-      --bg-card: rgba(18, 24, 38, 0.7);
-      --bg-card-hover: rgba(26, 35, 55, 0.85);
+      --bg-card: rgba(18, 24, 38, 0.75);
+      --bg-card-hover: rgba(26, 35, 55, 0.9);
       --border-color: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(249, 115, 22, 0.4);
+      --border-hover: rgba(249, 115, 22, 0.45);
       --primary-orange: #F97316;
       --primary-orange-glow: rgba(249, 115, 22, 0.25);
       --accent-cyan: #38BDF8;
       --accent-emerald: #10B981;
+      --accent-purple: #A855F7;
       --text-white: #F8FAFC;
       --text-muted: #94A3B8;
       --text-dim: #64748B;
@@ -55,28 +56,27 @@
       line-height: 1.6;
       overflow-x: hidden;
       background-image: 
-        radial-gradient(circle at 20% 15%, rgba(249, 115, 22, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 80% 30%, rgba(56, 189, 248, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+        radial-gradient(circle at 15% 15%, rgba(249, 115, 22, 0.09) 0%, transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.07) 0%, transparent 50%),
+        radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 45%);
       background-attachment: fixed;
     }
 
-    /* Container */
     .container {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    /* Header / Navbar */
+    /* Header */
     header {
-      padding: 20px 0;
+      padding: 18px 0;
       border-bottom: 1px solid var(--border-color);
       backdrop-filter: blur(16px);
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(7, 9, 14, 0.85);
+      background: rgba(7, 9, 14, 0.88);
     }
     .nav-wrap {
       display: flex;
@@ -97,7 +97,7 @@
     .logo-badge {
       background: linear-gradient(135deg, var(--primary-orange), #EA580C);
       color: white;
-      padding: 4px 8px;
+      padding: 4px 9px;
       border-radius: 6px;
       font-size: 11px;
       font-weight: 700;
@@ -107,7 +107,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 22px;
     }
     .nav-link {
       color: var(--text-muted);
@@ -141,7 +141,7 @@
 
     /* Hero Section */
     .hero {
-      padding: 80px 0 60px;
+      padding: 70px 0 50px;
       text-align: center;
       position: relative;
     }
@@ -149,12 +149,12 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 6px 14px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 7px 18px;
       border-radius: 50px;
       margin-bottom: 24px;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 600;
       color: var(--accent-emerald);
       animation: pulse 2.5s infinite;
@@ -164,15 +164,15 @@
       50% { transform: scale(1.02); }
     }
     .status-dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       background-color: var(--accent-emerald);
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--accent-emerald);
+      box-shadow: 0 0 10px var(--accent-emerald);
     }
     .hero h1 {
       font-family: var(--font-heading);
-      font-size: 52px;
+      font-size: 54px;
       font-weight: 900;
       line-height: 1.15;
       letter-spacing: -1.5px;
@@ -186,15 +186,15 @@
     .hero p.subtitle {
       font-size: 20px;
       color: var(--text-muted);
-      max-width: 820px;
+      max-width: 860px;
       margin: 0 auto 36px;
       font-weight: 400;
     }
 
     /* Terminal Command Box */
     .terminal-box {
-      max-width: 780px;
-      margin: 0 auto 40px;
+      max-width: 820px;
+      margin: 0 auto 36px;
       background: #0D1117;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 12px;
@@ -224,7 +224,7 @@
     .dot-green { background: #27C93F; }
     .terminal-title {
       font-family: var(--font-code);
-      font-size: 11px;
+      font-size: 11.5px;
       color: var(--text-dim);
     }
     .terminal-body {
@@ -266,13 +266,13 @@
       border-color: var(--primary-orange);
     }
 
-    /* CTA Buttons Row */
+    /* Hero Buttons */
     .hero-actions {
       display: flex;
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
     }
     .btn-primary {
       background: linear-gradient(135deg, #F97316, #EA580C);
@@ -311,6 +311,75 @@
       border-color: rgba(255, 255, 255, 0.25);
     }
 
+    /* Plant Gallery Showcase (Fotos reales) */
+    .plant-gallery-section {
+      padding: 40px 0 70px;
+    }
+    .plant-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-top: 30px;
+    }
+    .plant-photo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all 0.3s;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    .plant-photo-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-hover);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.7);
+    }
+    .photo-wrapper {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+    }
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .plant-photo-card:hover .photo-wrapper img {
+      transform: scale(1.04);
+    }
+    .photo-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(7, 9, 14, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      color: #F8FAFC;
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .photo-info {
+      padding: 24px;
+    }
+    .photo-info h3 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .photo-info p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
     /* Trust Stats Bar */
     .trust-bar {
       display: grid;
@@ -320,7 +389,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      margin-bottom: 80px;
+      margin: 40px 0 70px;
       backdrop-filter: blur(12px);
     }
     .stat-item {
@@ -366,108 +435,74 @@
     .section-title p {
       font-size: 17px;
       color: var(--text-muted);
-      max-width: 680px;
+      max-width: 760px;
       margin: 0 auto;
     }
 
-    /* Ceramics Equipment Grid */
-    .machines-grid {
+    /* All 13 GMAO Capabilities Grid */
+    .features-grid-13 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 24px;
-      margin-bottom: 40px;
     }
-    .machine-card {
+    .feature-card-item {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 28px 24px;
+      padding: 28px;
       transition: all 0.25s;
-      position: relative;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
-    .machine-card:hover {
+    .feature-card-item:hover {
       transform: translateY(-4px);
       border-color: var(--border-hover);
-      box-shadow: 0 16px 30px rgba(0,0,0,0.4);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.4);
       background: var(--bg-card-hover);
     }
-    .machine-icon {
-      width: 52px;
-      height: 52px;
+    .feature-icon-box {
+      width: 48px;
+      height: 48px;
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 22px;
       margin-bottom: 18px;
-      font-size: 24px;
     }
-    .icon-orange { background: rgba(249, 115, 22, 0.15); color: #F97316; }
-    .icon-blue { background: rgba(56, 189, 248, 0.15); color: #38BDF8; }
-    .icon-green { background: rgba(16, 185, 129, 0.15); color: #10B981; }
-    .icon-purple { background: rgba(168, 85, 247, 0.15); color: #A855F7; }
-    .machine-card h3 {
+    .bg-orange { background: rgba(249, 115, 22, 0.15); color: #F97316; }
+    .bg-blue { background: rgba(56, 189, 248, 0.15); color: #38BDF8; }
+    .bg-emerald { background: rgba(16, 185, 129, 0.15); color: #10B981; }
+    .bg-purple { background: rgba(168, 85, 247, 0.15); color: #A855F7; }
+    .bg-yellow { background: rgba(234, 179, 8, 0.15); color: #EAB308; }
+    .bg-rose { background: rgba(244, 63, 94, 0.15); color: #F43F5E; }
+
+    .feature-card-item h3 {
       font-family: var(--font-heading);
       font-size: 20px;
       font-weight: 700;
       margin-bottom: 10px;
     }
-    .machine-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.55;
-      margin-bottom: 16px;
-    }
-    .machine-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .m-tag {
-      font-size: 11px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 3px 8px;
-      border-radius: 4px;
-      color: var(--text-muted);
-    }
-
-    /* Features 2-column Grid */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 28px;
-    }
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 32px;
-      transition: all 0.25s;
-    }
-    .feature-card:hover {
-      border-color: rgba(56, 189, 248, 0.3);
-      box-shadow: 0 16px 30px rgba(0,0,0,0.4);
-    }
-    .feature-card h3 {
-      font-family: var(--font-heading);
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .feature-card p {
-      font-size: 15px;
+    .feature-card-item p {
+      font-size: 14.5px;
       color: var(--text-muted);
       line-height: 1.6;
+      flex-grow: 1;
+    }
+    .feature-badge-sub {
+      margin-top: 14px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--primary-orange);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    /* Mobile App Showcase */
+    /* Mobile App Banner */
     .app-banner {
       background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(56, 189, 248, 0.1) 100%);
-      border: 1px solid rgba(249, 115, 22, 0.3);
+      border: 1px solid rgba(249, 115, 22, 0.35);
       border-radius: 20px;
       padding: 44px 36px;
       margin: 60px 0;
@@ -483,7 +518,7 @@
     }
     .app-content h3 {
       font-family: var(--font-heading);
-      font-size: 30px;
+      font-size: 32px;
       font-weight: 800;
       margin-bottom: 12px;
       letter-spacing: -0.5px;
@@ -498,11 +533,11 @@
       margin-bottom: 28px;
     }
     .app-features-list li {
-      font-size: 14px;
-      margin-bottom: 8px;
+      font-size: 14.5px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       color: #E2E8F0;
     }
     .app-features-list li span {
@@ -525,8 +560,8 @@
       position: relative;
     }
     .step-number {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       background: var(--primary-orange);
       color: white;
       border-radius: 8px;
@@ -540,7 +575,7 @@
     }
     .step-box h4 {
       font-family: var(--font-heading);
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 700;
       margin-bottom: 10px;
     }
@@ -551,7 +586,7 @@
 
     /* CTA Bottom */
     .cta-bottom {
-      background: linear-gradient(180deg, rgba(18, 24, 38, 0) 0%, rgba(249, 115, 22, 0.12) 100%);
+      background: linear-gradient(180deg, rgba(18, 24, 38, 0) 0%, rgba(249, 115, 22, 0.14) 100%);
       border-top: 1px solid var(--border-color);
       padding: 90px 0;
       text-align: center;
@@ -567,9 +602,9 @@
     /* Footer */
     footer {
       border-top: 1px solid var(--border-color);
-      padding: 36px 0;
+      padding: 40px 0;
       text-align: center;
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-dim);
     }
     footer a {
@@ -586,7 +621,9 @@
       .hero h1 { font-size: 38px; }
       .hero p.subtitle { font-size: 17px; }
       .trust-bar { grid-template-columns: repeat(2, 1fr); }
+      .plant-gallery-grid { grid-template-columns: 1fr; }
       .steps-row { grid-template-columns: 1fr; }
+      .features-grid-13 { grid-template-columns: 1fr; }
       .terminal-body { flex-direction: column; align-items: stretch; }
       .nav-links { display: none; }
     }
@@ -602,12 +639,12 @@
         <span class="logo-badge">Edición Azulejos</span>
       </a>
       <div class="nav-links">
-        <a href="#maquinaria" class="nav-link">Maquinaria Cerámica</a>
-        <a href="#modulos" class="nav-link">Funciones</a>
-        <a href="#app-movil" class="nav-link">App Móvil</a>
+        <a href="#galeria-planta" class="nav-link">Planta Real</a>
+        <a href="#catalogo" class="nav-link">Catálogo Completo</a>
+        <a href="#app-movil" class="nav-link">App Android</a>
         <a href="#instalacion" class="nav-link">Instalación</a>
-        <a href="https://github.com/fromeram/GMAO-installer" class="btn-header" target="_blank">
-          ⭐ Ver en GitHub
+        <a href="mailto:fromeram@gmail.com" class="btn-header">
+          ✉️ fromeram@gmail.com
         </a>
       </div>
     </div>
@@ -624,12 +661,12 @@
       </div>
 
       <h1>
-        El Software GMAO especializado en<br>
+        El Software GMAO diseñado para<br>
         <span class="gradient">Fábricas de Azulejos y Cerámica</span>
       </h1>
 
       <p class="subtitle">
-        Minimiza paradas imprevistas en <strong>hornos de rodillos continuos, prensas hidráulicas de gran tonelaje, líneas de esmaltado e impresión digital</strong>. Gestión de repuestos críticos, técnicos a pie de máquina con App Android e Inteligencia Artificial predictiva.
+        Diseñado y probado sobre el terreno industrial. Protege <strong>hornos de rodillos continuos, prensas hidráulicas de alto tonelaje, líneas de esmaltado y clasificación</strong>. Todo el mantenimiento bajo control, desde la App móvil del técnico hasta el despacho del jefe de planta.
       </p>
 
       <!-- Terminal Command -->
@@ -640,7 +677,7 @@
             <span class="dot dot-yellow"></span>
             <span class="dot dot-green"></span>
           </div>
-          <span class="terminal-title">Instalación automática en 1 línea (Servidor Linux / VM)</span>
+          <span class="terminal-title">Instalación automática en 1 línea (Linux / Proxmox / VM)</span>
           <span></span>
         </div>
         <div class="terminal-body">
@@ -661,6 +698,9 @@
         <a href="https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.1.apk" class="btn-secondary">
           📲 Descargar App Android (APK v2.2.1)
         </a>
+        <a href="mailto:fromeram@gmail.com" class="btn-secondary">
+          ✉️ Contactar Soporte
+        </a>
       </div>
 
       <!-- Trust Stats Bar -->
@@ -679,129 +719,190 @@
         </div>
         <div class="stat-item">
           <div class="stat-num">Ollama IA</div>
-          <div class="stat-label">Predicción Local de Averías</div>
+          <div class="stat-label">Un Técnico Más en Plantilla</div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Maquinaria Cerámica -->
-  <section id="maquinaria">
+  <!-- Galería Visual de Fábrica Real (Sin marcas) -->
+  <section id="galeria-planta" class="plant-gallery-section">
     <div class="container">
       <div class="section-title">
-        <span class="section-tag">Sector Cerámico Especializado</span>
-        <h2>Diseñado para el ritmo 24/7 del azulejo</h2>
-        <p>Una parada de horno o rotura en prensa cuesta miles de euros por hora. El GMAO incorpora protocolos específicos para activos críticos cerámicos:</p>
+        <span class="section-tag">Entorno Real de Producción</span>
+        <h2>Adaptado a los activos más críticos del azulejo</h2>
+        <p>El programa ha sido configurado para responder a los problemas diarios que sufren los mecánicos y electricistas en las naves cerámicas:</p>
       </div>
 
-      <div class="machines-grid">
-        <div class="machine-card">
-          <div class="machine-icon icon-orange">🔥</div>
-          <h3>Hornos de Rodillos</h3>
-          <p>Supervisión preventiva de motores de tracción, cadenas, rodillos cerámicos, quemadores de gas y calibración periódica de termopares.</p>
-          <div class="machine-tags">
-            <span class="m-tag">Temperatura</span>
-            <span class="m-tag">Tracción</span>
-            <span class="m-tag">Quemadores</span>
+      <div class="plant-gallery-grid">
+        <!-- Foto 1: Horno de Rodillos -->
+        <div class="plant-photo-card">
+          <div class="photo-wrapper">
+            <img src="img/fabrica_azulejos_horno.jpg" alt="Horno continuo de rodillos para baldosas cerámicas">
+            <div class="photo-badge">🔥 Área de Cocción: Hornos Continuos</div>
+          </div>
+          <div class="photo-info">
+            <h3>Hornos de Rodillos de Alta Temperatura</h3>
+            <p>Control riguroso de tracción de rodillos cerámicos, quemadores de gas, ventiladores de enfriamiento rápido y termopares. Evita atascos de material cocido que paralizan la planta.</p>
           </div>
         </div>
 
-        <div class="machine-card">
-          <div class="machine-icon icon-blue">⚙️</div>
-          <h3>Prensas Hidráulicas</h3>
-          <p>Control de ciclos de prensado, cambios de moldes, estados de sellos y retenes, nivel y refrigeración de aceite hidráulico de alta presión.</p>
-          <div class="machine-tags">
-            <span class="m-tag">Presión</span>
-            <span class="m-tag">Moldes</span>
-            <span class="m-tag">Válvulas</span>
+        <!-- Foto 2: Prensa Hidráulica -->
+        <div class="plant-photo-card">
+          <div class="photo-wrapper">
+            <img src="img/fabrica_azulejos_prensa.jpg" alt="Prensa hidráulica de azulejos de alto tonelaje">
+            <div class="photo-badge">⚙️ Área de Conformado: Prensas de Gran Tonelaje</div>
           </div>
-        </div>
-
-        <div class="machine-card">
-          <div class="machine-icon icon-green">🎨</div>
-          <h3>Líneas de Esmaltado</h3>
-          <p>Mantenimiento de campanas de esmaltar, bombas de barbotina, cabezales de impresión digital inkjet, secaderos y variadores de velocidad.</p>
-          <div class="machine-tags">
-            <span class="m-tag">Inkjet</span>
-            <span class="m-tag">Bombas</span>
-            <span class="m-tag">Secaderos</span>
-          </div>
-        </div>
-
-        <div class="machine-card">
-          <div class="machine-icon icon-purple">📦</div>
-          <h3>Clasificación y Empaque</h3>
-          <p>Mantenimiento de líneas de selección óptica de calidades, apiladores, encartonadoras automáticas y robots de paletizado final.</p>
-          <div class="machine-tags">
-            <span class="m-tag">Robótica</span>
-            <span class="m-tag">Sensores</span>
-            <span class="m-tag">Paletizado</span>
+          <div class="photo-info">
+            <h3>Prensas Hidráulicas & Conformatrices</h3>
+            <p>Seguimiento de ciclos de prensado, cambios de moldes, fugas en sellos hidráulicos de alta presión, válvulas proporcionales y refrigeración del aceite de prensas.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Módulos Principales -->
-  <section id="modulos">
+  <!-- Catálogo Completo de Características del GMAO -->
+  <section id="catalogo">
     <div class="container">
       <div class="section-title">
-        <span class="section-tag">Capacidades Industriales</span>
-        <h2>Todo lo que tu equipo técnico necesita</h2>
-        <p>Desde el mecánico de turno hasta el jefe de mantenimiento de planta.</p>
+        <span class="section-tag">Catálogo Completo del Software</span>
+        <h2>Potencia industrial adaptada al día a día de fábrica</h2>
+        <p>Todo el engranaje de gestión que necesita tu planta, 100% configurable por el Administrador:</p>
       </div>
 
-      <div class="features-grid">
-        <div class="feature-card">
-          <h3>📋 Órdenes de Trabajo Ágiles</h3>
-          <p>Apertura instantánea de partes correctivos, asignación a técnicos por especialidad (mecánica, eléctrica, automatización) y registro de tiempos y piezas consumidas.</p>
+      <div class="features-grid-13">
+
+        <!-- 1. Calendario perpetuo a turnos -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-orange">📅</div>
+          <h3>Calendario Perpetuo a Turnos</h3>
+          <p>Configurable con cualquier plantilla de turnos rotativos de tu fábrica (6x2, 5x2, 4x3, mañana, tarde, noche y descansos). Visualiza qué técnicos están de guardia en cada momento.</p>
+          <span class="feature-badge-sub">✓ Cuadrante perpetuo automático</span>
         </div>
 
-        <div class="feature-card">
-          <h3>📦 Repuestos & Almacén Crítico</h3>
-          <p>Control de stock de rodillos refractarios, electroválvulas, boquillas, rodamientos de alta temperatura y alertas automáticas de reposición antes de roturas.</p>
+        <!-- 2. Calendario de vacaciones -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-blue">🏖️</div>
+          <h3>Gestión y Solicitud de Vacaciones</h3>
+          <p>Módulo para que los operarios soliciten días de vacaciones o permisos desde su panel, y el responsable los apruebe o rechace garantizando la cobertura de los turnos de planta.</p>
+          <span class="feature-badge-sub">✓ Aprobación y cuadrante visual</span>
         </div>
 
-        <div class="feature-card">
-          <h3>🤖 Inteligencia Artificial Predictiva (Ollama)</h3>
-          <p>Conexión directa con modelos locales de IA. Analiza las vibraciones y el historial para predecir cuándo va a fallar un motor o sugerir la solución a averías complejas.</p>
+        <!-- 3. Comunicación operarios-responsable -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-emerald">💬</div>
+          <h3>Comunicación Operarios — Responsable</h3>
+          <p>Canal directo de avisos e incidencias dentro de la propia plataforma. Se acabaron los grupos de WhatsApp caóticos o los partes de avería en papeles que se pierden.</p>
+          <span class="feature-badge-sub">✓ Trazabilidad de mensajes</span>
         </div>
 
-        <div class="feature-card">
-          <h3>🏆 Gamificación para Técnicos</h3>
-          <p>Sistema pionero en la industria: asigna puntos por orden completada, logros técnicos y ranking de rendimiento para motivar a la plantilla y evitar descuidos.</p>
+        <!-- 4. Inventario valorado y exportación a Excel -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-yellow">💰</div>
+          <h3>Inventario Valorado & Exportar a Excel</h3>
+          <p>Control exacto del valor total del almacén de repuestos. Permite fijar un precio máximo por pieza y exportar todo el listado a hojas de cálculo de Excel (.xlsx) con un clic.</p>
+          <span class="feature-badge-sub">✓ Informes valorados al instante</span>
         </div>
 
-        <div class="feature-card">
-          <h3>⚖️ Mantenimiento Legal & Auditorías</h3>
-          <p>Control de revisiones reglamentarias de recipientes a presión, depósitos de gas, transformadores eléctricos y planes preventivos con firma técnica.</p>
+        <!-- 5. Comparador de proveedores por precio -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-rose">🏷️</div>
+          <h3>Comparador de Proveedores por Precio</h3>
+          <p>Historial comparativo de cotizaciones para cada repuesto. Averigua rápidamente a qué proveedor comprar electroválvulas, rodillos o rodamientos al precio más rentable.</p>
+          <span class="feature-badge-sub">✓ Ahorro directo en compras</span>
         </div>
 
-        <div class="feature-card">
-          <h3>🏷️ Códigos QR en cada Máquina</h3>
-          <p>Genera e imprime etiquetas QR directamente para pegar en cada motor, reductor o máquina. El técnico escanea el código con el móvil y entra a la ficha al segundo.</p>
+        <!-- 6. Gamificación técnica -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-purple">🏆</div>
+          <h3>Gamificación para Motivar al Equipo</h3>
+          <p>Sistema pionero que recompensa a los mecánicos y electricistas: acumulan puntos por orden resuelta, suben de nivel técnico, desbloquean logros y compiten sanamente en el ranking.</p>
+          <span class="feature-badge-sub">✓ 0 partes de trabajo sin cerrar</span>
         </div>
+
+        <!-- 7. IA local como un técnico más -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-blue">🤖</div>
+          <h3>IA Local: "Un Técnico Más en Plantilla"</h3>
+          <p>La IA integrada con Ollama actúa como un compañero técnico las 24 horas. Puedes preguntarle en lenguaje natural cómo reparar una avería compleja, síntomas de rotura o esquemas.</p>
+          <span class="feature-badge-sub">✓ Asistente técnico inteligente</span>
+        </div>
+
+        <!-- 8. Mantenimiento Legal y alertas de vencimiento -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-rose">⚖️</div>
+          <h3>Mantenimiento Legal con Avisos de Vencimiento</h3>
+          <p>Controla revisiones reglamentarias de OCAs, centros de transformación (AT/BT), líneas de gas, aparatos a presión y líneas de vida con alertas automáticas antes de que caduquen.</p>
+          <span class="feature-badge-sub">✓ Cero sanciones en inspecciones</span>
+        </div>
+
+        <!-- 9. Gestor documental en servidor -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-emerald">📁</div>
+          <h3>Gestor Documental Técnico en Servidor</h3>
+          <p>Sube y vincula albaranes de entrega, esquemas eléctricos y neumáticos, certificados de conformidad y manuales en PDF directamente en la ficha de cada máquina.</p>
+          <span class="feature-badge-sub">✓ Manuales y esquemas a mano</span>
+        </div>
+
+        <!-- 10. Registro de cambios de formato -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-orange">🔄</div>
+          <h3>Registro de Cambios de Formato</h3>
+          <p>Específico para azulejeras: registra el tiempo invertido en cada cambio de molde o esmalte, identificando cuellos de botella para calcular la rentabilidad real de cada modelo.</p>
+          <span class="feature-badge-sub">✓ Control del OEE y tiempos muertos</span>
+        </div>
+
+        <!-- 11. Plan Anual Preventivo -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-yellow">📊</div>
+          <h3>Plan Anual de Mantenimiento Preventivo</h3>
+          <p>Planificación integral a 12 meses: programa paradas de hornos, limpiezas de secaderos, revisiones mayores de prensas y engrases periódicos con cronograma visual.</p>
+          <span class="feature-badge-sub">✓ Planificación anual sin sorpresas</span>
+        </div>
+
+        <!-- 12. Gráficas y analítica de planta -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-purple">📈</div>
+          <h3>Gráficas y Cuadros de Mando (KPIs)</h3>
+          <p>Paneles visuales con estadísticas de averías por sección, tiempos medios entre fallos (MTBF), tiempos de reparación (MTTR) y costes acumulados de repuestos.</p>
+          <span class="feature-badge-sub">✓ Decisiones basadas en datos</span>
+        </div>
+
+        <!-- 13. Configuración 100% por Administrador -->
+        <div class="feature-card-item">
+          <div class="feature-icon-box bg-blue">⚙️</div>
+          <h3>100% Configurable por el Administrador</h3>
+          <p>Crea y ajusta a tu gusto secciones, líneas de producción, máquinas, almacenes de fábrica, usuarios, roles, permisos y códigos de avería sin depender de programación externa.</p>
+          <span class="feature-badge-sub">✓ Autonomía absoluta para la planta</span>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- App Móvil Banner -->
+  <!-- App Móvil Showcase -->
   <section id="app-movil">
     <div class="container">
       <div class="app-banner">
         <div class="app-content">
-          <h3>📱 App Móvil Android Nativa para Técnicos</h3>
-          <p>Diseñada específicamente para llevar en el bolsillo del mono de trabajo. Los técnicos no necesitan ir a la oficina a apuntar nada:</p>
+          <h3>📱 App Móvil Android Nativa (GMAO Mobile v2.2.1)</h3>
+          <p>Diseñada para llevar en el mono de trabajo. Los técnicos no necesitan subir a la oficina a registrar nada:</p>
           <ul class="app-features-list">
-            <li><span>✓</span> Escaneo de códigos QR a pie de máquina en plena fábrica.</li>
-            <li><span>✓</span> Apertura y cierre de partes de trabajo en menos de 10 segundos.</li>
-            <li><span>✓</span> Adjunta fotografías directas de roturas y averías con la cámara del móvil.</li>
-            <li><span>✓</span> Selector dinámico de servidor: funciona con la IP local de tu planta o con VPN.</li>
+            <li><span>✓</span> <strong>Escaneo de Códigos QR</strong> pegados directamente en el motor o prensa.</li>
+            <li><span>✓</span> <strong>Apertura y cierre de partes de trabajo</strong> en menos de 10 segundos.</li>
+            <li><span>✓</span> <strong>Adjunta fotos de roturas</strong> con la cámara del teléfono móvil.</li>
+            <li><span>✓</span> <strong>Selector dinámico de servidor</strong>: introduce la IP de tu planta y pruébala en vivo.</li>
           </ul>
-          <a href="https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.1.apk" class="btn-primary">
-            📲 Descargar GMAOv2.2.1.apk (9.2 MB)
-          </a>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <a href="https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.1.apk" class="btn-primary">
+              📲 Descargar APK Android (9.2 MB)
+            </a>
+            <a href="mailto:fromeram@gmail.com" class="btn-secondary">
+              ✉️ Consultar con el Desarrollador
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -811,9 +912,9 @@
   <section id="instalacion">
     <div class="container">
       <div class="section-title">
-        <span class="section-tag">Despliegue Sin Complicaciones</span>
-        <h2>¿Cómo ponerlo en marcha en tu fábrica?</h2>
-        <p>No necesitas ser informático. El script instala automáticamente Docker y todas las herramientas.</p>
+        <span class="section-tag">Despliegue Rápido</span>
+        <h2>¿Cómo ponerlo en marcha en tu empresa?</h2>
+        <p>No necesitas conocimientos informáticos avanzados. El comando instala Docker y todo lo necesario de forma automática.</p>
       </div>
 
       <div class="steps-row">
@@ -826,7 +927,7 @@
         <div class="step-box">
           <div class="step-number">2</div>
           <h4>Responde al Asistente</h4>
-          <p>El asistente en español te preguntará la IP de tu planta, contraseñas y te permitirá cargar la plantilla de fábrica con 1 clic.</p>
+          <p>El asistente en español te preguntará la IP de tu fábrica, contraseñas y te permitirá cargar la plantilla de fábrica con 1 clic.</p>
         </div>
 
         <div class="step-box">
@@ -841,16 +942,16 @@
   <!-- CTA Bottom -->
   <section class="cta-bottom">
     <div class="container">
-      <h2>Prueba el GMAO durante 3 meses sin coste</h2>
-      <p style="color: var(--text-muted); font-size: 18px; max-width: 650px; margin: 0 auto 36px;">
-        Descubre cómo las plantas cerámicas reducen hasta un 35% las paradas no programadas. Sin compromiso ni tarjeta de crédito.
+      <h2>Prueba el GMAO durante 3 meses sin coste alguno</h2>
+      <p style="color: var(--text-muted); font-size: 18px; max-width: 680px; margin: 0 auto 36px;">
+        Descubre cómo las plantas cerámicas reducen paradas imprevistas y controlan su stock de recambios. Sin compromisos ni tarjeta de crédito.
       </p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="copyCommand()">
           📋 Copiar Comando de Instalación
         </button>
-        <a href="https://github.com/fromeram/GMAO-installer" class="btn-secondary" target="_blank">
-          ⭐ Ver Código e Instrucciones en GitHub
+        <a href="mailto:fromeram@gmail.com" class="btn-secondary">
+          ✉️ Escribir a fromeram@gmail.com
         </a>
       </div>
     </div>
@@ -859,12 +960,12 @@
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p style="margin-bottom: 12px;"><strong>GMAO System</strong> — Mantenimiento Inteligente para Fábricas de Cerámica y Azulejos.</p>
+      <p style="margin-bottom: 12px;"><strong>GMAO Cerámico</strong> — Plataforma Integral de Mantenimiento para Fábricas de Azulejos.</p>
       <p>
         Desarrollado por <strong>Fran Romera</strong> · 
+        <a href="mailto:fromeram@gmail.com">fromeram@gmail.com</a> · 
         <a href="https://github.com/fromeram/GMAO-installer">Repositorio GitHub</a> · 
-        <a href="https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.1.apk">Descargar APK Android</a> · 
-        <a href="https://github.com/fromeram">Contacto</a>
+        <a href="https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.1.apk">Descargar APK Android</a>
       </p>
     </div>
   </footer>
