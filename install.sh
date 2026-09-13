@@ -179,7 +179,7 @@ case "$FACTORY_OPT" in
                     M_CRIT="${M_CRIT:-MEDIA}"
                     M_CRIT=$(echo "$M_CRIT" | tr '[:lower:]' '[:upper:]')
                     
-                    echo "INSERT INTO machines (nombre, marca, modelo, numero_serie, criticidad, section_id, line_id) VALUES ('$M_NAME', '$M_BRAND', '$M_MODEL', '$M_SN', '$M_CRIT', (SELECT id FROM sections WHERE nombre = '$SEC_NAME' ORDER BY id DESC LIMIT 1), (SELECT id FROM lines WHERE nombre = '$L_NAME' ORDER BY id DESC LIMIT 1));" >> "$SQL_SETUP"
+                    echo "INSERT INTO machines (nombre, marca, modelo, numero_serie, criticidad, section_id, line_id) VALUES ('$M_NAME', '$M_BRAND', '$M_MODEL', '$M_SN', '$M_CRIT', (SELECT id FROM sections WHERE nombre = '$SEC_NAME' ORDER BY id DESC LIMIT 1), (SELECT id FROM lines WHERE nombre = '$L_NAME' AND section_id = (SELECT id FROM sections WHERE nombre = '$SEC_NAME' ORDER BY id DESC LIMIT 1) ORDER BY id DESC LIMIT 1));" >> "$SQL_SETUP"
                 done
             done
         done
@@ -283,7 +283,7 @@ fi
 echo -e "\n${CYAN}[5/6] Construyendo e iniciando contenedores Docker...${NC}"
 echo -e "${YELLOW}La primera compilación puede demorar unos minutos...${NC}\n"
 
-$DOCKER_COMPOSE_CMD down --remove-orphans 2>/dev/null || true
+$DOCKER_COMPOSE_CMD down -v --remove-orphans 2>/dev/null || true
 $DOCKER_COMPOSE_CMD pull && $DOCKER_COMPOSE_CMD up -d
 
 # 6. Comprobación de salud
@@ -302,6 +302,9 @@ done
 echo ""
 if [ $READY -eq 1 ]; then
     echo -e "  ${GREEN}✓ Todos los servicios iniciados y saludables.${NC}"
+    if [ -f "$SQL_SETUP" ]; then
+        docker exec -i gmao-project-db psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" < "$SQL_SETUP" 2>/dev/null || true
+    fi
 else
     echo -e "  ${YELLOW}ℹ️  Los servicios están iniciando en segundo plano.${NC}"
 fi
