@@ -49,11 +49,15 @@ if ! docker ps &> /dev/null; then
     sleep 3
 fi
 
-INSTALL_DIR="$PWD/GMAO-installer"
+# Asegurar directorio de trabajo valido en el host
+cd "$HOME" 2>/dev/null || cd /root 2>/dev/null || cd /
+
+INSTALL_DIR="$HOME/GMAO-installer"
 if [ -d "$INSTALL_DIR/.git" ]; then
-    echo -e "  ${GREEN}✓${NC} Repositorio ya clonado en $INSTALL_DIR. Actualizando..."
+    echo -e "  ${GREEN}✓${NC} Repositorio detectado en $INSTALL_DIR. Actualizando última versión..."
     cd "$INSTALL_DIR"
-    git pull || true
+    git fetch origin main 2>/dev/null || true
+    git reset --hard origin/main 2>/dev/null || git pull || true
 else
     echo -e "${CYAN}📥 Descargando GMAO System desde GitHub...${NC}"
     rm -rf "$INSTALL_DIR"
