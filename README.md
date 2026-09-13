@@ -1,164 +1,169 @@
-# 🏭 GMAO System - Sistema de Gestión de Mantenimiento Industrial
+# 🏭 GMAO System — Plataforma Integral de Mantenimiento Industrial
 
-[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/Frontend-React-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL%2017-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![License: Proprietary](https://img.shields.io/badge/Licencia-Prueba_Gratuita_3_Meses-blue.svg)](https://github.com/fromeram/GMAO-installer)
+[![Docker: Pre-built](https://img.shields.io/badge/Docker-Imágenes_Listas_(GHCR)-success.svg)](https://github.com/fromeram/GMAO-installer/pkgs/container/gmao-backend)
+[![Seguridad: RSA-2048](https://img.shields.io/badge/Seguridad-RSA_2048_Machine_ID-orange.svg)](https://github.com/fromeram/GMAO-installer)
+[![AI: Ollama Ready](https://img.shields.io/badge/IA-Ollama_Local_&_Privada-purple.svg)](https://ollama.com)
 
-**GMAO System** es una solución integral y moderna de **Gestión de Mantenimiento Asistido por Ordenador (CMMS / GMAO)** diseñada específicamente para entornos industriales y plantas de producción. 
+**GMAO System** es una solución profesional de **Gestión de Mantenimiento Asistido por Ordenador (GMAO / CMMS)** diseñada para fábricas, plantas industriales e instalaciones técnicas. 
 
-Incluye gestión completa de activos, órdenes de trabajo (correctivas, preventivas, predictivas), gestión de almacenes y repuestos, control de técnicos, auditoría, gamificación, scheduler de tareas automáticas y soporte para modelos de Inteligencia Artificial preventiva.
+Permite controlar todo el ciclo de vida de los activos industriales: órdenes de trabajo correctivas y preventivas, gamificación para técnicos, gestión de almacén con control de stock de repuestos, matriz de criticidad, mantenimiento legal con certificados, códigos QR para máquinas y asistencia con **Inteligencia Artificial local**.
 
 ---
 
-## 🚀 Despliegue Todo en Uno (100% Automático)
+## ⚡ Instalación en 1 Solo Paso (No necesitas instalar nada previamente)
 
-En un servidor Linux, máquina virtual o contenedor Proxmox recién creado y completamente limpio, **solo tienes que pegar este único comando**:
+> 💡 **No hace falta que instales Docker, ni Git, ni nada antes.**  
+> El instalador automático se encarga de instalar todas las herramientas necesarias por ti.
+
+En cualquier servidor Linux, máquina virtual (Ubuntu / Debian) o contenedor Proxmox limpio, ejecuta como usuario **root** (o con `sudo`):
 
 ```bash
 apt update && apt install -y curl && bash <(curl -fsSL https://raw.githubusercontent.com/fromeram/GMAO-installer/main/setup.sh)
 ```
 
-Este comando se encarga de todo el aprovisionamiento:
-1. Instala automáticamente `Docker`, `Docker Compose`, `Git` y `OpenSSL`.
-2. Inicia los servicios del sistema operativo.
-3. Descarga el repositorio.
-4. Lanza de inmediato el **menú interactivo** con el asistente de preguntas de fábrica.
+### ¿Qué hace este comando automáticamente?
+1. ⚙️ Detecta tu sistema e instala **Docker**, **Docker Compose**, **Git** y herramientas de seguridad.
+2. 📥 Descarga los scripts de arranque y orquestación.
+3. 🚀 Descarga las imágenes del sistema pre-compiladas y listas para usar.
+4. 📋 Abre un **asistente visual interactivo en pantalla** que te hace preguntas sencillas para dejar la fábrica lista.
 
 ---
 
-## 🛠️ ¿Qué hace el Instalador (`install.sh`)?
+## 📋 ¿Qué te preguntará el Asistente de Configuración?
 
-El instalador interactivo te guiará paso a paso:
+El instalador te guiará paso a paso en español con preguntas muy sencillas:
 
-1. **Comprobación del Entorno**: Verifica que Docker y Docker Compose estén presentes.
-2. **Configuración de Red**: Detecta automáticamente tu IP local o te permite configurar un dominio personalizado.
-3. **Credenciales Personalizadas**: Te solicita o genera contraseñas seguras para la base de datos PostgreSQL y la cuenta del Administrador principal.
-4. **Asistente de Estructura de Fábrica**:
-   - **Almacenes de Repuestos**: Te pregunta cuántos almacenes tienes y sus nombres (ej. *Almacén Central*, *Taller*, etc.).
-   - **Secciones / Áreas de Planta**: Te pregunta las secciones de tu fábrica (ej. *Mecanizado*, *Prensas*, *Envasado*).
-   - **Líneas de Producción**: Para cada sección, puedes definir sus líneas.
-   - **Máquinas**: Para cada línea, puedes introducir sus máquinas con Marca, Modelo, Número de Serie y Criticidad (ALTA, MEDIA, BAJA).
-   - *(Opcional)*: También puedes seleccionar la opción de cargar una **plantilla industrial estándar** de prueba con un solo clic.
-5. **Seguridad y SSL**: Genera automáticamente certificados SSL autofirmados para que puedas acceder por **HTTPS** de forma segura en tu red local o intranet.
-6. **Arranque Automatizado**: Construye los contenedores Docker e inicializa la base de datos completa con sus **48 tablas y 82 relaciones foráneas**.
+1. **Dirección IP del Servidor**: Detecta la IP local de tu máquina (por ejemplo `192.168.1.50`). Solo pulsas `ENTER` para aceptarla.
+2. **Contraseña de Base de Datos y Administrador**: Te propone contraseñas seguras automáticamente o puedes escribir las que tú quieras.
+3. **Servidor de Inteligencia Artificial (Ollama)**:
+   - Te preguntará la dirección IP del servidor donde tengas instalado Ollama.
+   - Si aún no tienes IA o prefieres probar el programa primero, simplemente pulsas `ENTER` y podrás configurarla en cualquier momento más adelante.
+4. **Estructura de tu Fábrica**:
+   - **Opción rápida**: Cargar una plantilla industrial completa con máquinas, secciones y almacenes de ejemplo listos para probar en 1 segundo.
+   - **Opción guiada**: Escribir tus propios almacenes, secciones (ej. *Línea 1, Envasado, Calderas*) y las máquinas de cada línea.
+
+Al terminar, el sistema arrancará de inmediato y te mostrará la dirección web para entrar desde cualquier navegador.
 
 ---
 
-## 🖥️ Panel de Control y Mantenimiento (`gmao.sh`)
+## 🤖 Inteligencia Artificial Industrial (Mantenimiento Predictivo y Asistente)
 
-Para gestionar el sistema día a día sin necesidad de recordar comandos de Docker, dispones del script de administración:
+El sistema integra un asistente de Inteligencia Artificial capaz de analizar el histórico de averías, diagnosticar fallos mecánicos/eléctricos y sugerir los repuestos necesarios en lenguaje natural.
+
+### 🔒 100% Privada y Local (Tus datos no salen a Internet)
+La IA funciona mediante **[Ollama](https://ollama.com)**, lo que garantiza que ningún dato industrial, fallo o documento de tu fábrica viaje a servidores externos.
+
+### 📌 ¿Dónde se instala Ollama?
+Puedes tener Ollama instalado en dos sitios según la potencia de tus equipos:
+- **En el mismo servidor que el GMAO**: Si tu servidor tiene suficiente memoria RAM (8GB - 16GB o más).
+- **En otro PC o servidor dedicado**: Si tienes otro ordenador en la red de la fábrica con tarjeta gráfica (GPU) o más potencia, puedes instalar Ollama allí y el GMAO se conectará a través de la red local introduciendo su dirección IP (ejemplo: `http://192.168.1.100:11434`).
+
+#### Para instalar Ollama en 1 minuto:
+```bash
+# 1. Instalar Ollama en Linux
+curl -fsSL https://ollama.com/install.sh | sh
+
+# 2. Descargar el modelo recomendado (bueno, rápido y preciso)
+ollama run qwen2.5:7b
+# O para equipos con muchos recursos:
+ollama run qwen2.5-coder:14b
+```
+
+---
+
+## 🌍 ¿Cómo acceder al GMAO desde fuera de la Fábrica (Internet / Móvil)?
+
+Si los técnicos o responsables necesitan consultar el GMAO desde su teléfono móvil, desde casa o desde otra delegación fuera de la red local, dispones de **3 formas seguras**:
+
+### 🥇 Opción 1: Cloudflare Tunnel (Recomendada — Gratis, fácil y sin abrir puertos)
+Es la opción más moderna y segura de la industria:
+- **No necesitas tocar el router de la fábrica ni abrir ningún puerto**.
+- Te proporciona un enlace web seguro con candado verde (`https://mantenimiento.tudominio.com`).
+- Protege el servidor contra ataques informáticos.
+
+**Pasos rápidos:**
+1. Crea una cuenta gratuita en [Cloudflare.com](https://cloudflare.com).
+2. Ve a **Zero Trust** $\rightarrow$ **Networks** $\rightarrow$ **Tunnels** $\rightarrow$ **Create a Tunnel**.
+3. Elige **Cloudflared (Linux)** y copia el comando que te da Cloudflare en la consola de tu servidor GMAO.
+4. En la configuración del túnel, apunta a `http://localhost:80` (o `https://localhost:443`). ¡Listo! Ya puedes acceder desde cualquier parte del mundo.
+
+### 🥈 Opción 2: VPN Privada (Tailscale o WireGuard — Máxima privacidad)
+Si solo quieres que entren personas autorizadas sin exponer nada a Internet:
+1. Instala **[Tailscale](https://tailscale.com)** en el servidor del GMAO y en los móviles/portátiles de los técnicos.
+2. Cada dispositivo recibe una IP segura privada.
+3. Podrás entrar al GMAO desde el móvil en la calle escribiendo esa IP en el navegador como si estuvieras dentro de la fábrica.
+
+### 🥉 Opción 3: Apertura de Puertos en el Router (Port Forwarding clásico)
+1. Entra al router de tu operador de Internet.
+2. Abre y redirige los puertos **80** (HTTP) y **443** (HTTPS) hacia la dirección IP local de tu servidor GMAO.
+3. Si no tienes IP pública fija, utiliza un servicio gratuito de DNS dinámico como **DuckDNS** o **No-IP**.
+
+---
+
+## 🎁 Periodo de Prueba Gratuito de 3 Meses (100% Funcional)
+
+Para que puedas implantar el software en tu empresa con total tranquilidad, cargues tus máquinas y compruebes el ahorro de tiempo y costes:
+
+- ✅ **90 días de prueba gratuita** desde el momento de la instalación.
+- ✅ **Todas las funciones desbloqueadas**: Sin límites de máquinas, usuarios, órdenes de trabajo, técnicos ni almacenes.
+- ✅ **Sin tarjeta de crédito ni compromisos**: Al terminar los 3 meses, el sistema se pausa a la espera de una clave de activación. Tus datos quedan guardados y protegidos intactos en tu base de datos.
+
+### 🔑 Activación de Licencia Permanente
+En cualquier momento puedes pulsar en el distintivo de licencia en la barra superior del programa:
+1. Te mostrará el **ID Único de tu Máquina (Machine ID)**.
+2. Escríbenos a través de GitHub o correo electrónico para solicitar tu clave de licencia.
+3. Pega la clave recibida en la ventana y el sistema quedará activado de por vida.
+
+---
+
+## 🛠️ Comandos de Administración del Sistema (`gmao.sh`)
+
+En la carpeta donde se instaló el programa dispones de un centro de control muy fácil de usar:
 
 ```bash
 ./gmao.sh
 ```
 
-O directamente mediante comandos rápidos:
+Abre un menú interactivo para gestionar el programa, o puedes usar comandos rápidos directos:
 
-| Comando | Descripción |
+| Comando | Para qué sirve |
 | :--- | :--- |
-| `./gmao.sh status` | Muestra el estado de salud de todos los contenedores |
-| `./gmao.sh start` | Inicia todos los servicios del GMAO |
-| `./gmao.sh stop` | Detiene los servicios de forma ordenada |
-| `./gmao.sh restart` | Reinicia los contenedores |
-| `./gmao.sh logs` | Muestra los logs en tiempo real (puedes especificar `./gmao.sh logs backend`) |
-| `./gmao.sh backup` | Crea un volcado completo de la base de datos en la carpeta `backups/` |
-| `./gmao.sh restore` | Restaura una copia de seguridad seleccionada |
+| `./gmao.sh status` | Comprueba si todos los servicios están funcionando correctamente |
+| `./gmao.sh start` | Enciende el programa |
+| `./gmao.sh stop` | Apaga el programa de forma limpia |
+| `./gmao.sh restart` | Reinicia todos los servicios |
+| `./gmao.sh logs` | Muestra en pantalla lo que está ocurriendo (útil para diagnósticos) |
+| `./gmao.sh backup` | **Crea una copia de seguridad completa** de todos tus datos en la carpeta `backups/` |
+| `./gmao.sh restore` | Restaura una copia de seguridad anterior en caso de emergencia |
+| `./gmao.sh build` | Actualiza los contenedores a la última versión disponible |
 
 ---
 
-## 🤖 Módulo de Inteligencia Artificial (Ollama)
+## 📦 Arquitectura del Software (Listo para Producción)
 
-El sistema GMAO incluye módulos de última generación impulsados por **Inteligencia Artificial 100% privada y local** (sin enviar datos a la nube):
-- **Mantenimiento Predictivo**: Evaluación periódica del riesgo de avería de cada máquina según su historial y condiciones.
-- **Asistente de Fallas y Chat Técnico**: Sugerencias de diagnóstico, causas probables y repuestos recomendados en lenguaje natural.
-- **Análisis de Formatos y Optimización**: Métricas de rendimiento y sugerencias de mejora de procesos.
-
-### ⚙️ ¿Cómo preparar Ollama?
-Para que estas funciones estén activas, el GMAO necesita conectarse a un servidor **Ollama** (puede estar en la misma máquina o en cualquier otro equipo o servidor de la red local).
-
-1. **Instalar Ollama en Linux (servidor local o remoto)**:
-   ```bash
-   curl -fsSL https://ollama.com/install.sh | sh
-   ```
-2. **Descargar los modelos recomendados**:
-   ```bash
-   # Modelo recomendado para análisis técnico y chat (14B):
-   ollama run qwen2.5-coder:14b
-
-   # O para equipos con menos recursos / RAM (7B o 3B):
-   ollama run qwen2.5:7b
-   ollama run llama3.2:3b
-   ```
-3. **Durante la instalación (`install.sh`)**:
-   Introduce la URL de tu Ollama (por ejemplo: `http://localhost:11434` o `http://192.168.1.50:11434`). El GMAO detectará automáticamente los modelos disponibles y comenzará a generar predicciones periódicas.
-
----
-
-## 📜 Periodo de Evaluación Gratuito (3 Meses) y Licenciamiento
-
-El sistema incluye por defecto un **Periodo de Evaluación de 3 Meses (90 días)** con **todas las funcionalidades activadas al 100%**:
-- Gestión de activos, órdenes de trabajo, planes preventivos y almacén de repuestos sin restricciones.
-- Módulo de inteligencia artificial, matriz de riesgo de averías y predicciones activas.
-- Creación de usuarios y control de roles para todo el equipo técnico de la fábrica.
-
-Esto permite a cualquier planta industrial probar el software en condiciones reales, cargar sus máquinas y comprobar el ahorro de costes y tiempos de respuesta.
-
-### 🔑 Activación de Licencia Permanente
-Al concluir los 3 meses (o en cualquier momento desde el botón de licencia en la barra superior):
-1. La aplicación muestra el **ID Único de tu Servidor (Machine ID)**.
-2. Contacta con **Fran Romera** (a través de GitHub o email) para solicitar tu clave de activación.
-3. Introduce la clave en el panel de la aplicación web para desbloquear el sistema de por vida o extender el soporte.
-
----
-
-## 🏗️ Arquitectura del Sistema
+El software se distribuye mediante imágenes Docker pre-compiladas y optimizadas alojadas en **GitHub Container Registry (GHCR)**:
 
 ```
-gmao-installer/
-├── install.sh                  # Asistente de instalación interactivo
-├── gmao.sh                     # Herramienta de gestión y backups
-├── docker-compose.yml          # Orquestación de servicios Docker
-├── .env.example                # Plantilla de variables de entorno
-├── db/
-│   ├── 01_schema.sql           # Esquema completo de la BD (48 tablas, 82 relaciones)
-│   └── 02_initial_data.sql     # Roles esenciales y datos de arranque
-├── backend/                    # API FastAPI modularizada
-│   └── src/
-│       ├── main.py             # Punto de entrada de la API
-│       ├── routers/            # 15 routers modulares (máquinas, órdenes, almacén, etc.)
-│       └── schemas/            # Esquemas de validación Pydantic
-├── frontend/                   # Interfaz de usuario en React
-└── nginx/                      # Servidor web inverso y terminación SSL (HTTPS)
-    └── gmao.conf               # Configuración segura y universal de Nginx
+GMAO-installer/
+├── setup.sh                  # Instalador 1-click automático
+├── install.sh                # Asistente de configuración de fábrica
+├── gmao.sh                   # Panel de administración y copias de seguridad
+├── docker-compose.yml        # Orquestación con imágenes oficiales de GHCR
+├── .env.example              # Plantilla de variables de entorno
+├── nginx/                    # Proxy inverso seguro Nginx con soporte SSL
+└── db/                       # Estructura de base de datos industrial (48 tablas, 82 relaciones)
 ```
 
----
-
-## 🧪 Cómo Probarlo en una Máquina Virtual Linux (VM)
-
-Si deseas probar el instalador en una máquina virtual limpia (Ubuntu 22.04 / 24.04 o Debian):
-
-1. **Instalar Docker**:
-   ```bash
-   sudo apt-get update
-   sudo apt-get install -y docker.io docker-compose-v2 openssl git
-   sudo usermod -aG docker $USER
-   newgrp docker
-   ```
-2. **Clonar e Instalar**:
-   ```bash
-   git clone https://github.com/fromeram/gmao-installer.git
-   cd gmao-installer
-   chmod +x install.sh gmao.sh
-   ./install.sh
-   ```
-3. **Acceder desde el navegador**:
-   Abre `https://<IP_DE_TU_VM>` en tu navegador web e inicia sesión con las credenciales que hayas configurado en el asistente.
+- **Backend**: API modular de alto rendimiento (FastAPI, Python 3.10) con firma criptográfica RSA-2048.
+- **Frontend**: Panel de control interactivo para técnicos y jefes de planta (React, Ant Design).
+- **Base de Datos**: PostgreSQL 17 optimizado para entornos industriales.
+- **Servidor Web**: Nginx con compresión gzip, terminación SSL y cabeceras de seguridad.
 
 ---
 
-## 🔒 Privacidad y Seguridad
+## 💬 Soporte y Contacto
 
-- Este repositorio **NO contiene contraseñas reales, tokens privados ni dominios personales**.
-- Todas las credenciales se generan o introducen durante la ejecución de `install.sh` y se almacenan exclusivamente en el archivo local `.env` del servidor del usuario, protegido con permisos restrictivos `600`.
+¿Tienes dudas durante la instalación, necesitas una adaptación a medida para tu planta o deseas solicitar una licencia permanente?
+- **Autor**: Fran Romera
+- **GitHub**: [github.com/fromeram](https://github.com/fromeram)

@@ -1,61 +1,85 @@
-# 🚀 Guía Rápida de Instalación - GMAO System
+# 📖 Instrucciones de Instalación — GMAO System
 
-## ⚡ Comando Todo en Uno (Instalación 100% Automática)
+¡Bienvenido! Esta guía te explica de forma muy sencilla cómo poner en marcha el sistema GMAO en tu empresa en solo 3 minutos.
 
-En una máquina virtual o contenedor Proxmox recién creado y completamente limpio, **solo tienes que pegar esta única línea en la consola**:
+---
+
+## 🚀 Paso 1: El Comando Mágico (No necesitas instalar nada antes)
+
+> 💡 **Nota importante**: No te preocupes por instalar Docker ni configurar nada manualmente en Linux. Este comando se encarga de todo el trabajo sucio por ti.
+
+Abre la consola (terminal) de tu servidor Linux, máquina virtual o contenedor Proxmox (como usuario `root` o con permisos `sudo`) y pega esta línea:
 
 ```bash
 apt update && apt install -y curl && bash <(curl -fsSL https://raw.githubusercontent.com/fromeram/GMAO-installer/main/setup.sh)
 ```
 
-Este comando se encarga de **TODO automáticamente**:
-1. Instala `curl`, `git`, `docker`, `docker-compose` y `openssl`.
-2. Inicia los servicios del sistema operativo.
-3. Descarga el repositorio de GitHub.
-4. Abre inmediatamente el **menú interactivo** para que tú solo tengas que responder las preguntas.
+El instalador comprobará tu sistema, instalará Docker y descargará todo lo necesario en menos de un minuto.
 
 ---
 
-## 📋 ¿Qué te preguntará el instalador durante el proceso?
+## 📝 Paso 2: Responde a las Preguntas del Asistente
 
-1. **Dirección IP o Dominio del Servidor**:
-   - Detecta automáticamente la IP de la máquina (por ejemplo `192.168.1.50`). Puedes pulsar `ENTER` para aceptarla o escribir un dominio/IP personalizado.
-2. **Base de Datos PostgreSQL**:
-   - Nombre de la base de datos (por defecto `gmao_db`).
-   - Usuario (por defecto `gmao_user`).
-   - Contraseña (te sugiere una segura aleatoria o puedes escribir la que quieras).
-3. **Usuario Administrador del GMAO**:
-   - Usuario de acceso al panel (por defecto `admin`).
-   - Contraseña de acceso (te sugiere una o puedes escribir la que prefieras).
-4. **Asistente de Fábrica Personalizada (Estructura de Planta)**:
-   - **Opción 1**: Configurar interactivamente:
-     - Te pregunta cuántos **almacenes de repuestos** tienes y sus nombres.
-     - Te pregunta las **secciones o áreas de producción** de tu fábrica.
-     - Para cada sección, te pregunta las **líneas de producción**.
-     - Para cada línea, te pregunta las **máquinas** (Nombre, Marca, Modelo, Número de Serie y Criticidad).
-   - **Opción 2** *(Recomendada para pruebas rápidas)*: Carga una plantilla estándar industrial de ejemplo con secciones, líneas y máquinas ya listas.
-   - **Opción 3**: Estructura mínima para dar de alta los activos más tarde desde la aplicación web.
+Aparecerá en tu pantalla un asistente en español muy claro:
+
+1. **IP de la máquina**: El programa detecta la IP de tu servidor (ej. `192.168.1.45`). Solo tienes que pulsar la tecla **ENTER**.
+2. **Contraseñas**: Puedes dejar que el asistente genere contraseñas seguras automáticamente pulsando **ENTER**, o escribir las tuyas personales.
+3. **Servidor de Inteligencia Artificial (Ollama)**:
+   - Si tienes **Ollama** funcionando para diagnósticos automáticos, escribe su dirección (ej. `http://localhost:11434` o la IP del ordenador donde esté instalado, ej. `http://192.168.1.100:11434`).
+   - Si todavía no tienes Ollama instalado o quieres probar el programa sin IA por ahora, pulsa **ENTER** y podrás añadirlo más adelante cuando quieras.
+4. **Estructura de Fábrica**:
+   - **Opción recomendada para empezar**: Elige la **Plantilla estándar**. En un segundo te creará máquinas, almacenes y áreas industriales listas para usar y probar el programa.
+   - **Opción personalizada**: Si prefieres configurarlo ya con los datos reales de tu planta, el asistente te irá pidiendo los nombres de tus almacenes, secciones y máquinas.
 
 ---
 
-## 🌐 Acceso al Sistema
+## 🌐 Paso 3: ¡Listo! Abre el Programa en tu Navegador
 
-Una vez finalizado el instalador:
-- **Panel Web (HTTPS)**: `https://<IP_DE_TU_SERVIDOR>`
-- **Documentación API**: `https://<IP_DE_TU_SERVIDOR>/api/docs`
-- **Login Inicial**: Con el usuario y contraseña que configuraste en el paso 3.
+Cuando el instalador termine de arrancar, verás un mensaje verde de felicitación indicándote la dirección web:
+
+- **Dirección Web (HTTPS)**: `https://<IP_DE_TU_SERVIDOR>`
+- **Usuario**: `admin` (o el que hayas configurado)
+- **Contraseña**: La que hayas introducido en el asistente.
+
+> 🔒 *Al entrar por primera vez, el navegador te avisará de que el certificado de seguridad es autofirmado. Es totalmente normal en redes locales: simplemente pulsa en "Configuración avanzada" $\rightarrow$ "Continuar a la web".*
 
 ---
 
-## 🛠️ Panel de Mantenimiento (`gmao.sh`)
+## 🤖 ¿Cómo añadir la Inteligencia Artificial (Ollama)?
 
-Para gestionar el sistema día a día:
+Si quieres que el GMAO te dé diagnósticos de averías, recomiende soluciones técnicas y prediga cuándo puede fallar una máquina:
+
+1. Instala Ollama en tu servidor o en otro ordenador de la fábrica:
+   ```bash
+   curl -fsSL https://ollama.com/install.sh | sh
+   ```
+2. Descarga el modelo de inteligencia artificial:
+   ```bash
+   ollama run qwen2.5:7b
+   ```
+3. En el GMAO ya estará conectado y listo para ayudarte en cada orden de trabajo.
+
+---
+
+## 🌍 ¿Cómo entrar desde fuera de la fábrica (Internet o Móvil)?
+
+Para que los técnicos puedan usar el GMAO desde su móvil o tú puedas consultarlo desde casa:
+
+- **La mejor opción (Cloudflare Tunnel - Gratis)**:
+  1. Entra en [Cloudflare.com](https://cloudflare.com) y crea un túnel gratuito en el apartado Zero Trust.
+  2. Apunta el túnel al puerto `80` de tu servidor.
+  3. Tendrás una dirección web pública y protegida (ej: `https://gmao.tuempresa.com`) sin tener que abrir ningún puerto en el router de tu fábrica.
+- **Opción VPN (Tailscale)**:
+  Instala la aplicación gratuita [Tailscale](https://tailscale.com) en el servidor y en los teléfonos móviles de los técnicos para conectaros de forma privada.
+
+---
+
+## ⚙️ Mantenimiento Diario (`./gmao.sh`)
+
+Dentro de la carpeta del programa (`cd GMAO-installer`), dispones de un menú de control:
+
 ```bash
 ./gmao.sh
 ```
-O con comandos directos:
-- `./gmao.sh status`  $\rightarrow$ Ver salud de los contenedores
-- `./gmao.sh logs`    $\rightarrow$ Ver registros en tiempo real
-- `./gmao.sh backup`  $\rightarrow$ Crear copia de seguridad completa de la BD
-- `./gmao.sh restore` $\rightarrow$ Restaurar una copia de seguridad
-- `./gmao.sh restart` $\rightarrow$ Reiniciar el sistema
+
+Desde ahí puedes hacer **copias de seguridad (backups)** de toda tu base de datos con un clic, ver si todo está funcionando o reiniciar el sistema.
