@@ -123,6 +123,24 @@ echo ""
 read -r -p "  Selecciona una opción [1-3, por defecto 2]: " FACTORY_OPT
 FACTORY_OPT="${FACTORY_OPT:-2}"
 
+ask_positive_int() {
+    local prompt="$1"
+    local default_val="$2"
+    local var_name="$3"
+    local val=""
+
+    while true; do
+        read -r -p "$prompt [$default_val]: " val
+        val="${val:-$default_val}"
+        if [[ "$val" =~ ^[1-9][0-9]*$ ]]; then
+            printf -v "$var_name" '%s' "$val"
+            break
+        else
+            echo -e "    ${RED}⚠️  Error: Debes introducir un número entero mayor que 0 (ej: 1, 2, 3...). Inténtalo de nuevo.${NC}"
+        fi
+    done
+}
+
 SQL_SETUP="db/03_factory_setup.sql"
 rm -f "$SQL_SETUP"
 echo "-- GMAO SYSTEM - Configuración de Planta Inicial" > "$SQL_SETUP"
@@ -130,8 +148,7 @@ echo "-- GMAO SYSTEM - Configuración de Planta Inicial" > "$SQL_SETUP"
 case "$FACTORY_OPT" in
     1)
         echo -e "\n${BLUE}--- [A] Almacenes de Repuestos ---${NC}"
-        read -r -p "  ¿Cuántos almacenes de repuestos tiene tu fábrica? [1]: " NUM_W
-        NUM_W="${NUM_W:-1}"
+        ask_positive_int "  ¿Cuántos almacenes de repuestos tiene tu fábrica?" "1" NUM_W
         for (( i=1; i<=NUM_W; i++ )); do
             read -r -p "    Nombre del Almacén #$i [Almacén $i]: " W_NAME
             W_NAME="${W_NAME:-Almacén $i}"
@@ -139,8 +156,7 @@ case "$FACTORY_OPT" in
         done
 
         echo -e "\n${BLUE}--- [B] Secciones / Áreas de Planta ---${NC}"
-        read -r -p "  ¿Cuántas secciones o áreas de producción tienes? [1]: " NUM_SEC
-        NUM_SEC="${NUM_SEC:-1}"
+        ask_positive_int "  ¿Cuántas secciones o áreas de producción tienes?" "1" NUM_SEC
         
         for (( s=1; s<=NUM_SEC; s++ )); do
             echo ""
@@ -148,8 +164,7 @@ case "$FACTORY_OPT" in
             SEC_NAME="${SEC_NAME:-Sección $s}"
             echo "INSERT INTO sections (nombre) VALUES ('$SEC_NAME');" >> "$SQL_SETUP"
             
-            read -r -p "    ¿Cuántas líneas de producción tiene '$SEC_NAME'? [1]: " NUM_L
-            NUM_L="${NUM_L:-1}"
+            ask_positive_int "    ¿Cuántas líneas de producción tiene '$SEC_NAME'?" "1" NUM_L
             
             for (( l=1; l<=NUM_L; l++ )); do
                 echo ""
@@ -157,8 +172,7 @@ case "$FACTORY_OPT" in
                 L_NAME="${L_NAME:-Línea $s.$l}"
                 echo "INSERT INTO lines (nombre, section_id) VALUES ('$L_NAME', (SELECT id FROM sections WHERE nombre = '$SEC_NAME' ORDER BY id DESC LIMIT 1));" >> "$SQL_SETUP"
                 
-                read -r -p "      ¿Cuántas máquinas tiene la línea '$L_NAME'? [1]: " NUM_M
-                NUM_M="${NUM_M:-1}"
+                ask_positive_int "      ¿Cuántas máquinas tiene la línea '$L_NAME'?" "1" NUM_M
                 
                 for (( m=1; m<=NUM_M; m++ )); do
                     echo -e "      ⚙️  ${BOLD}Datos de la Máquina #$m:${NC}"
