@@ -46,3 +46,11 @@ scratch/
 *.pem
 private_key.*
 licensing/private_key.pem
+
+# Código fuente cerrado (distribuido mediante imágenes GHCR pre-compiladas)
+backend/
+frontend/
+src/
+alembic/
+*.py
+node_modules/

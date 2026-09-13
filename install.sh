@@ -284,7 +284,7 @@ echo -e "\n${CYAN}[5/6] Construyendo e iniciando contenedores Docker...${NC}"
 echo -e "${YELLOW}La primera compilación puede demorar unos minutos...${NC}\n"
 
 $DOCKER_COMPOSE_CMD down --remove-orphans 2>/dev/null || true
-$DOCKER_COMPOSE_CMD up -d --build
+$DOCKER_COMPOSE_CMD pull && $DOCKER_COMPOSE_CMD up -d
 
 # 6. Comprobación de salud
 echo -e "\n${CYAN}[6/6] Verificando estado de los servicios...${NC}"

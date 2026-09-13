@@ -130,7 +130,7 @@ interactive_menu() {
         echo -e "  5) ${CYAN}Ver logs en tiempo real (logs)${NC}"
         echo -e "  6) ${GREEN}Crear copia de seguridad (backup)${NC}"
         echo -e "  7) ${RED}Restaurar copia de seguridad (restore)${NC}"
-        echo -e "  8) ${YELLOW}Reconstruir contenedores (build)${NC}"
+        echo -e "  8) ${YELLOW}Actualizar a última versión (pull & restart)${NC}"
         echo -e "  0) Salir"
         echo -e "${BLUE}----------------------------------------------------${NC}"
         read -r -p "Selecciona una opción [0-8]: " OPTION
@@ -143,7 +143,7 @@ interactive_menu() {
             5) logs_cmd ;;
             6) backup_cmd ;;
             7) restore_cmd ;;
-            8) $COMPOSE up -d --build ;;
+            8) $COMPOSE pull && $COMPOSE up -d ;;
             0) echo "Hasta pronto."; exit 0 ;;
             *) echo -e "${RED}Opción no válida.${NC}\n" ;;
         esac
@@ -159,6 +159,6 @@ case "${1:-}" in
     logs) logs_cmd "${2:-}" ;;
     backup) backup_cmd ;;
     restore) restore_cmd "${2:-}" ;;
-    build) $COMPOSE up -d --build ;;
+    build) $COMPOSE pull && $COMPOSE up -d ;;
     *) interactive_menu ;;
 esac
