@@ -1,33 +1,55 @@
-# frontend/Dockerfile (Versión Multi-etapa para Nginx)
-
-# --- Etapa 1: Construcción de la App React ---
+# frontend/Dockerfile - Multi-stage Production Build for Nginx
 FROM node:18-alpine AS build-stage
 WORKDIR /app
 
-# Variables de entorno para la construcción de React
 ENV REACT_APP_API_URL=/api
 
-# Copiar archivos de paquetes
-COPY frontend/package.json frontend/package-lock.json ./
-
-# Instalar dependencias
+# Copiar dependencias
+COPY package.json package-lock.json ./
 RUN npm install --legacy-peer-deps
 
-# Copiar el código fuente de frontend
-COPY frontend/. .
+# Copiar código fuente
+COPY . .
 
-# Construir la aplicación para producción
+# Compilar para producción (sin source-maps para proteger código y aligerar peso)
 RUN npm run build --source-map=false
 
-# --- Etapa 2: Servidor Nginx ---
+# --- Etapa 2: Servidor Web Nginx de Producción ---
 FROM nginx:stable-alpine
 
-# Copiar los archivos estáticos construidos desde la etapa anterior
+# Copiar estáticos compilados
 COPY --from=build-stage /app/build /usr/share/nginx/html
 
-# Eliminar configuración por defecto para usar la montada por volumen
-RUN rm -f /etc/nginx/conf.d/default.conf
+# Configuración por defecto de Nginx para SPA + Proxy API
+RUN cat << 'EOF' > /etc/nginx/conf.d/default.conf
+server {
+    listen 80;
+    server_name _;
 
-# Exponer puerto y comando por defecto de Nginx
+    root /usr/share/nginx/html;
+    index index.html;
+
+    client_max_body_size 50M;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api/ {
+        proxy_pass http://backend:8000/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 300s;
+        proxy_connect_timeout 300s;
+    }
+}
+EOF
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
