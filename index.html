@@ -6,14 +6,14 @@
   <title>GMAO Cerámico — Software de Mantenimiento para Fábricas de Azulejos y Cerámica</title>
   
   <!-- SEO Meta Tags -->
-  <meta name="description" content="GMAO industrial especializado en fábricas de azulejos y cerámica. Control de hornos, prensas hidráulicas, líneas de esmaltado y clasificación. Incluye App Android, IA predictiva local, calendario de turnos y mantenimiento legal. En funcionamiento real. Prueba gratis 3 meses.">
-  <meta name="keywords" content="gmao ceramica, gmao azulejos, software mantenimiento industrial, cmms ceramica, mantenimiento hornos ceramicos, prensas hidraulicas azulejos, app mantenimiento mecanicos, mantenimiento preventivo azulejos, calendario turnos gmao, comparador proveedores gmao">
+  <meta name="description" content="GMAO industrial especializado en fábricas de azulejos y cerámica. Control de hornos, prensas hidráulicas, líneas de esmaltado y clasificación. Incluye App Android, BOM de repuestos por máquina, inventario valorado en tiempo real e IA predictiva local. En funcionamiento real. Prueba gratis 3 meses.">
+  <meta name="keywords" content="gmao ceramica, gmao azulejos, bom repuestos maquina, inventario valorado gmao, software mantenimiento industrial, cmms ceramica, mantenimiento hornos ceramicos, prensas hidraulicas azulejos, app mantenimiento mecanicos, mantenimiento preventivo azulejos, comparador proveedores gmao">
   <meta name="author" content="Fran Romera">
   <meta name="robots" content="index, follow">
   
   <!-- Open Graph / Redes Sociales (LinkedIn, WhatsApp) -->
   <meta property="og:title" content="GMAO Cerámico — Mantenimiento Industrial para Fábricas de Azulejos">
-  <meta property="og:description" content="Minimiza las paradas de hornos y prensas. En funcionamiento real en planta de producción. Incluye App Android e IA predictiva. Prueba gratis 3 meses.">
+  <meta property="og:description" content="Minimiza las paradas de hornos y prensas. En funcionamiento real en planta. Incluye BOM de repuestos por máquina, App Android e IA predictiva. Prueba gratis 3 meses.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fromeram.github.io/GMAO-installer/">
   <meta property="og:image" content="https://fromeram.github.io/GMAO-installer/img/fabrica_azulejos_horno.jpg">
@@ -107,7 +107,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 20px;
     }
     .nav-link {
       color: var(--text-muted);
@@ -311,9 +311,64 @@
       border-color: rgba(255, 255, 255, 0.25);
     }
 
-    /* Plant Gallery Showcase (Fotos reales) */
+    /* BOM & Real-Time Sync Feature Highlight Banner */
+    .bom-highlight-section {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(56, 189, 248, 0.08) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 20px;
+      padding: 40px 36px;
+      margin: 20px 0 60px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.4);
+    }
+    .bom-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .bom-content h3 {
+      font-family: var(--font-heading);
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--text-white);
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+    .bom-content p {
+      font-size: 15.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .sync-loop {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sync-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(7, 9, 14, 0.6);
+      border: 1px solid var(--border-color);
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    .sync-icon {
+      font-size: 20px;
+    }
+    .sync-text strong {
+      color: var(--text-white);
+    }
+    .sync-text span {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* Plant Gallery Showcase (Fotos reales de azulejera) */
     .plant-gallery-section {
-      padding: 40px 0 70px;
+      padding: 30px 0 60px;
     }
     .plant-gallery-grid {
       display: grid;
@@ -378,6 +433,76 @@
       font-size: 14.5px;
       color: var(--text-muted);
       line-height: 1.55;
+    }
+
+    /* Screenshots Catalog Section */
+    .catalog-section {
+      padding: 60px 0;
+    }
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 28px;
+      margin-top: 36px;
+    }
+    .screenshot-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .screenshot-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+    }
+    .screen-img-wrap {
+      width: 100%;
+      height: 220px;
+      background: #0D1117;
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .screen-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.3s ease;
+    }
+    .screenshot-card:hover .screen-img-wrap img {
+      transform: scale(1.03);
+    }
+    .screen-meta {
+      padding: 22px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .screen-tag-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary-orange);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .screen-meta h4 {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .screen-meta p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
     }
 
     /* Trust Stats Bar */
@@ -622,6 +747,8 @@
       .hero p.subtitle { font-size: 17px; }
       .trust-bar { grid-template-columns: repeat(2, 1fr); }
       .plant-gallery-grid { grid-template-columns: 1fr; }
+      .bom-grid { grid-template-columns: 1fr; }
+      .screenshots-grid { grid-template-columns: 1fr; }
       .steps-row { grid-template-columns: 1fr; }
       .features-grid-13 { grid-template-columns: 1fr; }
       .terminal-body { flex-direction: column; align-items: stretch; }
@@ -640,9 +767,10 @@
       </a>
       <div class="nav-links">
         <a href="#galeria-planta" class="nav-link">Planta Real</a>
-        <a href="#catalogo" class="nav-link">Catálogo Completo</a>
+        <a href="#bom-section" class="nav-link">BOM & Stock en Vivo</a>
+        <a href="#pantallas" class="nav-link">Capturas Reales</a>
+        <a href="#catalogo" class="nav-link">13 Módulos</a>
         <a href="#app-movil" class="nav-link">App Android</a>
-        <a href="#instalacion" class="nav-link">Instalación</a>
         <a href="mailto:fromeram@gmail.com" class="btn-header">
           ✉️ fromeram@gmail.com
         </a>
@@ -666,7 +794,7 @@
       </h1>
 
       <p class="subtitle">
-        Diseñado y probado sobre el terreno industrial. Protege <strong>hornos de rodillos continuos, prensas hidráulicas de alto tonelaje, líneas de esmaltado y clasificación</strong>. Todo el mantenimiento bajo control, desde la App móvil del técnico hasta el despacho del jefe de planta.
+        Diseñado y probado sobre el terreno industrial. Protege <strong>hornos de rodillos continuos, prensas hidráulicas de alto tonelaje, líneas de esmaltado y clasificación</strong>. Con lista de repuestos por máquina (BOM), stock sincronizado en tiempo real y App Móvil Android.
       </p>
 
       <!-- Terminal Command -->
@@ -699,7 +827,7 @@
           📲 Descargar App Android (APK v2.2.1)
         </a>
         <a href="mailto:fromeram@gmail.com" class="btn-secondary">
-          ✉️ Contactar Soporte
+          ✉️ Contactar: fromeram@gmail.com
         </a>
       </div>
 
@@ -710,12 +838,12 @@
           <div class="stat-label">Prueba Gratuita Completa</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">100%</div>
-          <div class="stat-label">Datos Privados On-Premise</div>
+          <div class="stat-num">BOM Activo</div>
+          <div class="stat-label">Repuestos por Máquina</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">1 Minuto</div>
-          <div class="stat-label">Despliegue con Docker</div>
+          <div class="stat-num">Tiempo Real</div>
+          <div class="stat-label">Almacén Valorado al Segundo</div>
         </div>
         <div class="stat-item">
           <div class="stat-num">Ollama IA</div>
@@ -726,11 +854,54 @@
     </div>
   </section>
 
+  <!-- Módulo BOM & Trazabilidad Total en Tiempo Real -->
+  <section id="bom-section">
+    <div class="container">
+      <div class="bom-highlight-section">
+        <div class="bom-grid">
+          <div class="bom-content">
+            <span class="section-tag" style="color: var(--accent-emerald);">Trazabilidad Total en Fábrica</span>
+            <h3>Lista de Materiales por Máquina (BOM) & Stock Sincronizado en Vivo</h3>
+            <p>
+              En una fábrica de azulejos hay miles de repuestos repartidos en varios almacenes. Con el sistema BOM, el mecánico <strong>no pierde el tiempo navegando entre 3.000 piezas</strong>: al abrir una orden de trabajo, la pantalla le muestra <strong>únicamente los repuestos compatibles con esa máquina exacta</strong> (sus rodamientos específicos, sus electroválvulas, sus rodillos).
+            </p>
+            <p>
+              <strong>Todo el circuito está interconectado en la base de datos:</strong>
+            </p>
+          </div>
+          <div class="sync-loop">
+            <div class="sync-item">
+              <span class="sync-icon">🔧</span>
+              <div class="sync-text">
+                <strong>Uso en máquina:</strong>
+                <span>Al usar una pieza en una avería, se descuenta de inmediato del almacén y del stock.</span>
+              </div>
+            </div>
+            <div class="sync-item">
+              <span class="sync-icon">📥</span>
+              <div class="sync-text">
+                <strong>Recepción de compras:</strong>
+                <span>Al recibir material de proveedores, el stock se incrementa automáticamente.</span>
+              </div>
+            </div>
+            <div class="sync-item">
+              <span class="sync-icon">💰</span>
+              <div class="sync-text">
+                <strong>Almacén Valorado 24/7:</strong>
+                <span>Conoces en todo momento el valor exacto del stock inmovilizado por tipo (mecánico, eléctrico, etc.).</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Galería Visual de Fábrica Real (Sin marcas) -->
   <section id="galeria-planta" class="plant-gallery-section">
     <div class="container">
       <div class="section-title">
-        <span class="section-tag">Entorno Real de Producción</span>
+        <span class="section-tag">Entorno Real de Producción Cerámica</span>
         <h2>Adaptado a los activos más críticos del azulejo</h2>
         <p>El programa ha sido configurado para responder a los problemas diarios que sufren los mecánicos y electricistas en las naves cerámicas:</p>
       </div>
@@ -763,12 +934,85 @@
     </div>
   </section>
 
+  <!-- Catálogo de Pantallas Reales del GMAO -->
+  <section id="pantallas" class="catalog-section">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-tag">Catálogo Visual del Software</span>
+        <h2>Capturas reales de la aplicación en funcionamiento</h2>
+        <p>Interfaz limpia, moderna y pensada para que cualquier técnico aprenda a usarla en menos de 5 minutos:</p>
+      </div>
+
+      <div class="screenshots-grid">
+        <!-- Captura 1: Inventario General -->
+        <div class="screenshot-card">
+          <div class="screen-img-wrap">
+            <img src="img/captura_inventario_stock.jpg" alt="Inventario General y Stock Valorado del GMAO">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge">Inventario & Stock</span>
+            <h4>Inventario General Valorado</h4>
+            <p>Resumen por tipo (mecánico, eléctrico, neumático, limpieza) con valor total inmovilizado en euros (€), filtros instantáneos y exportación a Excel.</p>
+          </div>
+        </div>
+
+        <!-- Captura 2: Comparador de Precios -->
+        <div class="screenshot-card">
+          <div class="screen-img-wrap">
+            <img src="img/captura_comparador_precios.jpg" alt="Comparador de Precios con Múltiples Proveedores">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge">Ahorro en Compras</span>
+            <h4>Comparador de Múltiples Proveedores</h4>
+            <p>Detecta el ahorro total potencial y el porcentaje de ahorro comparando ofertas de diferentes suministros industriales para cada repuesto.</p>
+          </div>
+        </div>
+
+        <!-- Captura 3: Productos Bajo Stock -->
+        <div class="screenshot-card">
+          <div class="screen-img-wrap">
+            <img src="img/captura_stock_bajo.jpg" alt="Alerta de Productos con Bajo Stock">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge">Alertas Automáticas</span>
+            <h4>Productos con Bajo Stock</h4>
+            <p>Avisos automáticos cuando un recambio crítico baja del umbral mínimo de seguridad por almacén y proveedor asignado.</p>
+          </div>
+        </div>
+
+        <!-- Captura 4: Reporte de Auditoría -->
+        <div class="screenshot-card">
+          <div class="screen-img-wrap">
+            <img src="img/captura_reporte_auditoria.jpg" alt="Reporte de Inventario por Tipo y Auditoría">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge">Auditoría Contable</span>
+            <h4>Reporte de Auditoría & Excel con Fórmulas</h4>
+            <p>Selecciona artículos por categoría y exporta albaranes y auditorías a Excel (.xlsx) calculando precio unitario, descuentos y valor neto.</p>
+          </div>
+        </div>
+
+        <!-- Captura 5: Calendario de Vacaciones y Turnos -->
+        <div class="screenshot-card">
+          <div class="screen-img-wrap">
+            <img src="img/captura_calendario_vacaciones.jpg" alt="Calendario Perpetuo de Vacaciones y Turnos">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge">Gestión de Personal</span>
+            <h4>Calendario Perpetuo & Vacaciones</h4>
+            <p>Cuadrante visual con códigos de turno (Mañana, Tarde, Noche, Descanso, Festivo) y estados de solicitud de vacaciones (Solicitado, Aprobado, Rechazado).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Catálogo Completo de Características del GMAO -->
   <section id="catalogo">
     <div class="container">
       <div class="section-title">
-        <span class="section-tag">Catálogo Completo del Software</span>
-        <h2>Potencia industrial adaptada al día a día de fábrica</h2>
+        <span class="section-tag">Funcionalidades Integrales</span>
+        <h2>Los 13 Módulos de Élite del Sistema</h2>
         <p>Todo el engranaje de gestión que necesita tu planta, 100% configurable por el Administrador:</p>
       </div>
 
@@ -892,6 +1136,7 @@
           <ul class="app-features-list">
             <li><span>✓</span> <strong>Escaneo de Códigos QR</strong> pegados directamente en el motor o prensa.</li>
             <li><span>✓</span> <strong>Apertura y cierre de partes de trabajo</strong> en menos de 10 segundos.</li>
+            <li><span>✓</span> <strong>BOM en el móvil</strong>: solo muestra los repuestos de la máquina escaneada.</li>
             <li><span>✓</span> <strong>Adjunta fotos de roturas</strong> con la cámara del teléfono móvil.</li>
             <li><span>✓</span> <strong>Selector dinámico de servidor</strong>: introduce la IP de tu planta y pruébala en vivo.</li>
           </ul>
@@ -900,7 +1145,7 @@
               📲 Descargar APK Android (9.2 MB)
             </a>
             <a href="mailto:fromeram@gmail.com" class="btn-secondary">
-              ✉️ Consultar con el Desarrollador
+              ✉️ Contactar: fromeram@gmail.com
             </a>
           </div>
         </div>
