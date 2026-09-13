@@ -1,6 +1,8 @@
 # 📖 MANUAL INTEGRAL DE USUARIO, INSTALACIÓN Y RESOLUCIÓN DE PROBLEMAS
 ## Sistema GMAO — Gestión de Mantenimiento Asistido por Ordenador
-**Edición Industrial — Adaptado a Empresas del Sector Cerámico y Manufacturero**  
+**Edición Industrial — Adaptado a Plantas de Producción, Cartón y Envases, Cerámica y Manufactura**  
+**Autor y Titular de Derechos:** Fran Romera  
+**Copyright:** © 2024–2026 Fran Romera. Todos los derechos reservados. Prohibida su copia o distribución ilegal.  
 **Versión del Sistema:** 2.2.3  
 **Fecha de Publicación:** Septiembre 2026  
 
@@ -36,7 +38,7 @@
 
 ## 1. INTRODUCCIÓN Y ARQUITECTURA DEL SISTEMA
 
-El **Sistema GMAO** es una plataforma integral diseñada específicamente para optimizar la fiabilidad y el rendimiento de los equipos en plantas industriales, con especial adaptación a las exigencias de fábricas cerámicas (prensas, secaderos, líneas de esmaltado, hornos bicanal, rectificadoras, pulidoras y clasificadoras).
+El **Sistema GMAO** es una plataforma integral de mantenimiento asistido por ordenador diseñada para maximizar la fiabilidad, disponibilidad y vida útil de los equipos en plantas industriales de proceso continuo y manufactura: fábricas de cajas de cartón ondulado y packaging, plantas cerámicas, líneas de envasado, inyección de plástico y manufactura pesada (formadoras automáticas de cartón, trenes de rodillos transportadores, robots de paletizado, enfardadoras de film, prensas hidráulicas, hornos industriales, secaderos y centros de transformación).
 
 ### Arquitectura Técnica
 ```
@@ -427,5 +429,16 @@ docker exec gmao-project-db pg_dump -U Admin -d mimas -F c -f /tmp/backup_seguri
 El archivo generado en `/root/` contendrá todos los datos exactos del sistema listos para ser recuperados en segundos en caso de necesidad.
 
 ---
-*Manual elaborado y verificado para la versión GMAO 2.2.3. Sistema operativo en planta.*
+---
+
+## ⚖️ PROPIEDAD INTELECTUAL Y DERECHOS DE AUTOR
+
+© 2024–2026 **Fran Romera**. Todos los derechos reservados.
+
+El software **GMAO System**, su código fuente, arquitectura técnica, esquema de base de datos, interfaz gráfica web, app nativa Android, algoritmos de cálculo predictivo mediante IA y la presente documentación técnica constituyen una obra original y propiedad intelectual exclusiva de **Fran Romera**.
+
+**Aviso Legal y Prohibición Expresa:**  
+Queda terminantemente prohibida la copia ilegal, reproducción total o parcial, ingeniería inversa, decompilación, distribución comercial, cesión, sublicenciamiento o explotación no autorizada por cualquier medio físico o digital sin el consentimiento expreso, previo y por escrito de su autor y titular, **Fran Romera**.
+
+*Manual elaborado y verificado para la versión GMAO 2.2.3. Sistema operativo en planta industrial.*
 EOF

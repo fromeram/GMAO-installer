@@ -153,3 +153,14 @@ En la carpeta donde se instala el programa dispones de un menú de control rápi
 - **Desarrollador**: Fran Romera
 - **Email de Contacto**: [fromeram@gmail.com](mailto:fromeram@gmail.com)
 - **GitHub**: [github.com/fromeram](https://github.com/fromeram)
+
+
+---
+
+## ⚖️ Propiedad Intelectual y Derechos Reservados
+
+© 2024–2026 **Fran Romera**. Todos los derechos reservados.
+
+El software **GMAO System**, su código fuente, arquitectura técnica, algoritmos predictivos, interfaz web, aplicación móvil Android y documentación técnica son una creación y propiedad intelectual exclusiva de **Fran Romera**.
+
+Queda terminantemente prohibida la copia no autorizada, redistribución, decompilación, comercialización ilegal o uso indebido de este programa sin la previa autorización expresa y por escrito del autor.
