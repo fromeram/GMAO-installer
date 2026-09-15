@@ -1,0 +1,207 @@
+================================================================================
+MAPA FUNCIONAL COMPLETO DEL SISTEMA GMAO INDUSTRIAL (FRONTEND Y BACKEND)
+Referencia fiel basada exclusivamente en el código fuente real del proyecto.
+Sin inventos ni funcionalidades ficticias.
+================================================================================
+
+Este documento describe con exactitud qué hace cada pantalla y módulo del sistema,
+los datos que maneja, cómo interactúa el usuario y qué exportaciones o procesos ejecuta.
+
+--------------------------------------------------------------------------------
+1. MÓDULO DE MÁQUINAS Y ACTIVOS INDUSTRIALES
+--------------------------------------------------------------------------------
+
+• Maquinas.js (/maquinas)
+  - Muestra el listado de todas las máquinas y equipos de la planta.
+  - Filtros por sección (Producción, Envasado, Empaque, Almacén, Utilidades, etc.) y buscador por texto.
+  - Campos: Nombre, marca, modelo, número de serie, sección, línea, criticidad (A/B/C) y estado operativo.
+  - Acciones: Alta/edición de máquinas, botón directo para generar QR y acceso a la ficha detallada.
+
+• MachineDetailFixed.js (/maquinas/:machineId/detail, /bom, /history)
+  - Ficha técnica completa de un equipo específico, organizada en 4 pestañas:
+    1. Pestaña "Detalles / Documentación":
+       - Datos del equipo: marca, modelo, S/N, potencia, fecha instalación, última y próxima revisión.
+       - Métricas en vivo: MTBF (tiempo medio entre fallos), MTTR (tiempo medio de reparación), disponibilidad.
+       - Documentos Asociados (DocumentAttachmentManager): Permite subir, ver y descargar archivos vinculados
+         a esa máquina: manuales originales del fabricante en PDF, esquemas eléctricos, neumáticos y planos mecánicos.
+    2. Pestaña "Lista de Repuestos (BOM - Bill of Materials)":
+       - Lista de piezas y recambios que monta esa máquina específica.
+       - Muestra referencia, nombre, cantidad que monta y STOCK ACTUAL DISPONIBLE EN ALMACÉN.
+       - Permite añadir piezas al despiece de la máquina y exportar el BOM a Excel (.xlsx).
+    3. Pestaña "Historial de Mantenimiento":
+       - Cronología de todas las OTs correctivas y preventivas realizadas a esa máquina.
+       - Técnico responsable, fecha, horas invertidas, repuestos consumidos y códigos FCR de la avería.
+       - Botón para exportar el historial completo a Excel (.xlsx).
+    4. Pestaña "Análisis / Gráficos":
+       - Gráficas de tiempos de parada, intervenciones preventivas vs correctivas y evolución de disponibilidad.
+
+• QRGenerator.js (/maquinas/qr)
+  - Selecciona cualquier máquina del catálogo.
+  - Genera una etiqueta adhesiva normalizada con:
+    - Nombre del equipo, modelo y número de serie.
+    - Código QR de alta resolución con la URL directa: `${baseUrl}/maquinas/${id}/detail`.
+  - Botón para descargar como imagen PNG o imprimir directamente la etiqueta física para pegarla en la máquina.
+
+• QRScanner.js (/maquinas/scan) [En Web] y QRScannerScreen.kt [En App Android]
+  - Utiliza la cámara (webcam en navegador o cámara trasera en móvil con CameraX + ML Kit).
+  - Escanea el QR pegado físicamente en la máquina.
+  - Reconoce el ID de la máquina al instante y abre automáticamente su ficha técnica con manuales, BOM e historial.
+  - En la App Android incluye botón de linterna/flash y vibración háptica.
+
+--------------------------------------------------------------------------------
+2. MÓDULO DE INVENTARIO Y ALMACÉN DE REPUESTOS
+--------------------------------------------------------------------------------
+
+• Inventario.js (/inventario)
+  - Gestión integral del almacén de repuestos y suministros de mantenimiento.
+  - Clasificación por tipo: Mecánico, Eléctrico, Neumático, Limpieza.
+  - Campos: ID, producto/nombre, referencia, almacén, estantería, cajón, stock actual, stock mínimo,
+    precio unitario (PRECIO REAL COBRADO POR EL PROVEEDOR) y proveedor habitual.
+  - Exportación general: Genera un archivo Excel (.xlsx) con fórmulas nativas de Excel que calcula
+    los totales de existencias y valoración por pestaña y resumen general.
+
+• InventoryReport.js (/reporte-inventario)
+  - PANTALLA DE REPORTE Y EXPORTACIÓN A MEDIDA CON VALORACIÓN ACUMULADA:
+  - Permite seleccionar los repuestos específicos que el usuario desee mediante casillas de verificación (checkboxes).
+  - Cálculo dinámico en tiempo real: Mientras el usuario va marcando o desmarcando productos,
+    el sistema suma en la cabecera:
+    * Cantidad total de piezas seleccionadas.
+    * Valor monetario acumulado (€) = Cantidad x Precio cobrado por el proveedor (con descuento si aplica).
+  - Objetivo real: Permite seleccionar un conjunto de productos para alcanzar una valoración o importe
+    determinado que se necesite por motivos de ajustes contables o balances de empresa.
+  - Exportación a Excel (.xlsx): Exporta únicamente los productos seleccionados, agrupados por pestañas
+    (mecánico, eléctrico, neumático, limpieza) con fórmulas nativas de suma de cantidades y valores.
+
+• LowStockInventory.js (/inventario/bajo-stock)
+  - Filtro automático de artículos cuyo stock actual está igual o por debajo del stock mínimo configurado.
+  - Permite al jefe de taller o encargado de almacén tramitar pedidos de reposición antes de roturas de stock.
+
+• Almacenes.js (/almacenes)
+  - Registro de almacenes físicos, zonas, estanterías y ubicaciones dentro de la fábrica.
+
+• ProductoDetalle.js (/productos/:productId)
+  - Ficha pormenorizada de una pieza: movimientos de entrada y salida, historial de compras,
+    y listado de máquinas donde está instalada (usabilidad del repuesto).
+
+• PriceComparator.js (/comparar-precios)
+  - Muestra un comparador de los distintos proveedores que suministran una misma referencia o pieza,
+    mostrando el último precio cobrado por cada uno para elegir la compra más económica.
+
+• Suppliers.js / Proveedores.js (/proveedores)
+  - Ficha de proveedores de suministros industriales: razón social, CIF, teléfono, correo de contacto,
+    plazo de entrega habitual y catálogo de productos suministrados.
+
+--------------------------------------------------------------------------------
+3. MÓDULO DE ÓRDENES DE TRABAJO Y PARTES DE TRABAJO
+--------------------------------------------------------------------------------
+
+• Ordenes.js (/ordenes)
+  - Centro de gestión de Órdenes de Trabajo (OTs) preventivas y correctivas.
+  - Estados: Pendiente, Asignada, En Curso, Esperando Repuesto, Cerrada, Cancelada.
+  - Prioridades: Baja, Media, Alta, Urgente.
+  - Acciones:
+    - Crear nueva avería indicando máquina, descripción del síntoma y prioridad.
+    - Asignar a un mecánico o equipo técnico.
+    - Imputar repuestos del almacén (se descuentan del stock al instante).
+    - Asignar códigos FCR (Fallo, Causa, Remedio).
+    - Registro de horas de trabajo y cierre con firma.
+
+• Partes.js (/partes)
+  - Partes de trabajo diario individuales por técnico.
+  - Permite imputar las horas invertidas por cada operario en distintas máquinas y tareas a lo largo de su jornada.
+
+• MaintenanceBacklog.js (/backlog-mantenimiento)
+  - Bandeja de trabajos pendientes no urgentes para programar en paradas planificadas o días sin producción.
+
+• GestionCodigos.js (/gestion-codigos)
+  - Mantenimiento del catálogo de códigos FCR normalizados:
+    - Códigos de Fallo (qué síntoma se presentó: rotura, atasco, sobrecalentamiento, fuga, cortocircuito).
+    - Códigos de Causa (por qué ocurrió: fatiga, falta de engrase, holgura, error humano, suciedad).
+    - Códigos de Remedio (cómo se solucionó: sustitución, ajuste, limpieza, rebobinado, calibración).
+
+--------------------------------------------------------------------------------
+4. MANTENIMIENTO PREVENTIVO, LEGAL Y PLANIFICACIÓN
+--------------------------------------------------------------------------------
+
+• MantenimientoPreventivo.js (/mantenimiento/preventivo)
+  - Definición de gamas y planes preventivos por máquina.
+  - Periodicidad: Diaria, Semanal, Quincenal, Mensual, Trimestral, Semestral, Anual.
+  - Vinculación obligatoria con una Lista de Tareas (Checklist).
+
+• TaskListManagement.js (/listas-tareas) y TaskStepManagement.js (/listas-tareas/:id/pasos)
+  - Creación de listas maestras de chequeo (checklists).
+  - Desglose de cada lista en pasos numerados con instrucciones claras, tiempo estimado y herramientas necesarias.
+
+• PlanAnualMantenimiento.js (/plan-anual)
+  - Matriz visual interactiva de 12 meses.
+  - Muestra la planificación de todos los preventivos año a año por máquina, coloreando en verde los
+    completados y en naranja los pendientes.
+
+• MantenimientoLegal.js (/mantenimiento/legal)
+  - Gestión de activos sometidos a normativa reglamentaria de seguridad industrial:
+    - Calderas y recipientes a presión.
+    - Centros de transformación eléctrica y cuadros generales.
+    - Instalaciones contra incendios.
+    - Climatización y frío industrial.
+  - Registro de fechas de inspección por OCA (Organismo de Control Autorizado) y actas obligatorias.
+
+--------------------------------------------------------------------------------
+5. PLANIFICACIÓN DE PERSONAL, TURNOS Y VACACIONES
+--------------------------------------------------------------------------------
+
+• ShiftPatternManagement.js (/gestion-patrones)
+  - Configuración de turnos (Mañana, Tarde, Noche, Central, Retén) y asignación a patrones rotativos.
+
+• CalendarioTurnos.js (/calendario-turnos)
+  - Cuadrante mensual donde se visualiza qué técnicos están asignados a cada turno cada día del mes.
+
+• CalendarioVacaciones.js (/calendario-vacaciones)
+  - Registro y solicitud de vacaciones, días libres y bajas médicas del personal técnico con aprobación.
+
+• Usuarios.js (/usuarios)
+  - Gestión de usuarios y permisos del sistema:
+    - Roles: Administrador, Jefe de Mantenimiento, Mecánico, Almacén, Contabilidad.
+
+--------------------------------------------------------------------------------
+6. FORMATOS Y PRODUCCIÓN
+--------------------------------------------------------------------------------
+
+• FormatManager.js (/formatos)
+  - Definición de formatos de producción por línea o máquina (dimensiones, espesores, recetas).
+
+• FormatChangesList.js (/cambios-formato)
+  - Registro cronológico de paradas por cambio de formato en máquinas de envasado o producción.
+
+• FormatReports.js (/reportes-formato)
+  - Estadísticas de tiempos dedicados a cambios de formato y exportación a Excel.
+
+--------------------------------------------------------------------------------
+7. INTELIGENCIA ARTIFICIAL LOCAL (OLLAMA - 100% PRIVADA)
+--------------------------------------------------------------------------------
+
+• AIChat.js (/ai-chat)
+  - Chat técnico conversacional con la IA local para apoyo a los mecánicos ante averías complejas.
+
+• AIPredictions.js (/ai-predictions)
+  - Algoritmo que analiza el histórico de averías pasadas para sugerir preventivos recomendados.
+
+• AIDashboard.js (/ai-dashboard) y AIAdmin.js (/ai-admin)
+  - Monitor de estado de la conexión con el servidor Ollama local y selector de modelos disponibles en el equipo.
+  - La precisión y capacidad técnica dependen del tamaño del modelo que el usuario tenga instalado (8B, 14B, 70B).
+
+--------------------------------------------------------------------------------
+8. GESTIÓN DOCUMENTAL Y COMUNICACIÓN
+--------------------------------------------------------------------------------
+
+• DocumentManager.js (/documentos) y DocumentVerification.js
+  - Repositorio general para almacenar archivos técnicos del sistema y verificar su integridad.
+
+• Communications.js (/communications) y CommunicationAdmin.js
+  - Sistema interno de notas y avisos entre turnos para los técnicos de mantenimiento.
+
+• AuditTrail.js (/audit-trail)
+  - Registro de seguridad de accesos y modificaciones en el sistema.
+
+• SchedulerAdmin.js (/scheduler-admin)
+  - Monitor del servicio interno en segundo plano que genera OTs de preventivos según su vencimiento.
+================================================================================

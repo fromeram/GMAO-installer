@@ -245,9 +245,15 @@ Módulo específico para inspecciones oficiales y cumplimiento reglamentario:
 * Registro de número de certificado y adjuntos de actas oficiales.
 
 ### 4.6 Gestión de Inventario, Repuestos, Almacenes y Proveedores (`/inventario`, `/proveedores`)
-* **Ficha de Repuesto:** Referencia interna, código del fabricante, ubicación física (Almacén, Estantería, Cajón), stock actual, stock mínimo y stock máximo.
-* **Alertas de Stock Bajo:** Cuando un consumo en una OT deja la cantidad por debajo del stock mínimo, el sistema emite una alerta visual en el Dashboard y un correo automático a compras.
-* **Proveedores y Precios:** Muestra qué proveedores suministran cada pieza, precios históricos y comparador para compras rentables.
+* **Ficha de Repuesto:** Referencia interna, código del fabricante, ubicación física (Almacén, Estantería, Cajón), stock actual y stock mínimo de seguridad.
+* **Precios Reales Cobrados por Proveedor:** El sistema no utiliza precios teóricos ni precios máximos arbitrarios; el precio unitario de cada repuesto es exactamente el precio real cobrado y facturado por el proveedor en compras anteriores.
+* **Reporte y Exportación a Medida para Ajustes Contables (`/reporte-inventario`):**
+  * Permite marcar mediante casillas de verificación (checkboxes) los repuestos específicos que se deseen incluir.
+  * **Suma acumulada en vivo:** El sistema calcula y muestra en la cabecera la cantidad total de artículos y el valor monetario exacto (€) acumulado a medida que se seleccionan productos.
+  * **Ajustes de Contabilidad:** Permite seleccionar un conjunto de productos hasta cuadrar el valor o importe determinado que la empresa necesite para sus balances o cierres contables.
+  * **Exportación a Excel (.xlsx):** Genera el archivo Excel agrupado por tipos (mecánico, eléctrico, neumático, limpieza) con fórmulas nativas de suma para totales automáticos.
+* **Alertas de Stock Bajo (`/inventario/bajo-stock`):** Cuando el consumo en una OT sitúa el stock por debajo del mínimo, el sistema genera avisos visuales para tramitar la reposición.
+* **Comparador de Proveedores por Precio (`/comparar-precios`):** Historial comparativo de cotizaciones para cada repuesto que permite comprar al proveedor más económico.
 
 ### 4.7 Gestión de Turnos, Cuadrantes y Solicitudes de Vacaciones (`/turnos`, `/vacaciones`)
 * **Patrones Rotativos:** Configuración de secuencias de turnos (ejemplo: 6x2, rotación Mañana-Tarde-Noche).
@@ -273,8 +279,8 @@ El sistema se integra de forma nativa con **Ollama** (servidores locales privado
 2. **Chat Asistente Técnico (AIChat):**  
    Los mecánicos pueden conversar con el modelo de lenguaje configurado como experto industrial. Ejemplo:  
    *«Tengo alarma de sobrepresión en la bomba de esmalte de la Línea 2, ¿qué debo revisar primero?»*
-3. **Visión y OCR para Albaranes y Partes:**  
-   Procesa imágenes de partes manuscritos o albaranes de proveedores para extraer automáticamente texto, referencias y cantidades hacia el sistema.
+3. **Análisis Multimodal de Imágenes Técnicas:**  
+   Permite adjuntar fotografías de piezas dañadas o placas de características de motores tomadas desde la app móvil para apoyar el diagnóstico y la identificación de componentes.
 
 > [!IMPORTANT]
 > **Criterio de Elección del Modelo de IA (Ollama):**  
