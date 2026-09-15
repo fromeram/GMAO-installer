@@ -1111,6 +1111,222 @@
       .sectors-grid { grid-template-columns: 1fr; }
     }
     
+
+    /* ==========================================================================
+       ESTILOS DE PRECIOS TRANSPARENTES Y PREGUNTAS FRECUENTES (FAQ)
+       ========================================================================== */
+    .pricing-section {
+      padding: 85px 0;
+      background: rgba(7, 9, 14, 0.95);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 40px;
+      align-items: stretch;
+    }
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      transition: transform 0.25s, border-color 0.25s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-orange);
+    }
+    .pricing-card-featured {
+      background: linear-gradient(145deg, rgba(22, 33, 54, 0.95) 0%, rgba(13, 20, 35, 0.98) 100%);
+      border: 2px solid var(--accent-emerald);
+      box-shadow: 0 15px 45px rgba(0,0,0,0.5), 0 0 25px rgba(16, 185, 129, 0.2);
+    }
+    .featured-ribbon {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-emerald);
+      color: #000;
+      font-family: var(--font-heading);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      letter-spacing: 0.5px;
+    }
+    .pricing-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .pricing-tier-name {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 12px;
+    }
+    .pricing-price {
+      font-family: var(--font-heading);
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: var(--text-white);
+      margin-bottom: 6px;
+    }
+    .pricing-period {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .pricing-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 24px;
+      min-height: 42px;
+    }
+    .pricing-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .pricing-features li {
+      font-size: 0.88rem;
+      color: #CBD5E1;
+      line-height: 1.4;
+    }
+    .pricing-features li strong {
+      color: var(--text-white);
+    }
+
+    .ai-transparency-box {
+      margin-top: 36px;
+      background: rgba(56, 189, 248, 0.07);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 14px;
+      padding: 22px 26px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #CBD5E1;
+    }
+    .ai-transparency-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      color: var(--accent-cyan);
+      margin-bottom: 8px;
+    }
+
+    .guarantee-box {
+      margin-top: 30px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 16px;
+      padding: 24px 30px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .guarantee-icon {
+      font-size: 2.8rem;
+      flex-shrink: 0;
+    }
+    .guarantee-text h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #10B981;
+      margin-bottom: 4px;
+    }
+    .guarantee-text p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* FAQ Accordion */
+    .faq-section {
+      padding: 80px 0;
+      background: rgba(11, 15, 25, 0.8);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .faq-accordion {
+      max-width: 860px;
+      margin: 36px auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.active {
+      border-color: var(--primary-orange);
+    }
+    .faq-question {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 18px 24px;
+      text-align: left;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-white);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+    .faq-arrow {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--primary-orange);
+      transition: transform 0.2s;
+    }
+    .faq-item.active .faq-arrow {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      display: none;
+      padding: 0 24px 20px 24px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    @media (max-width: 992px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+      .guarantee-box { flex-direction: column; text-align: center; }
+    }
+    
   </style>
 </head>
 <body>
@@ -1123,11 +1339,11 @@
         <span class="logo-badge">Plantas de Producción & Manufactura</span>
       </a>
       <div class="nav-links">
-        <a href="#roi-calculator" class="nav-link" style="color: var(--accent-emerald); font-weight: 700;">📊 Calculadora de Ahorro</a>
+        <a href="#roi-calculator" class="nav-link" style="color: var(--accent-emerald); font-weight: 700;">📊 Calculadora Ahorro</a>
         <a href="#sectores" class="nav-link">Sectores</a>
         <a href="#comparativa" class="nav-link">Comparativa</a>
-        <a href="#bom-section" class="nav-link">BOM & Repuestos</a>
-        <a href="#pantallas" class="nav-link">Capturas</a>
+        <a href="#precios" class="nav-link" style="color: var(--primary-orange); font-weight: 700;">Tarifas</a>
+        <a href="#faq" class="nav-link">Preguntas</a>
         <a href="#app-movil" class="nav-link">App Android</a>
         <a href="mailto:fromeram@gmail.com" class="btn-header">
           ✉️ fromeram@gmail.com
@@ -1829,6 +2045,202 @@
     </div>
   </section>
 
+
+  <!-- ========================================================================
+       SECCIÓN: MODELOS DE PRECIO TRANSPARENTES Y RENTABILIDAD
+       ======================================================================== -->
+  <section id="precios" class="pricing-section">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-tag" style="background: rgba(249, 115, 22, 0.15); color: var(--primary-orange); border-color: rgba(249, 115, 22, 0.3);">Sin Trampas Ni Costes Ocultos</span>
+        <h2>Inversión Clara, Transparente y 100% Amortizable</h2>
+        <p>A diferencia de la competencia, nosotros <strong>no cobramos por usuario técnico</strong>. Queremos que todos los mecánicos y operarios usen la app a pie de máquina sin que su factura se dispare:</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Plan 1: Prueba Gratuita -->
+        <div class="pricing-card">
+          <div class="pricing-badge">RIESGO CERO</div>
+          <div class="pricing-tier-name">Prueba Piloto en Planta</div>
+          <div class="pricing-price">0 € <span class="pricing-period">/ 90 Días Completos</span></div>
+          <p class="pricing-desc">Pruebe el software sobre el terreno real en su propia fábrica sin pagar un solo céntimo.</p>
+          <ul class="pricing-features">
+            <li>✓ <strong>90 días de acceso total</strong> sin restricciones</li>
+            <li>✓ <strong>Técnicos y usuarios ilimitados</strong></li>
+            <li>✓ App Móvil Android con escáner QR</li>
+            <li>✓ Lista de repuestos por máquina (BOM)</li>
+            <li>✓ Servidor local en su red (Docker)</li>
+            <li>✓ <strong>Sin tarjeta de crédito ni compromiso</strong></li>
+          </ul>
+          <a href="#instalacion" class="btn-secondary" style="width: 100%; text-align: center; justify-content: center; margin-top: auto;">
+            🚀 Instalar en 5 Minutos
+          </a>
+        </div>
+
+        <!-- Plan 2: Suscripción Anual Planta (Recomendada) -->
+        <div class="pricing-card pricing-card-featured">
+          <div class="featured-ribbon">MÁS RENTABLE</div>
+          <div class="pricing-badge" style="background: rgba(16, 185, 129, 0.2); color: #10B981; border-color: rgba(16, 185, 129, 0.4);">TARIFA PLANA ANUAL</div>
+          <div class="pricing-tier-name">Planta Completa (Suscripción)</div>
+          <div class="pricing-price">249 € <span class="pricing-period">/ mes (2.990 €/año + IVA)</span></div>
+          <p class="pricing-desc">Tarifa plana para toda la fábrica. Se amortiza con la primera hora de parada evitada en el año.</p>
+          <ul class="pricing-features">
+            <li>✓ <strong>Usuarios y mecánicos ilimitados</strong> (cero costes por técnico)</li>
+            <li>✓ <strong>Máquinas y activos ilimitados</strong> en toda la planta</li>
+            <li>✓ Módulo de Inteligencia Artificial Predictiva local</li>
+            <li>✓ Control de stock valorado y alertas de compra</li>
+            <li>✓ Actualizaciones continuas del sistema incluidas</li>
+            <li>✓ Soporte técnico directo y prioritario con el creador</li>
+          </ul>
+          <a href="mailto:fromeram@gmail.com?subject=Solicitud%20Información%20GMAO%20Suscripción%20Planta" class="btn-primary" style="width: 100%; text-align: center; justify-content: center; margin-top: auto; padding: 15px;">
+            ✉️ Solicitar Activación de Planta
+          </a>
+        </div>
+
+        <!-- Plan 3: Licencia Perpetua On-Premise -->
+        <div class="pricing-card">
+          <div class="pricing-badge">EN PROPIEDAD DEFINITIVA</div>
+          <div class="pricing-tier-name">Licencia Perpetua (On-Premise)</div>
+          <div class="pricing-price">5.900 € <span class="pricing-period">pago único definitivo</span></div>
+          <p class="pricing-desc">El software pasa a ser propiedad de su empresa para siempre en sus servidores locales.</p>
+          <ul class="pricing-features">
+            <li>✓ <strong>Licencia permanente de por vida</strong> (sin cuotas mensuales)</li>
+            <li>✓ Instalación 100% On-Premise en su servidor físico</li>
+            <li>✓ Máquinas, técnicos y usuarios ilimitados para siempre</li>
+            <li>✓ Máxima privacidad y soberanía de datos industriales</li>
+            <li>✓ 1 año de soporte técnico y actualizaciones incluido</li>
+            <li>✓ Mantenimiento evolutivo opcional posterior</li>
+          </ul>
+          <a href="mailto:fromeram@gmail.com?subject=Consulta%20Licencia%20Perpetua%20GMAO" class="btn-secondary" style="width: 100%; text-align: center; justify-content: center; margin-top: auto;">
+            ✉️ Consultar Licencia Perpetua
+          </a>
+        </div>
+      </div>
+
+      <!-- Nota de Transparencia sobre la IA -->
+      <div class="ai-transparency-box">
+        <div class="ai-transparency-header">
+          <span style="font-size: 1.5rem;">🤖</span>
+          <strong>Nota de Transparencia y Honestidad sobre la Inteligencia Artificial (Ollama):</strong>
+        </div>
+        <p>
+          La IA predictiva y el asistente de chat se ejecutan <strong>100% de forma local y privada</strong> dentro de los servidores de su propia fábrica (sin enviar datos confidenciales a la nube ni pagar suscripciones por uso de tokens).<br>
+          <strong>La capacidad de razonamiento depende del modelo que decida instalar su empresa:</strong> no podemos garantizar que un modelo ligero de 1B o 3B en una CPU vieja actúe como un ingeniero jefe de mantenimiento. Recomendamos instalar en su servidor local el modelo más potente que su hardware (memoria RAM o tarjeta gráfica GPU) permita (como <em>Llama 3 8B / 70B, Qwen 14B / 32B o Mistral</em>). Cuanto mayor sea el modelo configurado por su departamento técnico, más profundo y acertado será el diagnóstico de averías.
+        </p>
+      </div>
+
+      <!-- Garantía de Satisfacción Personal -->
+      <div class="guarantee-box">
+        <div class="guarantee-icon">🛡️</div>
+        <div class="guarantee-text">
+          <h3>Garantía Personal de Retorno de Inversión (Fran Romera)</h3>
+          <p>
+            Instale GMAO System durante 90 días en su planta de producción. Si durante ese tiempo el software no ha detectado averías antes de ocurrir, no ha ahorrado tiempo a sus mecánicos o no ha demostrado un retorno económico contundente, le ayudamos a desinstalarlo y <strong>no paga absolutamente nada</strong>. Sin preguntas ni letra pequeña.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN: PREGUNTAS FRECUENTES (FAQ)
+       ======================================================================== -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="section-title">
+        <span class="section-tag">Resolución de Dudas</span>
+        <h2>Preguntas Frecuentes de Directores y Jefes de Planta</h2>
+        <p>Todo lo que necesita saber antes de iniciar la prueba de 90 días en sus instalaciones:</p>
+      </div>
+
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Qué ocurre si mis mecánicos tienen poca experiencia informática o se resisten a usar pantallas?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Esa es precisamente la razón por la que el 74% de los programas fallan y por la que este sistema triunfa. Nuestra app móvil para Android está diseñada con la simplicidad de WhatsApp: el técnico enfoca con la cámara el código QR pegado en la máquina, pulsa un solo botón y ve los recambios exactos o dicta la avería por voz. Sin formularios complejos ni tecnicismos. En menos de 10 minutos cualquier operario sabe usarla.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Cómo funciona exactamente la IA y qué modelo debo poner en mi fábrica?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              El sistema se conecta a Ollama, que corre en su propia red local. Es una decisión particular de cada empresa elegir el modelo a desplegar. Si instalan un modelo pequeño (1B-3B) funcionará como un asistente básico de consultas simples; si dedican un servidor con tarjeta gráfica (GPU) o buena memoria RAM e instalan modelos medianos o grandes (8B, 14B o 70B), el razonamiento técnico y la capacidad de análisis de síntomas será muy superior, equiparable al conocimiento de un ingeniero de mantenimiento experto.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Nuestros datos de producción, fallos y esquemas técnicos viajan a servidores externos en la nube?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Rotundamente NO. GMAO System se despliega 100% On-Premise dentro de su red local (mediante contenedores Docker en cualquier servidor, PC de control o máquina virtual Proxmox). Su base de datos, planos técnicos, histórico de averías y modelos de Inteligencia Artificial residen físicamente en su fábrica y jamás salen a internet.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Por qué no cobráis una cuota por cada técnico como hacen Fracttal o UpKeep?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Porque cobrar 60€ o 100€ al mes por cada usuario es absurdo en una fábrica: hace que la dirección limite las licencias a unos pocos encargados, obligando a los mecánicos a seguir usando papel y arruinando la digitalización. Nosotros creemos en una tarifa plana de planta para que toda la plantilla (técnicos, jefes de turno, compras y dirección) use el sistema sin costes sorpresa.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Cuánto tiempo lleva poner en marcha el sistema con nuestro catálogo actual de máquinas?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              El despliegue técnico del software lleva literalmente 5 minutos ejecutando un comando en Linux. Además, el instalador interactivo te permite configurar la estructura de tu planta al vuelo o importar tu listado de máquinas y repuestos desde tus tablas actuales de Excel en un par de clics.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Qué infraestructura o hardware necesitamos tener en nuestra fábrica?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Cualquier ordenador o servidor modesto con Linux (Ubuntu, Debian) o una máquina virtual Proxmox/VMware con 4 GB de RAM y 25 GB de disco SSD es más que suficiente para mover la planta completa. Los técnicos solo necesitan un teléfono móvil o tablet Android conectados al Wi-Fi de planta.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>¿Qué sucede cuando se cumplen los 90 días de prueba gratuita?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Durante los 90 días no se le solicita ninguna tarjeta de crédito. Al finalizar el trimestre, si ha comprobado que el sistema ha evitado paradas y le ahorra dinero, podrá activar la licencia anual o perpetua manteniendo todos sus datos históricos intactos. Si decide no continuar, el sistema simplemente se detiene sin coste alguno.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Instalación en 3 Pasos -->
   <section id="instalacion">
     <div class="container">
@@ -1961,14 +2373,16 @@
       document.getElementById('res-saving-repairs').innerText = formatMoney(savingRepairs);
       document.getElementById('res-saving-stock').innerText = formatMoney(savingStock);
 
-      // Payback calculation
+      // Cálculo exacto de Payback basado en la tarifa anual de planta (2.990 €)
+      const annualCost = 2990;
+      const paybackDays = Math.max(2, Math.round((annualCost / totalSaving) * 365));
       const paybackEl = document.getElementById('res-payback');
-      if (totalSaving > 250000) {
-        paybackEl.innerText = 'Menos de 30 días';
-      } else if (totalSaving > 100000) {
-        paybackEl.innerText = 'Menos de 60 días';
+      if (paybackDays <= 7) {
+        paybackEl.innerText = '¡En menos de 1 semana! (' + paybackDays + ' días)';
+      } else if (paybackDays <= 30) {
+        paybackEl.innerText = 'En menos de ' + paybackDays + ' días de producción';
       } else {
-        paybackEl.innerText = 'Entre 2 y 4 meses';
+        paybackEl.innerText = 'En ' + Math.round(paybackDays / 30) + ' meses';
       }
     }
 
@@ -1976,6 +2390,19 @@
     document.addEventListener('DOMContentLoaded', () => {
       calculateROI();
     });
+    
+
+    // =========================================================================
+    // ACORDEÓN DE PREGUNTAS FRECUENTES (FAQ)
+    // =========================================================================
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    }
     
   </script>
 </body>

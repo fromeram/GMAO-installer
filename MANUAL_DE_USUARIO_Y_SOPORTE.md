@@ -254,6 +254,15 @@ El sistema se integra de forma nativa con **Ollama** (servidores locales privado
 3. **Visión y OCR para Albaranes y Partes:**  
    Procesa imágenes de partes manuscritos o albaranes de proveedores para extraer automáticamente texto, referencias y cantidades hacia el sistema.
 
+> [!IMPORTANT]
+> **Criterio de Elección del Modelo de IA (Ollama):**  
+> El servidor Ollama se ejecuta de forma 100% privada dentro de la infraestructura local del cliente. La profundidad del diagnóstico, el razonamiento técnico y la calidad de las respuestas dependen directamente de la capacidad del modelo que decida instalar cada empresa:
+> - **Modelos ligeros (1B a 3B en CPU estándar):** Adecuados para consultas sencillas y clasificación básica. No pueden garantizar el razonamiento técnico profundo de un ingeniero de mantenimiento sénior.
+> - **Modelos recomendados (8B a 14B con GPU o buena RAM, ej. *Llama 3.1 8B, Qwen 2.5 14B, Mistral*):** Nivel óptimo para diagnóstico de averías, detección de síntomas y consulta de manuales.
+> - **Modelos avanzados (32B a 70B en servidores dedicados con GPU):** Capacidad analítica equivalente al criterio de un ingeniero especialista en fiabilidad industrial.
+> Cada empresa debe instalar el modelo más potente que su hardware (memoria RAM o tarjeta gráfica GPU) le permita para maximizar el valor del asistente.
+
+
 ---
 
 ## 5. ADMINISTRACIÓN DEL SISTEMA Y AUTOMATIZACIÓN
