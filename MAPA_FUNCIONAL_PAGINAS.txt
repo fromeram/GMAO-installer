@@ -150,10 +150,10 @@ los datos que maneja, cómo interactúa el usuario y qué exportaciones o proces
 --------------------------------------------------------------------------------
 
 • ShiftPatternManagement.js (/gestion-patrones)
-  - Configuración de turnos (Mañana, Tarde, Noche, Central, Retén) y asignación a patrones rotativos.
+  - Configuración de turnos (Mañana, Tarde, Noche, Jornada Partida y Libre) y asignación a patrones rotativos.
 
 • CalendarioTurnos.js (/calendario-turnos)
-  - Cuadrante mensual donde se visualiza qué técnicos están asignados a cada turno cada día del mes.
+  - Cuadrante mensual interactivo con códigos de turno normalizados (Mañana, Tarde, Noche, Jornada Partida y Libre).
 
 • CalendarioVacaciones.js (/calendario-vacaciones)
   - Registro y solicitud de vacaciones, días libres y bajas médicas del personal técnico con aprobación.

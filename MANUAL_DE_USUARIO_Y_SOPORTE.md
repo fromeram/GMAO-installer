@@ -256,8 +256,8 @@ Módulo específico para inspecciones oficiales y cumplimiento reglamentario:
 * **Comparador de Proveedores por Precio (`/comparar-precios`):** Historial comparativo de cotizaciones para cada repuesto que permite comprar al proveedor más económico.
 
 ### 4.7 Gestión de Turnos, Cuadrantes y Solicitudes de Vacaciones (`/turnos`, `/vacaciones`)
-* **Patrones Rotativos:** Configuración de secuencias de turnos (ejemplo: 6x2, rotación Mañana-Tarde-Noche).
-* **Calendario de Personal:** Vista mensual donde se visualizan los técnicos disponibles en cada turno y posibles descubiertos.
+* **Códigos de Turno Normalizados:** El sistema contempla los turnos reales de planta: **Mañana**, **Tarde**, **Noche**, **Jornada Partida** y **Libre**.
+* **Patrones Rotativos y Cuadrante Mensual:** Configuración de secuencias (ejemplo: rotaciones 6x2, 5x2, etc.) y visualización en un calendario interactivo de toda la plantilla de mantenimiento.
 * **Módulo de Vacaciones:** El trabajador solicita días de permiso desde la web o app móvil; los administradores reciben la solicitud y la aprueban o rechazan con un clic.
 
 ### 4.8 Módulo de Comunicaciones Internas (`/communications`)
