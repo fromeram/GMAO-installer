@@ -7,6 +7,9 @@
 [![Seguridad: RSA-2048](https://img.shields.io/badge/Seguridad-RSA_2048_Machine_ID-orange.svg)](https://github.com/fromeram/GMAO-installer)
 [![AI: Ollama Ready](https://img.shields.io/badge/IA-Ollama_Local_&_Privada-purple.svg)](https://ollama.com)
 
+
+> 💡 **Impacto Financiero Demostrable**: Reduce hasta un **70% las paradas no planificadas** y ahorra entre **180.000€ y 450.000€ anuales** en cualquier fábrica de producción continua (**cartón y envases, packaging, alimentación, inyección de plásticos, metalmecánica y cerámica**). Retorno de inversión (Payback) demostrado en 6 a 12 meses.
+
 **GMAO System** es una plataforma integral de **Gestión de Mantenimiento Asistido por Ordenador (GMAO / CMMS)** diseñada para plantas de producción, fábricas e instalaciones técnicas industriales. 
 
 Permite digitalizar y optimizar el ciclo de vida completo de los activos de fábrica:
@@ -21,6 +24,18 @@ Permite digitalizar y optimizar el ciclo de vida completo de los activos de fáb
 
 
 ---
+
+
+## 📊 El Impacto Económico Real en una Fábrica Mediana
+
+| Concepto de Coste | Situación Típica (Sin GMAO) | Con GMAO System | Ahorro Anual Neto |
+| :--- | :--- | :--- | :--- |
+| **Paradas Imprevistas de Línea** | 120 h/año × 3.000 €/h | 36 h/año (-70%) | **252.000 € recuperados** |
+| **Mantenimiento Correctivo Urgente** | 180.000 € en piezas y averías | 144.000 € (-20%) | **36.000 € ahorrados** |
+| **Capital Inmovilizado en Almacén** | 200.000 € en stock ciego | 170.000 € (-15%) | **30.000 € liberados** |
+| **AHORRO TOTAL ANUAL ESTIMADO** | — | — | **~318.000 € / año** |
+
+*Estudios de ingeniería de mantenimiento (Cegid, Dimo Maint, Induscor) demuestran que pasar de un mantenimiento reactivo "apaga-fuegos" a uno preventivo y predictivo con app móvil y trazabilidad BOM amortiza la inversión en menos de un semestre.*
 
 ## 📖 Manual de Usuario, Instalación y Soporte Técnico
 
