@@ -180,15 +180,37 @@ La fábrica se estructura de forma jerárquica en tres niveles:
 * **Cómo agregar una Sección/Línea:**  
   Accede a `Configuración de Planta` -> `Añadir Sección`. Introduce el nombre descriptivo y pulsa guardar. Dentro de la sección, añade las líneas correspondientes.
 
-### 4.2 Catálogo de Máquinas, Historial, BOM y Códigos QR (`/maquinas`)
-Cada máquina cuenta con un perfil maestro completo:
-* **Ficha de la Máquina:** Marca, modelo, número de serie, potencia, año de puesta en marcha, criticidad (A/B/C) y documentación técnica asociada (manuales PDF, esquemas eléctricos).
-* **BOM (Lista de Materiales / Repuestos):** Asocia los recambios del almacén que usa específicamente esa máquina (rodamientos, correas, fotocélulas, cilindros).
-* **Historial de Averías:** Registro cronológico de todas las intervenciones correctivas y preventivas sufridas por el equipo.
-* **Códigos QR de Máquina:**  
-  * Haz clic en el botón **«Código QR»** dentro de la máquina.  
-  * Puedes imprimir la etiqueta adhesiva con el QR para pegarla físicamente en el cuadro o chasis de la máquina en planta.  
-  * Desde la **App Android**, el mecánico solo tiene que escanear el QR con la cámara del móvil para abrir al instante la ficha del equipo, ver averías activas o abrir un parte de trabajo inmediato.
+### 4.2 Catálogo de Máquinas, Documentación Técnica, BOM y Códigos QR (`/maquinas`)
+Cada máquina de la planta cuenta con un perfil maestro integral diseñado para facilitar el trabajo tanto del Responsable de Mantenimiento desde el ordenador como del técnico a pie de máquina.
+
+#### A. Generación e Impresión de Códigos QR (Desde la Web)
+* Accede al menú **«Generador QR»** o pulsa el botón **«Código QR»** en cualquier máquina.
+* El sistema genera una etiqueta física normalizada que incluye:
+  * Nombre de la máquina y modelo.
+  * Número de serie y sección.
+  * Código QR de alta resolución con URL directa a la ficha técnica del equipo (`/maquinas/:machineId/detail`).
+* **Impresión:** Puedes imprimir la etiqueta directamente en impresora de etiquetas adhesivas o láser y plastificarla para adherirla al cuadro eléctrico o chasis de la máquina.
+
+#### B. Escaneo con Cámara desde la App Android (A Pie de Planta)
+El mecánico ya no necesita llevar pesadas carpetas de planos ni desplazarse al taller para consultar manuales:
+1. Abre la aplicación móvil **GMAO** en su teléfono o tablet industrial.
+2. Toca el botón **«Escanear QR»** disponible directamente en el **Dashboard** o en la pestaña **Máquinas** (también dispone de botón de linterna/flash para zonas oscuras de la fábrica).
+3. Apunta la cámara al código QR de la máquina. En menos de 0,5 segundos, la app vibra, reconoce el equipo y abre automáticamente su ficha completa.
+
+#### C. Las 4 Áreas de Trabajo a Pie de Máquina:
+1. **📄 Documentación Técnica y Planos (¡Acceso Inmediato!):**
+   * **Manuales de usuario y mantenimiento (PDF):** El mecánico puede consultar el manual original del fabricante directamente en pantalla.
+   * **Esquemas eléctricos y neumáticos:** Visualización de diagramas para rastrear cableados, relés, fusibles y electroválvulas en plena avería.
+   * **Planos mecánicos y guías de ajuste:** Planos de despiece, tolerancias y pares de apriete.
+2. **⚙️ Lista de Materiales (BOM) y Consulta de Stock:**
+   * Despiece de todos los repuestos asignados al equipo (rodamientos, retenes, correas, fotocélulas, cilindros, contactores).
+   * **Stock disponible en almacén en tiempo real:** El mecánico comprueba al instante si hay repuestos en stock físico antes de desmontar la pieza defectuosa.
+3. **🛠️ Historial de Averías e Intervenciones:**
+   * Registro histórico de todas las averías correctivas y mantenimientos preventivos previos.
+   * Permite ver qué ocurrió la última vez que falló el equipo, qué operario intervino y qué solución se aplicó (Códigos FCR).
+4. **📊 Indicadores de Fiabilidad y Apertura Rápida de OT:**
+   * Consulta de métricas MTBF (tiempo medio entre fallos), MTTR (tiempo medio de reparación) y disponibilidad real.
+   * Botón directo para **«Abrir Parte de Trabajo / OT»** vinculada automáticamente a la máquina escaneada sin tener que buscarla en listas.
 
 ### 4.3 Órdenes de Trabajo (OTs) y Partes de Mantenimiento (`/ordenes`)
 El flujo de vida de una orden de trabajo garantiza trazabilidad total:
