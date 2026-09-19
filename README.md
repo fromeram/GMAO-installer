@@ -134,7 +134,7 @@ Si los técnicos o directores necesitan acceder al GMAO desde fuera de la red lo
 
 - ✅ **90 días de evaluación completa** desde el momento de la instalación.
 - ✅ **Sin limitaciones**: Máquinas ilimitadas, usuarios ilimitados, órdenes de trabajo, almacén y módulo de IA activados al 100%.
-- ✅ **Sin tarjeta de crédito**: Al terminar los 3 meses, el sistema se pausa a la espera de una clave de activación. Tus datos quedan intactos y guardados con seguridad en la base de datos PostgreSQL.
+- ✅ **Prueba 90 días completa**: Al terminar los 3 meses, el sistema se pausa a la espera de una clave de activación. Tus datos quedan intactos y guardados con seguridad en la base de datos PostgreSQL. Para continuar o activar tu licencia, contacta directamente por email a fromeram@gmail.com para coordinar la forma de pago.
 
 ### Activación Permanente
 En cualquier momento puedes pulsar en el distintivo de licencia en la barra superior de la aplicación para ver el **ID Único de tu Servidor (Machine ID)** y solicitar tu clave de activación permanente.
