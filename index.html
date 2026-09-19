@@ -1993,62 +1993,90 @@
   <section id="pantallas" class="catalog-section">
     <div class="container">
       <div class="section-title">
-        <span class="section-tag">Catálogo Visual en Entorno Real</span>
-        <h2>Capturas Reales de la Aplicación en Funcionamiento</h2>
-        <p>Software visual, moderno y robusto. Haz clic en cualquier captura para ampliarla y examinar los detalles técnicos:</p>
+        <span class="section-tag">Catálogo Visual en Planta Real</span>
+        <h2>Capturas Reales de la Aplicación en Producción</h2>
+        <p>Software industrial visual, moderno y robusto. Haz clic en cualquier captura para ampliarla a pantalla completa y examinar los detalles técnicos:</p>
       </div>
 
       <!-- Filtros de Categoría -->
       <div class="catalog-filters">
-        <button class="cat-filter-btn active" onclick="filterCatalog('all', this)">🌟 Todas las Pantallas (10)</button>
+        <button class="cat-filter-btn active" onclick="filterCatalog('all', this)">🌟 Todas las Pantallas (21)</button>
+        <button class="cat-filter-btn" onclick="filterCatalog('kpi', this)">📊 Control & KPIs (3)</button>
         <button class="cat-filter-btn" onclick="filterCatalog('ia', this)">🤖 Inteligencia Artificial (2)</button>
-        <button class="cat-filter-btn" onclick="filterCatalog('planta', this)">🏭 Planta & Mantenimiento (3)</button>
+        <button class="cat-filter-btn" onclick="filterCatalog('planta', this)">🏭 Planta & Preventivo (5)</button>
         <button class="cat-filter-btn" onclick="filterCatalog('almacen', this)">📦 Almacén & Repuestos (4)</button>
-        <button class="cat-filter-btn" onclick="filterCatalog('personal', this)">👥 Personal & Turnos (1)</button>
+        <button class="cat-filter-btn" onclick="filterCatalog('formatos', this)">🔄 Formatos & Troqueles (3)</button>
+        <button class="cat-filter-btn" onclick="filterCatalog('personal', this)">👥 Turnos & Gamificación (4)</button>
       </div>
 
       <div class="screenshots-grid">
         
-        <!-- 1. Dashboard IA Predictiva -->
-        <div class="screenshot-card" data-category="ia" onclick="openLightbox('img/captura_dashboard_ia_predictivo.jpg', 'Dashboard de Inteligencia Artificial — Distribución de Riesgo y Predicciones de Averías')">
+        <!-- 1. Dashboard Principal & Métricas Clave -->
+        <div class="screenshot-card" data-category="kpi" onclick="openLightbox('img/captura_dashboard_principal.jpg', 'Panel de Control Principal — Disponibilidad, MTBF, MTTR e Histórico de OTs')">
           <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
-            <img src="img/captura_dashboard_ia_predictivo.jpg" alt="Dashboard de Inteligencia Artificial y Salud de Activos">
+            <img src="img/captura_dashboard_principal.jpg" alt="Panel de Control y Dashboard Principal de GMAO System">
           </div>
           <div class="screen-meta">
-            <span class="screen-tag-badge" style="background: rgba(168, 85, 247, 0.15); color: #C084FC;">🤖 IA Predictiva</span>
-            <h4>Dashboard de Salud de Activos e IA</h4>
-            <p>Monitoriza las 93 máquinas de la planta en tiempo real. Un gráfico donut segmenta el nivel de riesgo (Crítico, Alto, Medio, Bajo) y calcula la probabilidad matemática de fallo de cada máquina antes de la avería.</p>
+            <span class="screen-tag-badge" style="background: rgba(59, 130, 246, 0.15); color: #60A5FA;">📊 Panel de Control</span>
+            <h4>Panel de Control y KPIs en Tiempo Real</h4>
+            <p>Métricas clave operativas: MTBF (Tiempo Medio Entre Fallos), MTTR (Tiempo Medio de Reparación), Disponibilidad global de planta, órdenes de trabajo mensuales e incidencias en curso.</p>
           </div>
         </div>
 
-        <!-- 2. Asistente Técnico IA (Chat) -->
-        <div class="screenshot-card" data-category="ia" onclick="openLightbox('img/captura_asistente_ia_chat.jpg', 'Asistente IA de Mantenimiento — Chat con IA Local Privada (Ollama)')">
+        <!-- 2. Información de Planta / Árbol de Activos -->
+        <div class="screenshot-card" data-category="planta" onclick="openLightbox('img/captura_arbol_planta.jpg', 'Información de Planta — Estructura Organizacional Completa (8 Secciones, 27 Líneas, 93 Máquinas)')">
           <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
-            <img src="img/captura_asistente_ia_chat.jpg" alt="Chat Técnico con Inteligencia Artificial Ollama">
-          </div>
-          <div class="screen-meta">
-            <span class="screen-tag-badge" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8;">💬 Asistente IA 24/7</span>
-            <h4>Chat con Experto en Mantenimiento</h4>
-            <p>Pregunta en lenguaje natural a la IA local integrada (Ollama) cómo solucionar roturas complejas, interpretar patrones de vibración, calcular métricas MTBF/MTTR o planificar intervenciones sin fuga de datos industriales.</p>
-          </div>
-        </div>
-
-        <!-- 3. Estructura de Planta -->
-        <div class="screenshot-card" data-category="planta" onclick="openLightbox('img/captura_info_planta.jpg', 'Información de Planta — Estructura Organizacional Completa (8 Secciones, 27 Líneas, 93 Máquinas)')">
-          <div class="screen-zoom-hint">🔍 Ampliar</div>
-          <div class="screen-img-wrap">
-            <img src="img/captura_info_planta.jpg" alt="Estructura Organizacional de Planta con Árbol de Activos">
+            <img src="img/captura_arbol_planta.jpg" alt="Estructura Organizacional de Planta con Árbol de Activos">
           </div>
           <div class="screen-meta">
             <span class="screen-tag-badge" style="background: rgba(249, 115, 22, 0.15); color: var(--primary-orange);">🏭 Estructura de Planta</span>
-            <h4>Árbol Jerárquico de Activos</h4>
-            <p>Desglose visual completo de la planta: 8 secciones de fábrica, 27 líneas de producción y 93 máquinas totales. Permite desplegar y colapsar áreas para acceder al historial de averías y ficha técnica de cada activo.</p>
+            <h4>Árbol Jerárquico de Activos (93 Máquinas)</h4>
+            <p>Desglose visual completo de la planta en 8 secciones de fábrica, 27 líneas y 93 máquinas. Navegación jerárquica con acceso inmediato al historial de averías y ficha técnica de cada equipo.</p>
           </div>
         </div>
 
-        <!-- 4. Plan Anual Preventivo -->
+        <!-- 3. Dashboard IA Predictiva -->
+        <div class="screenshot-card" data-category="ia" onclick="openLightbox('img/captura_ia_predictiva.jpg', 'Dashboard de Inteligencia Artificial — Distribución de Riesgo y Predicciones de Averías')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_ia_predictiva.jpg" alt="Dashboard de Inteligencia Artificial y Salud de Activos">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(168, 85, 247, 0.15); color: #C084FC;">🤖 IA Predictiva</span>
+            <h4>Salud de Activos y Diagnóstico Predictivo</h4>
+            <p>Monitoriza todas las máquinas de la planta con cálculo probabilístico de fallo. Gráfico donut de riesgo (Crítico, Alto, Medio, Normal) y recomendaciones de inspección preventiva.</p>
+          </div>
+        </div>
+
+        <!-- 4. Asistente Técnico IA (Chat con Ollama) -->
+        <div class="screenshot-card" data-category="ia" onclick="openLightbox('img/captura_ia_asistente_chat.jpg', 'Asistente IA de Mantenimiento — Chat con IA Local Privada (Ollama)')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_ia_asistente_chat.jpg" alt="Chat Técnico con Inteligencia Artificial Ollama">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8;">💬 Asistente IA 24/7</span>
+            <h4>Chat Técnico con Experto en Mantenimiento</h4>
+            <p>Consulta interactiva con el modelo de IA local (Ollama). Resuelve dudas mecánicas, esquemas eléctricos, cálculo de rodamientos o pasos de desmontaje sin enviar datos industriales a la nube externa.</p>
+          </div>
+        </div>
+
+        <!-- 5. Centro de Comunicaciones -->
+        <div class="screenshot-card" data-category="kpi" onclick="openLightbox('img/captura_comunicaciones.jpg', 'Dashboard de Comunicaciones — Avisos y Partes de Avería en Tiempo Real')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_comunicaciones.jpg" alt="Dashboard de Comunicaciones y Avisos entre Turnos">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(236, 72, 153, 0.15); color: #F472B6;">📢 Avisos y Partes</span>
+            <h4>Centro de Comunicaciones de Planta</h4>
+            <p>Recepción instantánea de avisos de parada reportados por operarios de línea. Comunicación bidireccional entre producción y técnicos con trazabilidad del tiempo de respuesta.</p>
+          </div>
+        </div>
+
+        <!-- 6. Plan Anual Preventivo (12 Meses) -->
         <div class="screenshot-card" data-category="planta" onclick="openLightbox('img/captura_plan_anual_preventivo.jpg', 'Plan de Mantenimiento Anual — 12 Meses y 363 Tareas Programadas')">
           <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
@@ -2057,11 +2085,24 @@
           <div class="screen-meta">
             <span class="screen-tag-badge" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">📅 Preventivo Anual</span>
             <h4>Planificación Anual de 12 Meses</h4>
-            <p>Matriz completa con las 363 tareas preventivas del año. El mapa de calor por colores señala los días con mayor carga técnica para programar paradas de planta programadas y exportar el cronograma a Excel.</p>
+            <p>Matriz completa con las 363 tareas programadas del ejercicio. Mapa de calor por días y meses para balancear cargas de trabajo de los técnicos y exportación directa a Excel con fórmulas.</p>
           </div>
         </div>
 
-        <!-- 5. Mantenimiento Legal y Regulatorio -->
+        <!-- 7. Gamas y Rutinas Preventivas -->
+        <div class="screenshot-card" data-category="planta" onclick="openLightbox('img/captura_mantenimiento_preventivo.jpg', 'Mantenimiento Preventivo — Gamas Técnicas, Frecuencias y Protocolos')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_mantenimiento_preventivo.jpg" alt="Mantenimiento Preventivo y Checklists Técnicos">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(34, 197, 94, 0.15); color: #4ADE80;">🛠️ Gamas Periódicas</span>
+            <h4>Rutinas de Preventivo y Checklists</h4>
+            <p>Programación por frecuencias (diaria, semanal, quincenal, trimestral). Protocolos claros con checklists técnicos para mecánicos y electricistas con validación de tareas completadas.</p>
+          </div>
+        </div>
+
+        <!-- 8. Mantenimiento Legal y Regulatorio -->
         <div class="screenshot-card" data-category="planta" onclick="openLightbox('img/captura_mantenimiento_legal.jpg', 'Mantenimiento Legal y Regulatorio — Inspecciones de OCAs y Centros de Transformación')">
           <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
@@ -2070,24 +2111,37 @@
           <div class="screen-meta">
             <span class="screen-tag-badge" style="background: rgba(239, 68, 68, 0.15); color: #F87171;">⚖️ Mantenimiento Legal</span>
             <h4>Inspecciones Obligatorias & OCAs</h4>
-            <p>Control riguroso de revisiones legales en Centros de Transformación (CT-01, CT-02), líneas de gas y aparatos a presión. Cuenta atrás en días de vigencia, alertas de caducidad y repositorio de actas y certificados en PDF.</p>
+            <p>Control de revisiones oficiales reglamentarias: Centros de Transformación (CT-01, CT-02), líneas de gas y recipientes a presión. Cuenta atrás en días de vigencia y repositorio de certificados oficiales.</p>
           </div>
         </div>
 
-        <!-- 6. Inventario General Valorado -->
-        <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_inventario_stock.jpg', 'Inventario General y Stock Valorado — Almacén con Valor en Euros')">
+        <!-- 9. Backlog de Mantenimiento -->
+        <div class="screenshot-card" data-category="planta" onclick="openLightbox('img/captura_backlog_mantenimiento.jpg', 'Backlog de Mantenimiento — Priorización de Trabajos Acumulados')">
           <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
-            <img src="img/captura_inventario_stock.jpg" alt="Inventario General y Stock Valorado del GMAO">
+            <img src="img/captura_backlog_mantenimiento.jpg" alt="Backlog de Mantenimiento y Carga de Trabajo">
           </div>
           <div class="screen-meta">
-            <span class="screen-tag-badge" style="background: rgba(234, 179, 8, 0.15); color: #FACC15;">💰 Almacén Valorado</span>
-            <h4>Inventario General Valorado en Euros</h4>
-            <p>Resumen de recambios clasificados por especialidad (mecánico, eléctrico, neumático, limpieza) con el capital total inmovilizado en euros (€), buscador instantáneo y trazabilidad en almacenes.</p>
+            <span class="screen-tag-badge" style="background: rgba(245, 158, 11, 0.15); color: #FBBF24;">📋 Backlog de Planta</span>
+            <h4>Gestión de Trabajos Pendientes</h4>
+            <p>Bandeja de trabajos pendientes clasificados por urgencia, criticidad y horas estimadas. Permite planificar intervenciones en las próximas paradas programadas de fabricación.</p>
           </div>
         </div>
 
-        <!-- 7. Comparador de Precios Multirproveedor -->
+        <!-- 10. Catálogo Maestro de Repuestos -->
+        <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_inventario_repuestos.jpg', 'Gestión de Productos e Inventario — Catálogo de Repuestos y Recepción')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_inventario_repuestos.jpg" alt="Catálogo Maestro de Repuestos e Inventario Industrial">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(234, 179, 8, 0.15); color: #FACC15;">📦 Catálogo Maestro</span>
+            <h4>Gestión Integral de Repuestos</h4>
+            <p>Catálogo maestro con referencia interna, código de fabricante, ubicación exacta en almacén, recepción directa de material, precio medio ponderado y exportación a Excel.</p>
+          </div>
+        </div>
+
+        <!-- 11. Comparador Real de Precios Multi-Proveedor -->
         <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_comparador_precios.jpg', 'Comparador de Precios con Múltiples Suministros Industriales')">
           <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
@@ -2095,47 +2149,138 @@
           </div>
           <div class="screen-meta">
             <span class="screen-tag-badge" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">🏷️ Ahorro en Compras</span>
-            <h4>Comparador de Proveedores por Repuesto</h4>
-            <p>Calcula automáticamente el ahorro potencial en euros y porcentaje comparando ofertas y tarifas de suministros industriales para cada pieza. Asegura comprar siempre al precio más rentable.</p>
+            <h4>Comparador de Tarifas por Proveedor</h4>
+            <p>Compara ofertas reales de diferentes suministros industriales para una misma referencia. Destaca ahorros de hasta más del 50% por componente para optimizar cada pedido de compra.</p>
           </div>
         </div>
 
-        <!-- 8. Productos Bajo Stock -->
-        <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_stock_bajo.jpg', 'Alertas de Repuestos con Stock Bajo')">
+        <!-- 12. Alertas de Stock Bajo y Mínimos -->
+        <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_stock_bajo_alertas.jpg', 'Alertas de Repuestos con Bajo Stock')">
           <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
-            <img src="img/captura_stock_bajo.jpg" alt="Alerta de Productos con Bajo Stock">
+            <img src="img/captura_stock_bajo_alertas.jpg" alt="Alerta de Productos con Bajo Stock">
           </div>
           <div class="screen-meta">
             <span class="screen-tag-badge" style="background: rgba(239, 68, 68, 0.15); color: #F87171;">⚠️ Stock Crítico</span>
             <h4>Alertas Automáticas de Rotura de Stock</h4>
-            <p>Avisos automáticos cuando un repuesto desciende por debajo del umbral mínimo de seguridad por almacén y proveedor asignado, evitando paradas de máquina por falta de recambios.</p>
+            <p>Detección automática cuando un recambio desciende por debajo de su umbral de seguridad, señalando almacén y proveedor habitual para cursar la reposición antes de sufrir roturas.</p>
           </div>
         </div>
 
-        <!-- 9. Reporte de Auditoría e Inventario a Medida -->
-        <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_reporte_auditoria.jpg', 'Reporte de Inventario y Auditoría con Fórmulas Excel')">
+        <!-- 13. Auditoría de Inventario Valorado -->
+        <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_auditoria_inventario.jpg', 'Reporte de Inventario y Auditoría con Fórmulas Excel')">
           <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
-            <img src="img/captura_reporte_auditoria.jpg" alt="Reporte de Inventario por Tipo y Auditoría">
+            <img src="img/captura_auditoria_inventario.jpg" alt="Reporte de Inventario por Tipo y Auditoría">
           </div>
           <div class="screen-meta">
-            <span class="screen-tag-badge" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8;">📊 Ajustes de Contabilidad</span>
-            <h4>Auditoría & Exportación a Medida</h4>
-            <p>Selecciona los productos y almacenes que desees y el sistema suma en tiempo real la cantidad y el importe acumulado según el coste real facturado, exportando a Excel con fórmulas nativas.</p>
+            <span class="screen-tag-badge" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8;">📊 Valoración Almacén</span>
+            <h4>Auditoría de Inventario Valorado</h4>
+            <p>Filtros por especialidad (mecánico, eléctrico, neumático, lubricantes), cálculo en vivo del capital inmovilizado y exportación de informes oficiales para contabilidad y auditorías.</p>
           </div>
         </div>
 
-        <!-- 10. Calendario Perpetuo de Vacaciones y Turnos -->
-        <div class="screenshot-card" data-category="personal" onclick="openLightbox('img/captura_calendario_vacaciones.jpg', 'Calendario Perpetuo de Turnos y Vacaciones')">
+        <!-- 14. Gestión de Formatos y Utillajes -->
+        <div class="screenshot-card" data-category="formatos" onclick="openLightbox('img/captura_gestion_formatos.jpg', 'Gestión de Formatos — Catálogo de Moldes, Troqueles y Utillajes de Producción')">
           <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
-            <img src="img/captura_calendario_vacaciones.jpg" alt="Calendario Perpetuo de Vacaciones y Turnos">
+            <img src="img/captura_gestion_formatos.jpg" alt="Gestión de Formatos de Fabricación y Moldes">
           </div>
           <div class="screen-meta">
-            <span class="screen-tag-badge" style="background: rgba(168, 85, 247, 0.15); color: #C084FC;">👥 Turnos & Plantilla</span>
-            <h4>Calendario Perpetuo & Vacaciones</h4>
-            <p>Cuadrante visual perpetuo con los 5 códigos de turno oficiales de fábrica (Mañana, Tarde, Noche, Jornada Partida y Libre) y flujo de solicitud y aprobación de vacaciones de los técnicos.</p>
+            <span class="screen-tag-badge" style="background: rgba(139, 92, 246, 0.15); color: #A78BFA;">🔄 Moldes & Troqueles</span>
+            <h4>Catálogo de Formatos de Producción</h4>
+            <p>Registro y control de todos los formatos, moldes y boquillas de cada línea de fabricación, con sus tolerancias, especificaciones dimensionales e historial de uso.</p>
+          </div>
+        </div>
+
+        <!-- 15. Órdenes de Cambio de Formato -->
+        <div class="screenshot-card" data-category="formatos" onclick="openLightbox('img/captura_ordenes_cambio_formato.jpg', 'Órdenes de Cambio de Formato — Tiempos de Ajuste y Preparación de Línea')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_ordenes_cambio_formato.jpg" alt="Órdenes de Cambio de Formato y Ajuste de Maquinaria">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(236, 72, 153, 0.15); color: #F472B6;">⏱️ Tiempos SMED</span>
+            <h4>Órdenes de Cambio de Formato</h4>
+            <p>Gestión de órdenes de trabajo específicas para cambios de utillaje, cronometraje de tiempos de preparación y ajuste de maquinaria para minimizar pérdidas de producción.</p>
+          </div>
+        </div>
+
+        <!-- 16. Reportes de Cambios de Formato -->
+        <div class="screenshot-card" data-category="formatos" onclick="openLightbox('img/captura_reportes_cambios_formato.jpg', 'Reportes de Cambios de Formato — Historial Analítico y Exportación Excel')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_reportes_cambios_formato.jpg" alt="Reportes de Cambios de Formato y Tiempos de Ajuste">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(245, 158, 11, 0.15); color: #FBBF24;">📈 Analítica de Formatos</span>
+            <h4>Reportes de Tiempos de Cambio</h4>
+            <p>Análisis histórico de duraciones por línea y turno con comparativa de tiempos objetivo vs tiempos reales, identificando cuellos de botella y exportando datos a Excel.</p>
+          </div>
+        </div>
+
+        <!-- 17. Calendario de Turnos del Equipo -->
+        <div class="screenshot-card" data-category="personal" onclick="openLightbox('img/captura_calendario_turnos.jpg', 'Calendario de Turnos — Cuadrante Mensual de Guardias y Coberturas')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_calendario_turnos.jpg" alt="Calendario de Turnos y Cuadrante Técnico">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(59, 130, 246, 0.15); color: #60A5FA;">🗓️ Cuadrante Mensual</span>
+            <h4>Calendario y Cuadrante de Turnos</h4>
+            <p>Planificación visual mensual de los 5 turnos de planta (Mañana, Tarde, Noche, Jornada Partida y Libre), con registro de ausencias y asignación rápida de coberturas técnicas.</p>
+          </div>
+        </div>
+
+        <!-- 18. Calendario Perpetuo de Vacaciones -->
+        <div class="screenshot-card" data-category="personal" onclick="openLightbox('img/captura_calendario_vacaciones.jpg', 'Calendario de Vacaciones — Gestión y Aprobación de Descansos')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_calendario_vacaciones.jpg" alt="Calendario Perpetuo de Vacaciones y Permisos">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(168, 85, 247, 0.15); color: #C084FC;">🏖️ Vacaciones & Permisos</span>
+            <h4>Gestión de Vacaciones de la Plantilla</h4>
+            <p>Sistema ágil de solicitudes de descanso del equipo de mantenimiento, comprobación automática de solapamientos entre especialistas y aprobación en un solo clic.</p>
+          </div>
+        </div>
+
+        <!-- 19. Gamificación y Ranking Técnico -->
+        <div class="screenshot-card" data-category="personal" onclick="openLightbox('img/captura_gamificacion_ranking.jpg', 'Gamificación de Mantenimiento — Puntos, Niveles y Ranking del Equipo')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_gamificacion_ranking.jpg" alt="Gamificación y Ranking de Técnicos de Mantenimiento">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(234, 179, 8, 0.15); color: #FACC15;">🏆 Gamificación Técnica</span>
+            <h4>Puntuaciones, Niveles y Ranking</h4>
+            <p>Módulo motivacional que premia a los técnicos por resolución eficiente de averías y cumplimiento de mantenimientos preventivos, impulsando el compromiso y la calidad técnica.</p>
+          </div>
+        </div>
+
+        <!-- 20. Logros y Medallas al Mérito -->
+        <div class="screenshot-card" data-category="personal" onclick="openLightbox('img/captura_gamificacion_logros.jpg', 'Logros y Medallas de Gamificación — Mecánico Experto y Guardián Preventivo')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_gamificacion_logros.jpg" alt="Logros y Medallas al Desempeño Técnico">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">🎖️ Reconocimiento</span>
+            <h4>Insignias y Medallas Profesionales</h4>
+            <p>Reconocimiento a hitos alcanzados en fábrica: "Mecánico Experto", "Guardián Preventivo", "Rayo McQueen", fomentando una cultura proactiva de cuidado de las máquinas.</p>
+          </div>
+        </div>
+
+        <!-- 21. Scheduler y Automatización en Background -->
+        <div class="screenshot-card" data-category="kpi" onclick="openLightbox('img/captura_scheduler_sistema.jpg', 'Administración del Scheduler — Motores en Segundo Plano y Tareas Periódicas')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_scheduler_sistema.jpg" alt="Administración del Scheduler y Procesos del Sistema">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(148, 163, 184, 0.15); color: #CBD5E1;">⚙️ Automatización</span>
+            <h4>Scheduler y Procesos en Background</h4>
+            <p>Supervisión en tiempo real del motor en segundo plano que regenera órdenes de preventivo, verifica niveles de stock, comprueba vencimientos legales y dispara alertas.</p>
           </div>
         </div>
 
