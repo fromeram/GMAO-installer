@@ -164,7 +164,7 @@ El sistema implementa un modelo de seguridad basado en roles (RBAC) con visibili
 | **Jefe de Sección** | Su sección asignada | Crear avisos, validar trabajos de su sección | Consulta de stock | Consulta de cuadrante de su sección | Consulta |
 | **Mecánico / Operario** | Tareas asignadas | Ejecutar OTs, imputar horas y repuestos | Consulta y consumo de stock en OT | Solicitud de vacaciones personales | Chat Asistente |
 | **Calidad** | Procesos y normativas | Verificación de estándares y formatos | Consulta | Consulta | Consulta |
-| **Contabilidad** | Costes y proveedores | Auditoría de costes por máquina y sección | Precios, proveedores y facturación | Consulta | Sin acceso |
+| **Contabilidad** | Costes y proveedores | Auditoría de costes por máquina y sección | Precios, proveedores y valoración de stock | Consulta | Sin acceso |
 
 ---
 
@@ -245,7 +245,7 @@ Módulo específico para inspecciones oficiales y cumplimiento reglamentario:
 
 ### 4.6 Gestión de Inventario, Repuestos, Almacenes y Proveedores (`/inventario`, `/proveedores`)
 * **Ficha de Repuesto:** Referencia interna, código del fabricante, ubicación física (Almacén, Estantería, Cajón), stock actual y stock mínimo de seguridad.
-* **Precios Reales Cobrados por Proveedor:** El sistema no utiliza precios teóricos ni precios máximos arbitrarios; el precio unitario de cada repuesto es exactamente el precio real cobrado y facturado por el proveedor en compras anteriores.
+* **Precios Reales Cobrados por Proveedor:** El sistema no utiliza precios teóricos ni precios máximos arbitrarios; el precio unitario de cada repuesto es exactamente el precio real cobrado por el proveedor en compras anteriores.
 * **Reporte y Exportación a Medida para Ajustes Contables (`/reporte-inventario`):**
   * Permite marcar mediante casillas de verificación (checkboxes) los repuestos específicos que se deseen incluir.
   * **Suma acumulada en vivo:** El sistema calcula y muestra en la cabecera la cantidad total de artículos y el valor monetario exacto (€) acumulado a medida que se seleccionan productos.
