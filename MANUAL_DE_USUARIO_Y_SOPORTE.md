@@ -1,9 +1,8 @@
 # 📖 MANUAL INTEGRAL DE USUARIO, INSTALACIÓN Y RESOLUCIÓN DE PROBLEMAS
 ## Sistema GMAO — Gestión de Mantenimiento Asistido por Ordenador
-**Edición Industrial — Adaptado a Plantas de Producción, Cartón y Envases, Cerámica y Manufactura**  
-**Autor y Titular de Derechos:** Fran Romera  
-**Copyright:** © 2024–2026 Fran Romera. Todos los derechos reservados. Prohibida su copia o distribución ilegal.  
-**Versión del Sistema:** 2.2.3  
+**Desarrollo y Soporte Técnico:** Equipo GMAO System  
+**Copyright:** © 2024–2026 GMAO System. Todos los derechos reservados. Prohibida su copia o distribución no autorizada.  
+**Versión del Sistema:** 2.2.4  
 **Fecha de Publicación:** Septiembre 2026  
 
 ---
@@ -470,12 +469,11 @@ El archivo generado en `/root/` contendrá todos los datos exactos del sistema l
 
 ## ⚖️ PROPIEDAD INTELECTUAL Y DERECHOS DE AUTOR
 
-© 2024–2026 **Fran Romera**. Todos los derechos reservados.
+© 2024–2026 **GMAO System**. Todos los derechos reservados.
 
-El software **GMAO System**, su código fuente, arquitectura técnica, esquema de base de datos, interfaz gráfica web, app nativa Android, algoritmos de cálculo predictivo mediante IA y la presente documentación técnica constituyen una obra original y propiedad intelectual exclusiva de **Fran Romera**.
+El software **GMAO System**, su código fuente, arquitectura técnica, esquema de base de datos, interfaz gráfica web, app nativa Android y la presente documentación técnica constituyen una obra y propiedad intelectual de **GMAO System**.
 
-**Aviso Legal y Prohibición Expresa:**  
-Queda terminantemente prohibida la copia ilegal, reproducción total o parcial, ingeniería inversa, decompilación, distribución comercial, cesión, sublicenciamiento o explotación no autorizada por cualquier medio físico o digital sin el consentimiento expreso, previo y por escrito de su autor y titular, **Fran Romera**.
+**Aviso Legal y Condiciones:**  
+Queda prohibida la copia no autorizada, reproducción total o parcial, ingeniería inversa, decompilación, distribución comercial, cesión, sublicenciamiento o explotación sin la debida licencia de uso concedida por **GMAO System**.
 
-*Manual elaborado y verificado para la versión GMAO 2.2.3. Sistema operativo en planta industrial.*
-EOF
+*Manual elaborado y verificado para la versión GMAO 2.2.4. Sistema operativo en planta industrial.*
