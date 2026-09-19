@@ -15,7 +15,7 @@ CYAN='\033[0;36m'
 BOLD='\033[1m'
 NC='\033[0m'
 
-clear
+clear 2>/dev/null || true
 echo -e "${BLUE}${BOLD}"
 echo "=========================================================================="
 echo "    ██████╗ ███╗   ███╗ █████╗  ██████╗     ███████╗██╗   ██╗███████╗"
@@ -31,26 +31,50 @@ echo -e "${BLUE}${BOLD}=========================================================
 # 1. Comprobación e instalación automática de requisitos
 echo -e "${CYAN}[1/6] Verificando e instalando componentes necesarios...${NC}"
 
-if ! command -v openssl &> /dev/null; then
-    echo -e "  ${YELLOW}⚙️  Instalando OpenSSL...${NC}"
-    if command -v apt-get &> /dev/null; then apt-get update -y -qq && apt-get install -y -qq openssl; fi
-fi
+OS="$(uname -s)"
+case "$OS" in
+    Linux*)
+        if ! command -v openssl &> /dev/null; then
+            echo -e "  ${YELLOW}⚙️  Instalando OpenSSL...${NC}"
+            if command -v apt-get &> /dev/null; then apt-get update -y -qq && apt-get install -y -qq openssl; fi
+        fi
 
-if ! command -v docker &> /dev/null; then
-    echo -e "  ${YELLOW}⚙️  Docker no está instalado. Instalándolo automáticamente...${NC}"
-    if command -v apt-get &> /dev/null; then
-        export DEBIAN_FRONTEND=noninteractive
-        apt-get update -y
-        apt-get install -y docker.io docker-compose-v2 || apt-get install -y docker.io docker-compose || true
-    fi
-fi
+        if ! command -v docker &> /dev/null; then
+            echo -e "  ${YELLOW}⚙️  Docker no está instalado. Instalándolo automáticamente...${NC}"
+            if command -v apt-get &> /dev/null; then
+                export DEBIAN_FRONTEND=noninteractive
+                apt-get update -y
+                apt-get install -y docker.io docker-compose-v2 || apt-get install -y docker.io docker-compose || true
+            fi
+        fi
 
-# Asegurar que el servicio de Docker esté corriendo
-if command -v systemctl &> /dev/null; then
-    systemctl enable --now docker 2>/dev/null || true
-    systemctl start docker 2>/dev/null || true
-fi
-service docker start 2>/dev/null || true
+        # Asegurar que el servicio de Docker esté corriendo en Linux
+        if command -v systemctl &> /dev/null; then
+            systemctl enable --now docker 2>/dev/null || true
+            systemctl start docker 2>/dev/null || true
+        fi
+        service docker start 2>/dev/null || true
+        ;;
+    Darwin*)
+        echo -e "  🍏 ${BOLD}Entorno macOS detectado${NC}"
+        if ! command -v docker &> /dev/null; then
+            echo -e "
+  ${RED}❌ Docker no está instalado en este Mac.${NC}"
+            echo -e "  👉 Descarga e instala ${BOLD}Docker Desktop para Mac${NC} desde:"
+            echo -e "     ${CYAN}https://www.docker.com/products/docker-desktop/${NC}"
+            echo -e "  Una vez instalado y abierto Docker Desktop, vuelve a ejecutar este comando.
+"
+            exit 1
+        fi
+        if ! docker info &> /dev/null; then
+            echo -e "
+  ${YELLOW}⚠️  Docker Desktop está instalado pero no se encuentra abierto o en ejecución.${NC}"
+            echo -e "  👉 Abre la aplicación ${BOLD}Docker Desktop${NC} en tu Mac y espera a que el icono esté activo, luego reintenta.
+"
+            exit 1
+        fi
+        ;;
+esac
 
 echo -e "  ${GREEN}✓${NC} Docker verificado: $(docker --version 2>/dev/null || echo Activo)"
 

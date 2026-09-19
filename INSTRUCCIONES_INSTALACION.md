@@ -1,67 +1,87 @@
-# 📖 Instrucciones de Instalación — GMAO System
+# 📖 Instrucciones de Instalación Multiplataforma — GMAO System
 
-¡Bienvenido! Esta guía te explica cómo poner en marcha el sistema GMAO en tu fábrica y en los teléfonos móviles de tus técnicos en menos de 3 minutos.
+¡Bienvenido! Esta guía te explica cómo poner en marcha el sistema GMAO en tu servidor de fábrica, en tu ordenador personal (Windows o Mac) y en los teléfonos móviles de tus técnicos en menos de 3 minutos.
 
 ---
 
-## 🚀 Paso 1: Instalación del Servidor (Comando Todo en Uno)
+## 🖥️ Paso 1: Elige tu Entorno de Instalación
 
-> 💡 **Nota**: No te preocupes por instalar Docker ni configurar nada manualmente en Linux. Este comando instala automáticamente todo lo necesario.
+GMAO System está 100% contenerizado con **Docker**, lo que permite desplegarlo tanto en un servidor de planta como en tu PC o portátil para ver cómo funciona.
 
-En la consola de tu servidor Linux, máquina virtual o contenedor Proxmox (como usuario `root` o con `sudo`), pega esta única línea:
+### Opción A: Servidor Linux / Proxmox (Recomendado para Producción en Planta)
+> 💡 **Nota**: No necesitas configurar nada previamente. Este comando instala automáticamente Docker, Compose y todo lo necesario en Ubuntu, Debian o Proxmox.
 
+En la terminal de tu servidor (como `root` o con `sudo`), ejecuta:
 ```bash
 apt update && apt install -y curl && bash <(curl -fsSL https://raw.githubusercontent.com/fromeram/GMAO-installer/main/setup.sh)
 ```
 
-El instalador preparará el sistema y abrirá el asistente interactivo de configuración.
+---
+
+### Opción B: Windows 10 / 11 (Ideal para Pruebas en tu Ordenador)
+Si eres director de fábrica, jefe de mantenimiento o técnico y quieres probar el sistema en tu PC:
+
+1. **Requisito**: Tener instalado y abierto **[Docker Desktop para Windows](https://www.docker.com/products/docker-desktop/)** (asegúrate de marcar *"Use WSL 2"* durante la instalación).
+2. **Método 1 (PowerShell en 1 línea)**: Abre PowerShell y pega:
+   ```powershell
+   irm https://raw.githubusercontent.com/fromeram/GMAO-installer/main/setup.ps1 | iex
+   ```
+3. **Método 2 (Descarga manual ZIP)**:
+   - Descarga el código: [GMAO-installer ZIP](https://github.com/fromeram/GMAO-installer/archive/refs/heads/main.zip)
+   - Descomprime la carpeta y haz **doble clic en `install.bat`**.
+   - Se abrirá automáticamente la aplicación en tu navegador web.
+
+---
+
+### Opción C: macOS (Para Mac con Procesador Apple Silicon M1-M4 o Intel)
+1. **Requisito**: Tener instalado y abierto **[Docker Desktop para Mac](https://www.docker.com/products/docker-desktop/)**.
+2. Abre la aplicación **Terminal** en tu Mac y pega:
+   ```bash
+   bash <(curl -fsSL https://raw.githubusercontent.com/fromeram/GMAO-installer/main/setup.sh)
+   ```
 
 ---
 
 ## 📝 Paso 2: Responde al Asistente de Fábrica
 
-1. **IP del Servidor**: El programa detecta la IP de tu máquina (ej. `192.168.1.45`). Pulsa **ENTER**.
-2. **Contraseñas**: Puedes dejar las contraseñas seguras automáticas pulsando **ENTER** o escribir las tuyas.
+1. **IP o Host del Servidor**:
+   - En servidores de fábrica: Detectará tu IP local (ej. `192.168.1.45`). Pulsa **ENTER**.
+   - En Windows o Mac para pruebas: Pulsa **ENTER** para usar `localhost`.
+2. **Contraseñas**: Puedes dejar las contraseñas seguras sugeridas pulsando **ENTER** o escribir las que prefieras.
 3. **Servidor de Inteligencia Artificial (Ollama)**:
-   - Si tienes **Ollama** funcionando para diagnósticos automáticos, escribe su dirección (ej. `http://localhost:11434` o la IP de tu equipo con IA).
-   - Si todavía no tienes Ollama instalado, pulsa **ENTER** y podrás añadirlo más adelante cuando quieras.
+   - Si tienes **Ollama** funcionando para diagnósticos automáticos, escribe su dirección (ej. `http://localhost:11434` o `http://host.docker.internal:11434` en Windows).
+   - Si aún no tienes Ollama, pulsa **ENTER** y podrás conectarlo cuando quieras.
 4. **Estructura de Fábrica**:
-   - **Plantilla Estándar (Recomendada para empezar)**: Te crea máquinas, almacenes y áreas industriales listas para usar y probar el programa al instante.
-   - **Personalizada**: Puedes introducir tus secciones y máquinas reales una a una.
+   - **Plantilla Estándar (Recomendada para empezar)**: Genera almacenes, secciones, líneas y máquinas con datos industriales realistas para ver cómo funciona el sistema de inmediato.
+   - **Personalizada**: Te permite dar de alta tus secciones y máquinas una a una.
 
 ---
 
-## 🌐 Paso 3: Accede desde el Navegador
+## 🌐 Paso 3: Acceso al Panel de Control Web
 
-Cuando termine la instalación:
-- **Panel Web (HTTPS)**: `https://<IP_DE_TU_SERVIDOR>`
+Cuando concluya la instalación, el navegador se abrirá o podrás acceder en:
+- **Panel Web Seguro (HTTPS)**: `https://<IP_O_LOCALHOST>`
+- **Panel Web Estándar (HTTP)**: `http://<IP_O_LOCALHOST>`
 - **Usuario inicial**: `admin`
-- **Contraseña**: La que hayas introducido en el asistente.
+- **Contraseña**: La generada en el asistente (se muestra en pantalla al finalizar).
 
-*(Si el navegador muestra advertencia de certificado autofirmado en la red local, pulsa en "Configuración avanzada" $\rightarrow$ "Continuar a la web").*
-
----
-
-## 📱 Paso 4: Instala la App en los Móviles de los Técnicos
-
-Para que los mecánicos y electricistas trabajen a pie de máquina escaneando códigos QR:
-
-1. **Descarga el archivo APK en el teléfono**:  
-   👉 [Descargar GMAOv2.2.3.apk](https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.3.apk)
-2. Instala la aplicación en el móvil Android.
-3. Pulsa en **⚙️ "Configurar Servidor"** en la pantalla de inicio y escribe la IP de tu servidor GMAO (ejemplo: `http://192.168.1.50:8000`).
-4. Pulsa **"Probar Conexión"** y **"Guardar"**. ¡Listo! Inicia sesión con tu usuario.
+*(En entornos locales con HTTPS autofirmado, si el navegador muestra aviso de seguridad, pulsa en "Configuración avanzada" $\rightarrow$ "Continuar a la web").*
 
 ---
 
-## ⚙️ Mantenimiento Diario y Backups (`./gmao.sh`)
+## 📱 Paso 4: Instala la App en los Teléfonos Móviles de los Mecánicos
 
-Dentro de la carpeta del programa (`cd GMAO-installer`), ejecuta:
+Para que los técnicos trabajen a pie de máquina escaneando códigos QR:
 
-```bash
-./gmao.sh
-```
+1. **Descarga el instalador APK en el móvil Android**:  
+   👉 **[Descargar GMAOv2.2.4.apk (Última versión oficial)](https://github.com/fromeram/GMAO-installer/raw/main/android/GMAOv2.2.4.apk)**
+2. Abre el archivo en el móvil e instala la app.
+3. En la pantalla inicial, pulsa en **⚙️ "Configurar Servidor"** e introduce la IP de tu servidor (ejemplo: `http://192.168.1.50:8000`).
+4. Pulsa **"Probar Conexión"** y **"Guardar"**. ¡Listo! Inicia sesión con las credenciales del técnico.
 
-- **Opción 6**: Crea una copia de seguridad (backup) completa de todos tus datos en la carpeta `backups/`.
-- **Opción 7**: Restaura una copia de seguridad anterior.
-- **Opción 1**: Comprueba que todos los servicios estén activos.
+---
+
+## 🛠️ Herramientas de Mantenimiento y Backups
+
+- **En Linux / Mac**: Entra en la carpeta del programa (`cd ~/GMAO-installer`) y ejecuta `./gmao.sh` para crear copias de seguridad de la base de datos, restaurar datos o reiniciar servicios.
+- **En Windows**: Haz doble clic en `uninstall.bat` si deseas detener y limpiar los contenedores.
