@@ -1367,6 +1367,123 @@
       .guarantee-box { flex-direction: column; text-align: center; }
     }
     
+    /* Catalog Filters & Lightbox */
+    .catalog-filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      margin-bottom: 28px;
+    }
+    .cat-filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cat-filter-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-white);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .cat-filter-btn.active {
+      background: linear-gradient(135deg, var(--primary-orange), #EA580C);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.35);
+    }
+    .screenshot-card {
+      cursor: pointer;
+      position: relative;
+    }
+    .screen-zoom-hint {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 4px 9px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .screenshot-card:hover .screen-zoom-hint {
+      opacity: 1;
+    }
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(4, 7, 13, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 99999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+    .lightbox-modal.active {
+      display: flex;
+    }
+    .lightbox-wrapper {
+      max-width: 96vw;
+      max-height: 94vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 86vh;
+      border-radius: 10px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      object-fit: contain;
+    }
+    .lightbox-caption {
+      margin-top: 12px;
+      color: #E2E8F0;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lightbox-close:hover {
+      background: var(--primary-orange);
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -1876,74 +1993,164 @@
   <section id="pantallas" class="catalog-section">
     <div class="container">
       <div class="section-title">
-        <span class="section-tag">Catálogo Visual del Software</span>
-        <h2>Capturas reales de la aplicación en funcionamiento</h2>
-        <p>Interfaz limpia, moderna y pensada para que cualquier técnico aprenda a usarla en menos de 5 minutos:</p>
+        <span class="section-tag">Catálogo Visual en Entorno Real</span>
+        <h2>Capturas Reales de la Aplicación en Funcionamiento</h2>
+        <p>Software visual, moderno y robusto. Haz clic en cualquier captura para ampliarla y examinar los detalles técnicos:</p>
+      </div>
+
+      <!-- Filtros de Categoría -->
+      <div class="catalog-filters">
+        <button class="cat-filter-btn active" onclick="filterCatalog('all', this)">🌟 Todas las Pantallas (10)</button>
+        <button class="cat-filter-btn" onclick="filterCatalog('ia', this)">🤖 Inteligencia Artificial (2)</button>
+        <button class="cat-filter-btn" onclick="filterCatalog('planta', this)">🏭 Planta & Mantenimiento (3)</button>
+        <button class="cat-filter-btn" onclick="filterCatalog('almacen', this)">📦 Almacén & Repuestos (4)</button>
+        <button class="cat-filter-btn" onclick="filterCatalog('personal', this)">👥 Personal & Turnos (1)</button>
       </div>
 
       <div class="screenshots-grid">
-        <!-- Captura 1: Inventario General -->
-        <div class="screenshot-card">
+        
+        <!-- 1. Dashboard IA Predictiva -->
+        <div class="screenshot-card" data-category="ia" onclick="openLightbox('img/captura_dashboard_ia_predictivo.jpg', 'Dashboard de Inteligencia Artificial — Distribución de Riesgo y Predicciones de Averías')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_dashboard_ia_predictivo.jpg" alt="Dashboard de Inteligencia Artificial y Salud de Activos">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(168, 85, 247, 0.15); color: #C084FC;">🤖 IA Predictiva</span>
+            <h4>Dashboard de Salud de Activos e IA</h4>
+            <p>Monitoriza las 93 máquinas de la planta en tiempo real. Un gráfico donut segmenta el nivel de riesgo (Crítico, Alto, Medio, Bajo) y calcula la probabilidad matemática de fallo de cada máquina antes de la avería.</p>
+          </div>
+        </div>
+
+        <!-- 2. Asistente Técnico IA (Chat) -->
+        <div class="screenshot-card" data-category="ia" onclick="openLightbox('img/captura_asistente_ia_chat.jpg', 'Asistente IA de Mantenimiento — Chat con IA Local Privada (Ollama)')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_asistente_ia_chat.jpg" alt="Chat Técnico con Inteligencia Artificial Ollama">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8;">💬 Asistente IA 24/7</span>
+            <h4>Chat con Experto en Mantenimiento</h4>
+            <p>Pregunta en lenguaje natural a la IA local integrada (Ollama) cómo solucionar roturas complejas, interpretar patrones de vibración, calcular métricas MTBF/MTTR o planificar intervenciones sin fuga de datos industriales.</p>
+          </div>
+        </div>
+
+        <!-- 3. Estructura de Planta -->
+        <div class="screenshot-card" data-category="planta" onclick="openLightbox('img/captura_info_planta.jpg', 'Información de Planta — Estructura Organizacional Completa (8 Secciones, 27 Líneas, 93 Máquinas)')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_info_planta.jpg" alt="Estructura Organizacional de Planta con Árbol de Activos">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(249, 115, 22, 0.15); color: var(--primary-orange);">🏭 Estructura de Planta</span>
+            <h4>Árbol Jerárquico de Activos</h4>
+            <p>Desglose visual completo de la planta: 8 secciones de fábrica, 27 líneas de producción y 93 máquinas totales. Permite desplegar y colapsar áreas para acceder al historial de averías y ficha técnica de cada activo.</p>
+          </div>
+        </div>
+
+        <!-- 4. Plan Anual Preventivo -->
+        <div class="screenshot-card" data-category="planta" onclick="openLightbox('img/captura_plan_anual_preventivo.jpg', 'Plan de Mantenimiento Anual — 12 Meses y 363 Tareas Programadas')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_plan_anual_preventivo.jpg" alt="Plan Anual de Mantenimiento Preventivo con Mapa de Calor">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">📅 Preventivo Anual</span>
+            <h4>Planificación Anual de 12 Meses</h4>
+            <p>Matriz completa con las 363 tareas preventivas del año. El mapa de calor por colores señala los días con mayor carga técnica para programar paradas de planta programadas y exportar el cronograma a Excel.</p>
+          </div>
+        </div>
+
+        <!-- 5. Mantenimiento Legal y Regulatorio -->
+        <div class="screenshot-card" data-category="planta" onclick="openLightbox('img/captura_mantenimiento_legal.jpg', 'Mantenimiento Legal y Regulatorio — Inspecciones de OCAs y Centros de Transformación')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
+          <div class="screen-img-wrap">
+            <img src="img/captura_mantenimiento_legal.jpg" alt="Mantenimiento Legal y Reglamentario con OCAs">
+          </div>
+          <div class="screen-meta">
+            <span class="screen-tag-badge" style="background: rgba(239, 68, 68, 0.15); color: #F87171;">⚖️ Mantenimiento Legal</span>
+            <h4>Inspecciones Obligatorias & OCAs</h4>
+            <p>Control riguroso de revisiones legales en Centros de Transformación (CT-01, CT-02), líneas de gas y aparatos a presión. Cuenta atrás en días de vigencia, alertas de caducidad y repositorio de actas y certificados en PDF.</p>
+          </div>
+        </div>
+
+        <!-- 6. Inventario General Valorado -->
+        <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_inventario_stock.jpg', 'Inventario General y Stock Valorado — Almacén con Valor en Euros')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
             <img src="img/captura_inventario_stock.jpg" alt="Inventario General y Stock Valorado del GMAO">
           </div>
           <div class="screen-meta">
-            <span class="screen-tag-badge">Inventario & Stock</span>
-            <h4>Inventario General Valorado</h4>
-            <p>Resumen por tipo (mecánico, eléctrico, neumático, limpieza) con valor total inmovilizado en euros (€), filtros instantáneos y exportación a Excel.</p>
+            <span class="screen-tag-badge" style="background: rgba(234, 179, 8, 0.15); color: #FACC15;">💰 Almacén Valorado</span>
+            <h4>Inventario General Valorado en Euros</h4>
+            <p>Resumen de recambios clasificados por especialidad (mecánico, eléctrico, neumático, limpieza) con el capital total inmovilizado en euros (€), buscador instantáneo y trazabilidad en almacenes.</p>
           </div>
         </div>
 
-        <!-- Captura 2: Comparador de Precios -->
-        <div class="screenshot-card">
+        <!-- 7. Comparador de Precios Multirproveedor -->
+        <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_comparador_precios.jpg', 'Comparador de Precios con Múltiples Suministros Industriales')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
             <img src="img/captura_comparador_precios.jpg" alt="Comparador de Precios con Múltiples Proveedores">
           </div>
           <div class="screen-meta">
-            <span class="screen-tag-badge">Ahorro en Compras</span>
-            <h4>Comparador de Múltiples Proveedores</h4>
-            <p>Detecta el ahorro total potencial y el porcentaje de ahorro comparando ofertas de diferentes suministros industriales para cada repuesto.</p>
+            <span class="screen-tag-badge" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">🏷️ Ahorro en Compras</span>
+            <h4>Comparador de Proveedores por Repuesto</h4>
+            <p>Calcula automáticamente el ahorro potencial en euros y porcentaje comparando ofertas y tarifas de suministros industriales para cada pieza. Asegura comprar siempre al precio más rentable.</p>
           </div>
         </div>
 
-        <!-- Captura 3: Productos Bajo Stock -->
-        <div class="screenshot-card">
+        <!-- 8. Productos Bajo Stock -->
+        <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_stock_bajo.jpg', 'Alertas de Repuestos con Stock Bajo')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
             <img src="img/captura_stock_bajo.jpg" alt="Alerta de Productos con Bajo Stock">
           </div>
           <div class="screen-meta">
-            <span class="screen-tag-badge">Alertas Automáticas</span>
-            <h4>Productos con Bajo Stock</h4>
-            <p>Avisos automáticos cuando un recambio crítico baja del umbral mínimo de seguridad por almacén y proveedor asignado.</p>
+            <span class="screen-tag-badge" style="background: rgba(239, 68, 68, 0.15); color: #F87171;">⚠️ Stock Crítico</span>
+            <h4>Alertas Automáticas de Rotura de Stock</h4>
+            <p>Avisos automáticos cuando un repuesto desciende por debajo del umbral mínimo de seguridad por almacén y proveedor asignado, evitando paradas de máquina por falta de recambios.</p>
           </div>
         </div>
 
-        <!-- Captura 4: Reporte de Auditoría -->
-        <div class="screenshot-card">
+        <!-- 9. Reporte de Auditoría e Inventario a Medida -->
+        <div class="screenshot-card" data-category="almacen" onclick="openLightbox('img/captura_reporte_auditoria.jpg', 'Reporte de Inventario y Auditoría con Fórmulas Excel')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
             <img src="img/captura_reporte_auditoria.jpg" alt="Reporte de Inventario por Tipo y Auditoría">
           </div>
           <div class="screen-meta">
-            <span class="screen-tag-badge">Ajustes de Contabilidad</span>
-            <h4>Reporte de Inventario & Exportación a Medida</h4>
-            <p>Selecciona los productos que desees y el sistema suma en vivo la cantidad y el importe acumulado según el coste facturado por los proveedores, exportando a Excel con fórmulas para ajustes contables precisos.</p>
+            <span class="screen-tag-badge" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8;">📊 Ajustes de Contabilidad</span>
+            <h4>Auditoría & Exportación a Medida</h4>
+            <p>Selecciona los productos y almacenes que desees y el sistema suma en tiempo real la cantidad y el importe acumulado según el coste real facturado, exportando a Excel con fórmulas nativas.</p>
           </div>
         </div>
 
-        <!-- Captura 5: Calendario de Vacaciones y Turnos -->
-        <div class="screenshot-card">
+        <!-- 10. Calendario Perpetuo de Vacaciones y Turnos -->
+        <div class="screenshot-card" data-category="personal" onclick="openLightbox('img/captura_calendario_vacaciones.jpg', 'Calendario Perpetuo de Turnos y Vacaciones')">
+          <div class="screen-zoom-hint">🔍 Ampliar</div>
           <div class="screen-img-wrap">
             <img src="img/captura_calendario_vacaciones.jpg" alt="Calendario Perpetuo de Vacaciones y Turnos">
           </div>
           <div class="screen-meta">
-            <span class="screen-tag-badge">Gestión de Personal</span>
+            <span class="screen-tag-badge" style="background: rgba(168, 85, 247, 0.15); color: #C084FC;">👥 Turnos & Plantilla</span>
             <h4>Calendario Perpetuo & Vacaciones</h4>
-            <p>Cuadrante visual con códigos de turno (Mañana, Tarde, Noche, Jornada Partida y Libre) y estados de solicitud de vacaciones (Solicitado, Aprobado, Rechazado).</p>
+            <p>Cuadrante visual perpetuo con los 5 códigos de turno oficiales de fábrica (Mañana, Tarde, Noche, Jornada Partida y Libre) y flujo de solicitud y aprobación de vacaciones de los técnicos.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+    <div class="lightbox-wrapper" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img id="lightboxImg" class="lightbox-img" src="" alt="Captura ampliada">
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+  </div>
 
   <!-- Catálogo Completo de Características del GMAO -->
   <section id="catalogo">
@@ -2542,6 +2749,48 @@
       }
     }
     
+    // =========================================================================
+    // CATÁLOGO DE PANTALLAS: FILTROS Y LIGHTBOX AMPLIABLE
+    // =========================================================================
+    function filterCatalog(category, btn) {
+      document.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.screenshot-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function openLightbox(src, caption) {
+      const modal = document.getElementById('lightboxModal');
+      const img = document.getElementById('lightboxImg');
+      const cap = document.getElementById('lightboxCaption');
+      if (modal && img) {
+        img.src = src;
+        if (cap) cap.innerText = caption || '';
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightboxModal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
   </script>
 </body>
 </html>
