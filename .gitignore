@@ -1,26 +1,33 @@
 # Entorno y Secretos
 .env
 backend/.env
+frontend/.env
 *.env
 .env.*
 !.env.example
-!frontend/.env
 
 # Conexiones remotas y configuración del IDE
 sftp.json
+*sftp*.json
 .vscode/
 .idea/
 .DS_Store
+*.DS_Store
+Thumbs.db
 
 # Certificados SSL privados
 nginx/certs/*.key
 nginx/certs/*.crt
 !nginx/certs/ssl-params.conf
 
-# Copias de seguridad y volcados de BD
+# Copias de seguridad, bases SQLite y volcados de BD
 backups/
 *.sql.gz
 *.bak
+*.sqlite3
+*.sqlite
+*.db
+backend/storage/
 
 # Python y entornos virtuales
 __pycache__/
@@ -35,22 +42,23 @@ backend/venv/
 node_modules/
 frontend/node_modules/
 frontend/build/
+frontend/dist/
 dist/
 
 # Logs y temporales
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 app.log
 scratch/
+scratch_*
+backend/scheduler_config.json
 
-# Claves privadas de firma criptográfica
+# Claves privadas de firma criptográfica y scripts privados
 *.pem
 private_key.*
 licensing/private_key.pem
-
-# Código fuente cerrado (distribuido mediante imágenes GHCR pre-compiladas)
-backend/
-frontend/
-src/
-alembic/
-*.py
-node_modules/
+scripts/licensing/private_key.pem
+scripts/
+Generador_Licencias_GMAO.command

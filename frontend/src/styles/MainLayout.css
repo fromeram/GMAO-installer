@@ -1,0 +1,125 @@
+/* src/styles/MainLayout.css */
+.gmao-main-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Estilos para el sidebar */
+.gmao-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  z-index: 1000;
+  transition: width 0.3s ease;
+  background-color: white;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+}
+
+.gmao-sidebar.collapsed {
+  width: 80px;
+}
+
+/* Estilos para el contenido principal */
+.gmao-main-content {
+  flex: 1;
+  margin-left: 200px;
+  transition: margin-left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Previene que el contenido se desborde */
+}
+
+.gmao-main-content.sidebar-collapsed {
+  margin-left: 80px;
+}
+
+/* Estilos para el header */
+.gmao-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 64px;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-button {
+  margin-right: 16px;
+}
+
+.back-button {
+  margin-right: 16px;
+}
+
+.page-title {
+  margin: 0 !important;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-dropdown {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+.user-dropdown span {
+  margin-left: 8px;
+}
+
+/* Estilos para el contenido */
+.gmao-content {
+  flex: 1;
+  padding: 24px;
+  background-color: #f0f2f5;
+  overflow: auto;
+}
+
+/* Ajuste importante para prevenir que los componentes internos se superpongan al sidebar */
+@media screen and (max-width: 768px) {
+  .gmao-main-content {
+    margin-left: 0;
+  }
+  
+  .gmao-sidebar {
+    width: 0;
+    box-shadow: none;
+  }
+  
+  .gmao-sidebar.open {
+    width: 200px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  }
+}
+/* Forzar el avatar a ser verde siempre */
+.ant-avatar {
+  background-color: #52c41a !important;
+}
+
+/* Alternativa más específica si la anterior afecta otros avatars */
+.user-avatar-green {
+  background-color: #52c41a !important;
+}
+
+/* Para el dropdown del usuario */
+.user-dropdown-container:hover {
+  background-color: #e6f7ff !important;
+  border-color: #91d5ff !important;
+}

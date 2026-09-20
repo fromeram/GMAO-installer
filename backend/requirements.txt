@@ -1,0 +1,20 @@
+# requirements.txt
+fastapi==0.95.1
+uvicorn==0.22.0
+SQLAlchemy==1.4.46
+psycopg2-binary==2.9.6
+python-jose==3.3.0
+passlib==1.7.4
+bcrypt==4.0.1
+python-dotenv==1.0.0
+alembic==1.13.1
+APScheduler==3.10.1
+python-dateutil==2.8.2
+aiohttp==3.9.3
+aiofiles==23.2.1
+Pillow==10.2.0  # Para procesamiento de imágenes
+python-multipart==0.0.7
+pydantic>=1.10.0,<2.0.0
+werkzeug==2.3.7
+pytz==2023.3.post1
+numpy

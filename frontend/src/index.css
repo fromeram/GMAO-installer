@@ -1,0 +1,15 @@
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #faf8e1; /* Beige claro */
+}
+/* Forzar alineación izquierda en cabeceras de día de semana del calendario Antd */
+.ant-picker-calendar thead th {
+  text-align: left !important;
+  padding-left: 8px; /* Ajusta si necesitas más/menos espacio a la izquierda */
+}

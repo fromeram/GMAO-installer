@@ -1,0 +1,295 @@
+/* src/styles/Mobile.css - Estilos específicos para dispositivos móviles */
+
+/* Aplicar estos estilos solo en dispositivos con ancho menor a 768px */
+@media (max-width: 767px) {
+  /* Resets y ajustes generales */
+  * {
+    box-sizing: border-box !important;
+    max-width: 100vw !important;
+  }
+  
+  html, body {
+    overflow-x: hidden !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 14px !important;
+  }
+  
+  /* Layout principal */
+  .page-container {
+    padding: 5px !important;
+    margin: 0 !important;
+    width: 100% !important; /* Cambiado de 100vw a 100% */
+    max-width: 100% !important; /* Cambiado de 100vw a 100% */
+    overflow-x: auto !important; /* Cambiado a auto en lugar de hidden */
+  }
+  
+  .ant-layout {
+    width: 100% !important;
+    overflow-x: auto !important; /* Cambiado a auto en lugar de hidden */
+  }
+  
+  /* Header y título */
+  .page-header {
+    margin-bottom: 8px !important;
+    padding: 5px 0 !important;
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  .page-title {
+    font-size: 18px !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    width: 100% !important;
+  }
+  
+  /* Contenedores de contenido */
+  .ant-layout-content {
+    padding: 5px !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Cards */
+  .ant-card {
+    width: 100% !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .ant-card-body {
+    padding: 8px !important;
+  }
+  
+  .ant-card-head {
+    padding: 0 8px !important;
+    min-height: 36px !important;
+  }
+  
+  .ant-card-head-title {
+    padding: 8px 0 !important;
+    font-size: 14px !important;
+  }
+  
+  /* Tabs más compactas */
+  .ant-tabs-nav {
+    margin-bottom: 8px !important;
+  }
+  
+  .ant-tabs-tab {
+    padding: 5px 10px !important;
+    margin: 0 2px 0 0 !important;
+    font-size: 12px !important;
+  }
+  
+  .ant-tabs-tab-btn {
+    font-size: 12px !important;
+  }
+  
+  /* Descripciones más compactas */
+  .ant-descriptions-title {
+    font-size: 14px !important;
+  }
+  
+  .ant-descriptions-item-label,
+  .ant-descriptions-item-content {
+    padding: 6px 8px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Estadísticas más pequeñas */
+  .ant-statistic {
+    margin-bottom: 5px !important;
+  }
+  
+  .ant-statistic-title {
+    font-size: 12px !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .ant-statistic-content {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Tablas con scroll horizontal */
+  .ant-table-wrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+  }
+  
+  .ant-table {
+    font-size: 12px !important;
+  }
+  
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 6px 8px !important;
+    white-space: nowrap !important;
+  }
+  
+  /* Espaciado de filas más compacto */
+  .ant-row {
+    margin-right: -4px !important;
+    margin-left: -4px !important;
+  }
+  
+  .ant-col {
+    padding-right: 4px !important;
+    padding-left: 4px !important;
+  }
+  
+  /* Forms más compactos */
+  .ant-form-item {
+    margin-bottom: 8px !important;
+  }
+  
+  .ant-form-item-label {
+    padding-bottom: 4px !important;
+  }
+  
+  .ant-form-item-label > label {
+    font-size: 12px !important;
+  }
+  
+  /* Botones más pequeños */
+  .ant-btn {
+    padding: 0 8px !important;
+    height: 28px !important;
+    font-size: 12px !important;
+  }
+  
+  .ant-btn-sm {
+    padding: 0 4px !important;
+    height: 22px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Input más pequeños */
+  .ant-input,
+  .ant-input-number,
+  .ant-select {
+    height: 28px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Alert más compactos */
+  .ant-alert {
+    padding: 5px 8px !important;
+    font-size: 12px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  /* Modal más compacto */
+  .ant-modal {
+    width: 95vw !important;
+    margin: 8px auto !important;
+  }
+  
+  .ant-modal-content {
+    padding: 8px !important;
+  }
+  
+  .ant-modal-header {
+    padding: 8px !important;
+  }
+  
+  .ant-modal-title {
+    font-size: 14px !important;
+  }
+  
+  .ant-modal-body {
+    padding: 8px !important;
+    font-size: 12px !important;
+  }
+  
+  .ant-modal-footer {
+    padding: 8px !important;
+  }
+  
+  /* Tags más compactos */
+  .ant-tag {
+    padding: 0 4px !important;
+    font-size: 10px !important;
+    margin-right: 4px !important;
+  }
+  
+  /* Space más compacto */
+  .ant-space {
+    gap: 4px !important;
+  }
+  
+  /* Drawer más compacto */
+  .ant-drawer-header {
+    padding: 8px 12px !important;
+  }
+  
+  .ant-drawer-title {
+    font-size: 14px !important;
+  }
+  
+  .ant-drawer-body {
+    padding: 8px !important;
+  }
+  
+  /* Spinner más pequeño */
+  .ant-spin {
+    font-size: 12px !important;
+  }
+  
+  /* Árboles más compactos */
+  .ant-tree {
+    font-size: 12px !important;
+  }
+  
+  .ant-tree-node-content-wrapper {
+    padding: 0 4px !important;
+  }
+  
+  /* Dropdown más compacto */
+  .ant-dropdown-menu-item {
+    padding: 4px 8px !important;
+    font-size: 12px !important;
+  }
+  
+  /* Padding lateral específico para MobileLayout */
+  .mobile-content-padding {
+    padding: 0 5px !important;
+  }
+  
+  /* Tipografía reducida */
+  h1, h2, h3, h4, h5 {
+    margin-bottom: 0.5em !important;
+  }
+  
+  h1 { font-size: 20px !important; }
+  h2 { font-size: 18px !important; }
+  h3 { font-size: 16px !important; }
+  h4 { font-size: 14px !important; }
+  h5 { font-size: 12px !important; }
+  
+  p {
+    font-size: 12px !important;
+    margin-bottom: 0.5em !important;
+  }
+  
+  /* Ocultar elementos en móvil */
+  .mobile-hidden {
+    display: none !important;
+  }
+  
+  /* Hacer visibles elementos solo en móvil */
+  .mobile-only {
+    display: block !important;
+  }
+}
+
+/* Por defecto, los elementos mobile-only están ocultos */
+.mobile-only {
+  display: none !important;
+}

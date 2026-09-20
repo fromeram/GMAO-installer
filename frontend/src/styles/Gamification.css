@@ -1,0 +1,249 @@
+/* frontend/src/pages/Gamification.css */
+.gamification-container {
+ padding: 24px;
+ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+ min-height: 100vh;
+}
+
+.gamification-container .ant-card {
+ border-radius: 12px;
+ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+ transition: all 0.3s ease;
+}
+
+.gamification-container .ant-card:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Tarjetas de estadísticas principales */
+.stat-card {
+ background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+ border: none;
+ height: 120px;
+}
+
+.stat-card.level-card {
+ background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+}
+
+.stat-card.points-card {
+ background: linear-gradient(135deg, #d4edda 0%, #a8e6cf 100%);
+}
+
+.stat-card.rank-card {
+ background: linear-gradient(135deg, #cce5ff 0%, #a6d5fa 100%);
+}
+
+.stat-card.streak-card {
+ background: linear-gradient(135deg, #ffe6e6 0%, #ffb3ba 100%);
+}
+
+.stat-content {
+ display: flex;
+ align-items: center;
+ height: 100%;
+}
+
+.stat-icon {
+ margin-right: 16px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ width: 60px;
+ height: 60px;
+ border-radius: 50%;
+ background: rgba(255, 255, 255, 0.3);
+}
+
+.stat-info {
+ flex: 1;
+}
+
+/* Grid de logros */
+.achievements-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+ gap: 12px;
+ margin-bottom: 16px;
+}
+
+.achievement-badge {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ width: 80px;
+ height: 80px;
+ border: 2px solid;
+ border-radius: 12px;
+ cursor: pointer;
+ transition: all 0.3s ease;
+ position: relative;
+ background: #ffffff;
+}
+
+.achievement-badge.earned {
+ background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+ border-color: #52c41a;
+}
+
+.achievement-badge.locked {
+ background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+ border-color: #d9d9d9;
+ opacity: 0.6;
+}
+
+.achievement-badge:hover {
+ transform: scale(1.1);
+ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.achievement-badge.earned:hover {
+ box-shadow: 0 4px 12px rgba(82, 196, 26, 0.3);
+}
+
+.achievement-icon {
+ margin-bottom: 4px;
+}
+
+.achievement-points {
+ position: absolute;
+ top: -6px;
+ right: -6px;
+ background: #52c41a;
+ color: white;
+ font-size: 10px;
+ font-weight: bold;
+ padding: 2px 4px;
+ border-radius: 8px;
+ min-width: 20px;
+ text-align: center;
+}
+
+/* Tarjetas de logros en modal */
+.achievement-card {
+ transition: all 0.3s ease;
+ cursor: pointer;
+}
+
+.achievement-card.earned {
+ background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.achievement-card.locked {
+ background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+.achievement-card:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Tabla de ranking */
+.ant-table-tbody > tr:nth-child(1) {
+ background: linear-gradient(90deg, #fff3cd, #ffffff);
+}
+
+.ant-table-tbody > tr:nth-child(2) {
+ background: linear-gradient(90deg, #e8e8e8, #ffffff);
+}
+
+.ant-table-tbody > tr:nth-child(3) {
+ background: linear-gradient(90deg, #f4e4bc, #ffffff);
+}
+
+/* Animaciones para notificaciones */
+@keyframes levelUp {
+ 0% { transform: scale(1); }
+ 50% { transform: scale(1.2); }
+ 100% { transform: scale(1); }
+}
+
+@keyframes pointsGain {
+ 0% { opacity: 0; transform: translateY(20px); }
+ 100% { opacity: 1; transform: translateY(0); }
+}
+
+.level-up-animation {
+ animation: levelUp 0.6s ease-in-out;
+}
+
+.points-gain-animation {
+ animation: pointsGain 0.4s ease-out;
+}
+
+/* Timeline personalizada */
+.ant-timeline-item-content {
+ margin-left: 20px;
+}
+
+/* Badges y tags */
+.ant-tag {
+ border-radius: 8px;
+ font-weight: 500;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+ .gamification-container {
+   padding: 16px;
+ }
+ 
+ .achievements-grid {
+   grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+   gap: 8px;
+ }
+ 
+ .achievement-badge {
+   width: 60px;
+   height: 60px;
+ }
+ 
+ .stat-card {
+   height: auto;
+   padding: 16px;
+ }
+ 
+ .stat-content {
+   flex-direction: column;
+   text-align: center;
+ }
+ 
+ .stat-icon {
+   margin-right: 0;
+   margin-bottom: 8px;
+ }
+}
+
+/* Efectos de brillo para elementos especiales */
+.legendary-glow {
+ animation: legendary-pulse 2s infinite;
+}
+
+@keyframes legendary-pulse {
+ 0% { box-shadow: 0 0 5px rgba(250, 140, 22, 0.5); }
+ 50% { box-shadow: 0 0 20px rgba(250, 140, 22, 0.8); }
+ 100% { box-shadow: 0 0 5px rgba(250, 140, 22, 0.5); }
+}
+
+.epic-glow {
+ animation: epic-pulse 2s infinite;
+}
+
+@keyframes epic-pulse {
+ 0% { box-shadow: 0 0 5px rgba(114, 46, 209, 0.5); }
+ 50% { box-shadow: 0 0 15px rgba(114, 46, 209, 0.7); }
+ 100% { box-shadow: 0 0 5px rgba(114, 46, 209, 0.5); }
+}
+
+/* Indicadores de progreso personalizados */
+.custom-progress .ant-progress-bg {
+ background: linear-gradient(90deg, #52c41a, #faad14);
+}
+
+/* Tooltips mejorados */
+.ant-tooltip-inner {
+ border-radius: 8px;
+ padding: 12px;
+}

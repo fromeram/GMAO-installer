@@ -1,0 +1,89 @@
+# SOLUCIÓN SIMPLE: Remover temporalmente la columna problemática
+# En src/models/audit_log.py:
+
+from sqlalchemy import Column, Integer, String, DateTime, Text, JSON, ForeignKey
+from sqlalchemy.orm import relationship
+from datetime import datetime
+from .base import Base
+
+class AuditLog(Base):
+    __tablename__ = "audit_logs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    
+    # ¿QUÉ acción se realizó?
+    action = Column(String(50), nullable=False, index=True)
+    entity_type = Column(String(100), nullable=False, index=True)
+    entity_id = Column(Integer, index=True)
+    
+    # ¿QUIÉN realizó la acción?
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    user_name = Column(String(255), nullable=False)
+    user_role = Column(String(100))
+    
+    # ¿CUÁNDO ocurrió?
+    timestamp = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
+    
+    # ¿DESDE DÓNDE?
+    ip_address = Column(String(45))
+    user_agent = Column(Text)
+    
+    # ¿QUÉ cambió exactamente?
+    old_values = Column(JSON)
+    new_values = Column(JSON)
+    changes_summary = Column(Text)
+    
+    # Contexto adicional
+    module = Column(String(100), index=True)
+    severity = Column(String(20), default='MEDIUM', index=True)
+    notes = Column(Text)
+    session_id = Column(String(255))
+    
+    # TEMPORALMENTE COMENTAR ESTA LÍNEA HASTA QUE FUNCIONE TODO LO DEMÁS
+    # extra_metadata = Column('metadata', JSON)
+    
+    # Relación con el usuario
+    user = relationship("User", back_populates="audit_logs")
+    
+    def __repr__(self):
+        return f"<AuditLog(id={self.id}, action={self.action}, entity={self.entity_type}:{self.entity_id}, user={self.user_name}, timestamp={self.timestamp})>"
+    
+    @property
+    def action_description(self):
+        """Descripción legible de la acción"""
+        action_descriptions = {
+            'CREATE': 'Creó',
+            'UPDATE': 'Modificó',
+            'DELETE': 'Eliminó',
+            'LOGIN': 'Inició sesión',
+            'LOGOUT': 'Cerró sesión',
+            'VIEW': 'Consultó',
+            'EXPORT': 'Exportó',
+            'COMPLETE': 'Completó',
+            'ASSIGN': 'Asignó',
+            'STATUS_CHANGE': 'Cambió estado'
+        }
+        return action_descriptions.get(self.action, self.action)
+    
+    @property
+    def severity_icon(self):
+        """Icono para mostrar en la UI según severidad"""
+        icons = {
+            'LOW': '🟢',
+            'MEDIUM': '🟡', 
+            'HIGH': '🟠',
+            'CRITICAL': '🔴'
+        }
+        return icons.get(self.severity, '⚪')
+    
+    def get_readable_summary(self):
+        """Genera un resumen legible de la acción"""
+        if self.changes_summary:
+            return self.changes_summary
+        
+        base_msg = f"{self.user_name} {self.action_description.lower()} {self.entity_type}"
+        
+        if self.entity_id:
+            base_msg += f" (ID: {self.entity_id})"
+        
+        return base_msg

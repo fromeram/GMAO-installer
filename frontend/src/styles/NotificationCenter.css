@@ -1,0 +1,212 @@
+/* src/styles/NotificationCenter.css */
+
+/* Botón flotante de notificaciones */
+.notification-float-button {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  z-index: 1000 !important;
+}
+
+/* Animación de pulso para notificaciones pendientes */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(24, 144, 255, 0.6);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1);
+  }
+}
+
+.notification-float-button.has-notifications {
+  animation: pulse 2s infinite;
+}
+
+/* Notificación inicial grande */
+.initial-notification-popup {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Estilos para las tarjetas de notificación */
+.notification-card {
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.notification-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Indicadores de severidad */
+.notification-severity-high {
+  border-left: 4px solid #ff4d4f !important;
+}
+
+.notification-severity-medium {
+  border-left: 4px solid #faad14 !important;
+}
+
+.notification-severity-low {
+  border-left: 4px solid #1890ff !important;
+}
+
+/* Badge personalizado */
+.notification-badge {
+  background-color: #ff4d4f !important;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Modal de notificaciones */
+.notification-modal .ant-modal-header {
+  background-color: #f0f2f5;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+.notification-modal .ant-modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* Tabs personalizados */
+.notification-tabs .ant-tabs-tab {
+  font-size: 16px;
+  padding: 12px 20px;
+}
+
+.notification-tabs .ant-badge {
+  margin-left: 8px;
+}
+
+/* Efectos de hover para botones de acción */
+.notification-action-button {
+  transition: all 0.3s ease;
+}
+
+.notification-action-button:hover {
+  transform: scale(1.05);
+}
+
+/* Estilos para diferentes tipos de notificación */
+.notification-type-maintenance {
+  background-color: rgba(82, 196, 26, 0.05);
+}
+
+.notification-type-communication {
+  background-color: rgba(24, 144, 255, 0.05);
+}
+
+.notification-type-alert {
+  background-color: rgba(255, 77, 79, 0.05);
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+  .notification-float-button {
+    width: 50px !important;
+    height: 50px !important;
+    bottom: 15px !important;
+    right: 15px !important;
+  }
+  
+  .notification-modal {
+    width: 95vw !important;
+  }
+  
+  .notification-card .ant-col-16 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .notification-card .ant-col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* Efecto de entrada para nuevas notificaciones */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notification-new {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Estilo para el popup inicial */
+.ant-notification-notice.initial-notification-popup {
+  background-color: #fff;
+  border: 2px solid #ff4d4f;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.ant-notification-notice.initial-notification-popup .ant-notification-notice-message {
+  font-size: 18px;
+  font-weight: bold;
+  color: #262626;
+  margin-bottom: 12px;
+}
+
+.ant-notification-notice.initial-notification-popup .ant-notification-notice-description {
+  font-size: 14px;
+  color: #595959;
+}
+
+/* Indicador visual de notificación no leída */
+.notification-unread {
+  position: relative;
+}
+
+.notification-unread::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  width: 6px;
+  height: 6px;
+  background-color: #ff4d4f;
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}

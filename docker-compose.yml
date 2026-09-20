@@ -44,6 +44,9 @@ services:
     networks:
       - default
     volumes:
+      - ./backend/src:/app/src
+      - ./alembic:/app/alembic
+      - ./alembic.ini:/app/alembic.ini
       - gmao-attachments:/app/src/storage/documents/attachments
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
