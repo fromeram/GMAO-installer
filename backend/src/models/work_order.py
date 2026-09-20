@@ -58,7 +58,6 @@ class WorkOrder(Base):
     # Este campo es la columna física en la base de datos que conecta con TaskList.
     task_list_id = Column(Integer, ForeignKey("task_lists.id"), nullable=True)
     generated_from_maintenance_id = Column(Integer, ForeignKey("maintenances.id"), nullable=True, index=True)
-    repuesto_id = Column(Integer, ForeignKey("inventory.id"), nullable=True)
     failure_code_id = Column(Integer, ForeignKey("failure_codes.id"), nullable=True)
     cause_code_id = Column(Integer, ForeignKey("cause_codes.id"), nullable=True)
     remedy_code_id = Column(Integer, ForeignKey("remedy_codes.id"), nullable=True)
@@ -88,7 +87,6 @@ class WorkOrder(Base):
     line = relationship("Line")
     machine_obj = relationship("Machine", foreign_keys=[machine_id])
     assigned_to = relationship("User", foreign_keys=[assigned_to_id])
-    repuesto = relationship("Inventory")
     failure_code = relationship("FailureCode", back_populates="work_orders")
     cause_code = relationship("CauseCode", back_populates="work_orders")
     remedy_code = relationship("RemedyCode", back_populates="work_orders")

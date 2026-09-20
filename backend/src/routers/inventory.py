@@ -751,9 +751,10 @@ def delete_producto(
             detail="No se puede eliminar el producto porque está asociado a máquinas"
         )
     
+    from src.models.work_order_material import WorkOrderMaterial
     # Comprobar si está en uso en órdenes de trabajo
-    work_orders = db.query(WorkOrder).filter(
-        WorkOrder.repuesto_id == producto_id
+    work_orders = db.query(WorkOrderMaterial).filter(
+        WorkOrderMaterial.inventory_id == producto_id
     ).first()
     
     if work_orders:
