@@ -71,9 +71,11 @@ app.add_middleware(LicenseEnforcementMiddleware)
 # Nginx elimina "/api/" de TODAS las rutas con "proxy_pass http://backend:8000/;"
 # Algunos endpoints del frontend tienen /api/ duplicado, así que registramos ambas versiones
 
-# 1. Routers de IA (SIN /api/ porque Nginx lo elimina)
+# 1. Routers de IA (con y sin prefijo /api/ para llamadas internas de scheduler y compatibilidad)
 app.include_router(dashboard_ai_router, prefix="/ai/dashboard", tags=["AI Dashboard"])
 app.include_router(ai_router, prefix="/ai", tags=["AI"])
+app.include_router(dashboard_ai_router, prefix="/api/ai/dashboard", tags=["AI Dashboard - Compat /api/ai/*"])
+app.include_router(ai_router, prefix="/api/ai", tags=["AI - Compat /api/ai/*"])
 
 # 2. Otros routers - DOBLE REGISTRO para compatibilidad con frontend
 # Versión sin /api/ (para URLs correctas)

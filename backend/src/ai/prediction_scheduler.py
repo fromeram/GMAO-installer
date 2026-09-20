@@ -457,8 +457,7 @@ def get_real_machines_needing_analysis(self, db: Session, ai_config: dict):
                    COUNT(CASE WHEN wo.work_type = 'Correctivo' THEN 1 END) as total_fallos
             FROM machines m
             INNER JOIN work_orders wo ON m.id = wo.machine_id
-            WHERE wo.created_at >= NOW() - INTERVAL '90 days'
-            AND wo.status = 'Cerrada'
+            WHERE wo.status = 'Cerrada'
             AND m.section_id IN :section_ids
             GROUP BY m.id, m.nombre, m.section_id
             HAVING COUNT(wo.id) >= 2 

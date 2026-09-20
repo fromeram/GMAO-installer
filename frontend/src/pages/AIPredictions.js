@@ -359,13 +359,16 @@ const AIPredictions = () => {
       
       setTimeout(() => {
         loadRealData();
-      }, 30000);
+      }, 5000);
+      setTimeout(() => {
+        loadRealData();
+      }, 20000);
       
     } catch (error) {
       console.error('Error en predicciones en lote:', error);
       notification.error({
         message: 'Error',
-        description: 'No se pudieron iniciar las predicciones en lote'
+        description: error.response?.data?.detail || 'No se pudieron iniciar las predicciones en lote'
       });
     } finally {
       setBatchLoading(false);

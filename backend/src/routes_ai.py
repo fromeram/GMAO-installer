@@ -216,8 +216,7 @@ class EnhancedMachineAnalyzer:
                 COUNT(CASE WHEN created_at >= NOW() - INTERVAL '30 days' AND work_type = 'Correctivo' THEN 1 END) as fallos_ultimos_30,
                 COUNT(CASE WHEN created_at BETWEEN NOW() - INTERVAL '60 days' AND NOW() - INTERVAL '30 days' AND work_type = 'Correctivo' THEN 1 END) as fallos_anteriores_30
             FROM work_orders 
-            WHERE machine_id = :machine_id 
-            AND created_at >= NOW() - INTERVAL '6 months'
+            WHERE machine_id = :machine_id
         """)
         
         result = self.db.execute(query, {"machine_id": machine_id}).fetchone()
@@ -262,7 +261,6 @@ class EnhancedMachineAnalyzer:
                     ROUND(AVG(wo.downtime_hours), 2) as avg_downtime
                 FROM machines m
                 LEFT JOIN work_orders wo ON m.id = wo.machine_id 
-                    AND wo.created_at >= NOW() - INTERVAL '3 months'
                 WHERE m.section_id = :section_id AND m.id != :machine_id
                 GROUP BY m.id, m.nombre, m.criticidad
                 HAVING COUNT(wo.id) > 0
@@ -540,10 +538,9 @@ async def force_completely_real_prediction_cycle(
             SELECT DISTINCT m.id, m.nombre, m.section_id, COUNT(wo.id) as orden_count
             FROM machines m
             INNER JOIN work_orders wo ON m.id = wo.machine_id
-            WHERE wo.created_at >= NOW() - INTERVAL '3 months'
-            AND (:section_id IS NULL OR m.section_id = :section_id)
+            WHERE (:section_id IS NULL OR m.section_id = :section_id)
             GROUP BY m.id, m.nombre, m.section_id
-            HAVING COUNT(wo.id) >= 2
+            HAVING COUNT(wo.id) >= 1
             ORDER BY COUNT(wo.id) DESC
             LIMIT :max_machines
         """)
@@ -971,7 +968,7 @@ async def get_real_plant_overview(
 ):
     """Resumen general REAL de toda la planta usando SOLO datos reales"""
     try:
-        # ✅ ESTADÍSTICAS GENERALES REALES
+        # ✅ ESTADÍSTICAS GENERALES REALES (Últimos 30 días con fallback a histórico)
         overview_query = text("""
             SELECT 
                 COUNT(DISTINCT m.id) as total_maquinas,
@@ -990,6 +987,25 @@ async def get_real_plant_overview(
         """)
         
         overview = db.execute(overview_query).fetchone()
+        
+        # Fallback a histórico si no hay órdenes en los últimos 30 días
+        if not overview or (overview.ordenes_ultimo_mes or 0) == 0:
+            overview_query_all = text("""
+                SELECT 
+                    COUNT(DISTINCT m.id) as total_maquinas,
+                    COUNT(DISTINCT s.id) as total_secciones,
+                    COUNT(wo.id) as ordenes_ultimo_mes,
+                    COUNT(CASE WHEN wo.work_type = 'Correctivo' THEN 1 END) as fallos_ultimo_mes,
+                    COUNT(CASE WHEN wo.work_type = 'Preventivo' THEN 1 END) as preventivos_ultimo_mes,
+                    ROUND(
+                        COUNT(CASE WHEN wo.work_type = 'Correctivo' THEN 1 END) * 100.0 / 
+                        NULLIF(COUNT(wo.id), 0), 1
+                    ) as porcentaje_correctivo_planta
+                FROM machines m
+                LEFT JOIN sections s ON m.section_id = s.id
+                LEFT JOIN work_orders wo ON m.id = wo.machine_id
+            """)
+            overview = db.execute(overview_query_all).fetchone()
         
         # ✅ SECCIONES CON MÁS PROBLEMAS REALES
         problematic_sections_query = text("""
@@ -1012,6 +1028,25 @@ async def get_real_plant_overview(
         """)
         
         problematic_sections = db.execute(problematic_sections_query).fetchall()
+        if not problematic_sections:
+            problematic_sections_all = text("""
+                SELECT 
+                    s.nombre as seccion,
+                    COUNT(CASE WHEN wo.work_type = 'Correctivo' THEN 1 END) as fallos,
+                    COUNT(wo.id) as total_ordenes,
+                    ROUND(
+                        COUNT(CASE WHEN wo.work_type = 'Correctivo' THEN 1 END) * 100.0 / 
+                        NULLIF(COUNT(wo.id), 0), 1
+                    ) as porcentaje_correctivo
+                FROM sections s
+                LEFT JOIN machines m ON s.id = m.section_id
+                LEFT JOIN work_orders wo ON m.id = wo.machine_id 
+                GROUP BY s.id, s.nombre
+                HAVING COUNT(wo.id) > 0
+                ORDER BY porcentaje_correctivo DESC
+                LIMIT 5
+            """)
+            problematic_sections = db.execute(problematic_sections_all).fetchall()
         
         # ✅ MÁQUINAS MÁS PROBLEMÁTICAS CON ID REAL
         top_problematic_machines_query = text("""
@@ -1032,6 +1067,23 @@ async def get_real_plant_overview(
         """)
         
         top_problematic = db.execute(top_problematic_machines_query).fetchall()
+        if not top_problematic:
+            top_problematic_all = text("""
+                SELECT 
+                    m.id,
+                    m.nombre,
+                    s.nombre as seccion,
+                    m.criticidad,
+                    COUNT(CASE WHEN wo.work_type = 'Correctivo' THEN 1 END) as fallos
+                FROM machines m
+                LEFT JOIN sections s ON m.section_id = s.id
+                LEFT JOIN work_orders wo ON m.id = wo.machine_id 
+                GROUP BY m.id, m.nombre, s.nombre, m.criticidad
+                HAVING COUNT(CASE WHEN wo.work_type = 'Correctivo' THEN 1 END) > 0
+                ORDER BY fallos DESC
+                LIMIT 10
+            """)
+            top_problematic = db.execute(top_problematic_all).fetchall()
         
         return {
             "plant_overview": {
@@ -1377,11 +1429,17 @@ def init_models_on_startup():
 init_models_on_startup()
 
 
+class BatchPredictionRequest(BaseModel):
+    section_id: Optional[int] = None
+    max_machines: Optional[int] = 10
+    force_refresh: Optional[bool] = False
+
 @router.post("/predictions/trigger-batch", dependencies=[Depends(get_ai_ready)])
 async def trigger_batch_predictions_fixed(
+    request: Optional[BatchPredictionRequest] = None,
     section_id: Optional[int] = Query(None),
-    max_machines: int = Query(10, ge=1, le=20),
-    force_refresh: bool = Query(False),
+    max_machines: Optional[int] = Query(None),
+    force_refresh: Optional[bool] = Query(None),
     background_tasks: BackgroundTasks = BackgroundTasks(),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
@@ -1389,6 +1447,10 @@ async def trigger_batch_predictions_fixed(
     """✅ DISPARA PREDICCIONES EN LOTE CORREGIDO"""
     try:
         logger.info(f"🚀 Iniciando predicciones en lote - Usuario: {current_user.username}")
+        
+        target_section_id = (request.section_id if request and request.section_id is not None else section_id)
+        target_max_machines = (request.max_machines if request and request.max_machines is not None else max_machines) or 10
+        target_force_refresh = (request.force_refresh if request and request.force_refresh is not None else force_refresh) or False
         
         # ✅ ASEGURAR MODELOS REALES
         if not AI_CONFIG_CACHE.get("default_prediction_model"):
@@ -1405,18 +1467,31 @@ async def trigger_batch_predictions_fixed(
             SELECT DISTINCT m.id, m.nombre, m.section_id, COUNT(wo.id) as orden_count
             FROM machines m
             INNER JOIN work_orders wo ON m.id = wo.machine_id
-            WHERE wo.created_at >= NOW() - INTERVAL '3 months'
-            AND (:section_id IS NULL OR m.section_id = :section_id)
+            WHERE (:section_id IS NULL OR m.section_id = :section_id)
             GROUP BY m.id, m.nombre, m.section_id
-            HAVING COUNT(wo.id) >= 2
+            HAVING COUNT(wo.id) >= 1
             ORDER BY COUNT(wo.id) DESC
             LIMIT :max_machines
         """)
         
         machines_data = db.execute(machines_query, {
-            "section_id": section_id,
-            "max_machines": max_machines
+            "section_id": target_section_id,
+            "max_machines": target_max_machines
         }).fetchall()
+        
+        if not machines_data:
+            fallback_query = text("""
+                SELECT DISTINCT m.id, m.nombre, m.section_id, COUNT(wo.id) as orden_count
+                FROM machines m
+                INNER JOIN work_orders wo ON m.id = wo.machine_id
+                GROUP BY m.id, m.nombre, m.section_id
+                HAVING COUNT(wo.id) >= 1
+                ORDER BY COUNT(wo.id) DESC
+                LIMIT :max_machines
+            """)
+            machines_data = db.execute(fallback_query, {
+                "max_machines": target_max_machines
+            }).fetchall()
         
         if not machines_data:
             raise HTTPException(
@@ -1476,7 +1551,7 @@ async def trigger_batch_predictions_fixed(
             "machines_count": len(machines_data),
             "machine_names": [m.nombre for m in machines_data],
             "model_used": real_model,
-            "estimated_completion": "3-8 minutos",
+            "estimated_completion": "1-3 minutos",
             "initiated_by": current_user.username,
             "check_status_url": "/api/ai/predictions/real-data"
         }
