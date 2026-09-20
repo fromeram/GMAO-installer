@@ -33,7 +33,7 @@ class Inventory(Base):
     supplier = relationship("Supplier", back_populates="inventory_items")
     warehouse = relationship("Warehouse", back_populates="inventory_items")
     # Asegúrate que WorkOrder tiene la relación inversa con back_populates="repuesto"
-    work_orders = relationship("WorkOrder", back_populates="repuesto")
+    work_order_materials = relationship("WorkOrderMaterial", back_populates="inventory", cascade="all, delete-orphan")
     machine_associations = relationship(
         "MachinePartAssociation",
         back_populates="part", # 'part' es como llamamos a la relación en MachinePartAssociation

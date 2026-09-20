@@ -94,6 +94,7 @@ class WorkOrder(Base):
     format_from_obj = relationship("Format", foreign_keys=[format_from_id], back_populates="work_orders_as_from")
     format_to_obj = relationship("Format", foreign_keys=[format_to_id], back_populates="work_orders_as_to")
     technicians = relationship("WorkOrderTechnician", back_populates="work_order", cascade="all, delete-orphan")
+    materials = relationship("WorkOrderMaterial", back_populates="work_order", cascade="all, delete-orphan")
     checklist_progress = relationship("ChecklistProgress", back_populates="work_order", cascade="all, delete-orphan")
 
     generated_from_maintenance = relationship(

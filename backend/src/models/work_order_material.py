@@ -20,8 +20,8 @@ class WorkOrderMaterial(Base):
     unit_cost_at_use = Column(Numeric(10, 2), nullable=False) # Precio histórico
 
     # Relaciones
-    work_order = relationship("WorkOrder")
-    inventory = relationship("Inventory")
+    work_order = relationship("WorkOrder", back_populates="materials")
+    inventory = relationship("Inventory", back_populates="work_order_materials")
 
     def __repr__(self):
         return f"<WorkOrderMaterial(wo_id={self.work_order_id}, item_id={self.inventory_id}, qty={self.quantity_used})>"
