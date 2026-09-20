@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Table, Button, Modal, Form, Input, InputNumber, Select, message, 
-  Space, Card, Typography, Popconfirm, Tag, Switch, Alert 
+  Space, Card, Typography, Popconfirm, Tag, Switch, Alert, Spin 
 } from 'antd';
 import { 
   PlusOutlined, EditOutlined, DeleteOutlined, SettingOutlined,
@@ -24,8 +24,9 @@ const FormatManager = () => {
   const [form] = Form.useForm();
   const { currentUser } = useAuth();
 
-  // Solo admin y jefe de mantenimiento pueden gestionar formatos
-  const canManage = ['Administrador', 'Jefe de Mantenimiento'].includes(currentUser?.role);
+  // Admin, jefe de mantenimiento y jefe de sección pueden gestionar formatos
+  const userRole = currentUser?.role?.nombre || (typeof currentUser?.role === 'string' ? currentUser?.role : '');
+  const canManage = ['Administrador', 'Jefe de Mantenimiento', 'Jefe de Sección', 'Jefe Sección'].includes(userRole);
 
   useEffect(() => {
     loadData();
@@ -34,7 +35,7 @@ const FormatManager = () => {
   const loadData = async () => {
     try {
       const [formatsData, machinesData] = await Promise.all([
-        fetchWithAuth('/formats'),
+        fetchWithAuth('/formats?active_only=false'),
         fetchWithAuth('/maquinas')
       ]);
       setFormats(formatsData || []);
@@ -185,6 +186,14 @@ const FormatManager = () => {
       align: 'center'
     }
   ];
+
+  if (loading) {
+    return (
+      <div style={{ padding: 48, textAlign: 'center' }}>
+        <Spin size="large" tip="Cargando formatos..." />
+      </div>
+    );
+  }
 
   if (!canManage) {
     return (

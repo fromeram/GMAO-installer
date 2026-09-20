@@ -399,6 +399,41 @@ def get_machines_for_line(
     machines = db.query(Machine).filter(Machine.line_id == line_id).all()
     return machines
 
+@router.get("/maquinas/all-for-global-change")
+def get_all_machines_for_global_change(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Obtiene todas las máquinas organizadas por sección y línea para cambios globales"""
+    try:
+        machines = db.query(Machine).options(
+            joinedload(Machine.line).joinedload(Line.section)
+        ).filter(Machine.active == True).all()
+        
+        organized_machines = []
+        for machine in machines:
+            if machine.line and machine.line.section:
+                organized_machines.append({
+                    'id': machine.id,
+                    'nombre': machine.nombre,
+                    'modelo': machine.modelo,
+                    'line_id': machine.line.id,
+                    'line_name': machine.line.nombre,
+                    'section_id': machine.line.section.id,
+                    'section_name': machine.line.section.nombre
+                })
+        
+        return {
+            'machines': organized_machines,
+            'summary': {
+                'total_machines': len(organized_machines),
+                'sections': len(set(m['section_id'] for m in organized_machines)),
+                'lines': len(set(m['line_id'] for m in organized_machines))
+            }
+        }
+    except Exception as e:
+        logger.error(f"Error obteniendo máquinas para cambio global: {e}")
+        raise HTTPException(status_code=500, detail="Error al obtener máquinas")
 
 @router.get("/maquinas/{machine_id}/metrics", response_model=MachineMetricsResponse)
 def get_machine_metrics(

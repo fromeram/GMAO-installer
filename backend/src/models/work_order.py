@@ -6,7 +6,7 @@ campos detallados de finalización Y nuevos campos para cambios de formato.
 """
 
 from sqlalchemy import (
-    Column, Integer, String, ForeignKey, DateTime, CheckConstraint, Text, Float, JSON, Boolean
+    Column, Integer, String, ForeignKey, DateTime, CheckConstraint, Text, Float, JSON, Boolean, Numeric
 )
 from sqlalchemy.orm import relationship
 from .base import Base
@@ -82,6 +82,12 @@ class WorkOrder(Base):
     setup_team = Column(JSON, nullable=True)
     setup_notes = Column(Text, nullable=True)
 
+    # Costes TCO
+    total_material_cost = Column(Numeric(10, 2), default=0.0)
+    total_labor_cost = Column(Numeric(10, 2), default=0.0)
+    total_external_cost = Column(Numeric(10, 2), default=0.0)
+    maintenance_request_origin_id = Column(Integer, nullable=True)
+
     # Relaciones
     section = relationship("Section")
     line = relationship("Line")
@@ -111,6 +117,14 @@ class WorkOrder(Base):
     def has_checklist(self):
         """Determina si esta orden tiene un checklist asociado"""
         return self.task_list_id is not None or len(self.checklist_progress) > 0
+
+    @property
+    def total_cost(self):
+        """Calcula el coste total de la orden de trabajo (material + labor + externo)"""
+        mat = self.total_material_cost or 0
+        labor = self.total_labor_cost or 0
+        ext = self.total_external_cost or 0
+        return float(mat) + float(labor) + float(ext)
 
     def __repr__(self):
         return f"<WorkOrder(id={self.id}, title='{self.title}', status='{self.status}')>"

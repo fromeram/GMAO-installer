@@ -135,6 +135,64 @@ def list_formats(
     formats = query.order_by(Format.name).all()
     return formats
 
+@router.get("/formats/global-templates")
+def get_global_format_templates(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    """Obtiene formatos que pueden usarse como plantillas para cambios globales"""
+    try:
+        # Buscar formatos que tengan máquinas asociadas (potenciales plantillas globales)
+        formats = db.query(Format).filter(
+            Format.active == True,
+            Format.machines_requiring_adjustment.isnot(None)
+        ).all()
+        
+        # Filtrar solo los que tienen al menos 2 máquinas (para ser considerados "globales")
+        global_templates = []
+        for format_obj in formats:
+            if (format_obj.machines_requiring_adjustment and 
+                isinstance(format_obj.machines_requiring_adjustment, list) and 
+                len(format_obj.machines_requiring_adjustment) >= 2):
+                
+                # Obtener información de las máquinas
+                machine_info = []
+                for machine_id in format_obj.machines_requiring_adjustment:
+                    machine = db.query(Machine).options(
+                        joinedload(Machine.line).joinedload(Line.section)
+                    ).filter(Machine.id == machine_id).first()
+                    
+                    if machine:
+                        machine_info.append({
+                            'id': machine.id,
+                            'nombre': machine.nombre,
+                            'section': machine.line.section.nombre if machine.line and machine.line.section else 'N/A',
+                            'line': machine.line.nombre if machine.line else 'N/A'
+                        })
+                
+                global_templates.append({
+                    'id': format_obj.id,
+                    'name': format_obj.name,
+                    'description': format_obj.description,
+                    'estimated_setup_time': format_obj.estimated_setup_time,
+                    'machines_count': len(machine_info),
+                    'machines_info': machine_info,
+                    'sections_involved': len(set(m['section'] for m in machine_info if m['section'] != 'N/A')),
+                    'is_truly_global': len(set(m['section'] for m in machine_info if m['section'] != 'N/A')) > 1
+                })
+        
+        return {
+            'templates': global_templates,
+            'summary': {
+                'total_templates': len(global_templates),
+                'truly_global_templates': len([t for t in global_templates if t['is_truly_global']])
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Error obteniendo plantillas globales: {e}")
+        raise HTTPException(status_code=500, detail="Error al obtener plantillas")
+
 @router.get("/formats/{format_id}", response_model=FormatRead)
 def get_format(
     format_id: int,
@@ -323,110 +381,6 @@ def create_format_change_order(
         db.rollback()
         logger.error(f"Error creando orden de cambio de formato: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Error interno al crear orden de cambio de formato")
-    
-
-@router.get("/maquinas/all-for-global-change")
-def get_all_machines_for_global_change(
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    """Obtiene todas las máquinas organizadas por sección y línea para cambios globales"""
-    
-    try:
-        # Cargar todas las máquinas con sus relaciones
-        machines = db.query(Machine).options(
-            joinedload(Machine.line).joinedload(Line.section)
-        ).filter(Machine.active == True).all()
-        
-        # Organizar por sección y línea
-        organized_machines = []
-        for machine in machines:
-            if machine.line and machine.line.section:
-                organized_machines.append({
-                    'id': machine.id,
-                    'nombre': machine.nombre,
-                    'modelo': machine.modelo,
-                    'line_id': machine.line.id,
-                    'line_name': machine.line.nombre,
-                    'section_id': machine.line.section.id,
-                    'section_name': machine.line.section.nombre
-                })
-        
-        return {
-            'machines': organized_machines,
-            'summary': {
-                'total_machines': len(organized_machines),
-                'sections': len(set(m['section_id'] for m in organized_machines)),
-                'lines': len(set(m['line_id'] for m in organized_machines))
-            }
-        }
-        
-    except Exception as e:
-        logger.error(f"Error obteniendo máquinas para cambio global: {e}")
-        raise HTTPException(status_code=500, detail="Error al obtener máquinas")
-
-# 4. AGREGAR ENDPOINT PARA PLANTILLAS DE FORMATO GLOBAL
-
-@router.get("/formats/global-templates")
-def get_global_format_templates(
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    """Obtiene formatos que pueden usarse como plantillas para cambios globales"""
-    
-    try:
-        # Buscar formatos que tengan máquinas asociadas (potenciales plantillas globales)
-        formats = db.query(Format).filter(
-            Format.active == True,
-            Format.machines_requiring_adjustment.isnot(None)
-        ).all()
-        
-        # Filtrar solo los que tienen al menos 2 máquinas (para ser considerados "globales")
-        global_templates = []
-        for format_obj in formats:
-            if (format_obj.machines_requiring_adjustment and 
-                isinstance(format_obj.machines_requiring_adjustment, list) and 
-                len(format_obj.machines_requiring_adjustment) >= 2):
-                
-                # Obtener información de las máquinas
-                machine_info = []
-                for machine_id in format_obj.machines_requiring_adjustment:
-                    machine = db.query(Machine).options(
-                        joinedload(Machine.line).joinedload(Line.section)
-                    ).filter(Machine.id == machine_id).first()
-                    
-                    if machine:
-                        machine_info.append({
-                            'id': machine.id,
-                            'nombre': machine.nombre,
-                            'section': machine.line.section.nombre if machine.line and machine.line.section else 'N/A',
-                            'line': machine.line.nombre if machine.line else 'N/A'
-                        })
-                
-                global_templates.append({
-                    'id': format_obj.id,
-                    'name': format_obj.name,
-                    'description': format_obj.description,
-                    'estimated_setup_time': format_obj.estimated_setup_time,
-                    'machines_count': len(machine_info),
-                    'machines_info': machine_info,
-                    'sections_involved': len(set(m['section'] for m in machine_info if m['section'] != 'N/A')),
-                    'is_truly_global': len(set(m['section'] for m in machine_info if m['section'] != 'N/A')) > 1
-                })
-        
-        return {
-            'templates': global_templates,
-            'summary': {
-                'total_templates': len(global_templates),
-                'truly_global_templates': len([t for t in global_templates if t['is_truly_global']])
-            }
-        }
-        
-    except Exception as e:
-        logger.error(f"Error obteniendo plantillas globales: {e}")
-        raise HTTPException(status_code=500, detail="Error al obtener plantillas")
-
-
 
 @router.put("/work-orders/{order_id}/format-change")
 def update_format_change_order(
