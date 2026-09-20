@@ -408,7 +408,7 @@ def get_all_machines_for_global_change(
     try:
         machines = db.query(Machine).options(
             joinedload(Machine.line).joinedload(Line.section)
-        ).filter(Machine.active == True).all()
+        ).all()
         
         organized_machines = []
         for machine in machines:
