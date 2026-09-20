@@ -864,48 +864,6 @@ async def update_complete_orden(
         logger.error(f"Error al actualizar orden {orden_id}: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Error interno al guardar la orden: {e}")
 
-@router.get("/task-lists", response_model=List[TaskListReadBasic], summary="Listar Listas de Tareas")
-def list_task_lists(
-    applies_to_type: Optional[str] = Query(None, description="Filtrar por tipo de aplicación"),
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    """Lista todas las listas de tareas disponibles."""
-    try:
-        query = db.query(TaskList).options(joinedload(TaskList.steps))
-        
-        if applies_to_type:
-            query = query.filter(TaskList.applies_to_type == applies_to_type)
-        
-        task_lists = query.order_by(TaskList.name).all()
-        return task_lists
-        
-    except Exception as e:
-        logger.error(f"Error listando listas de tareas: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail="Error interno al listar listas de tareas")
-
-@router.get("/task-lists/{task_list_id}", response_model=TaskListRead, summary="Obtener Lista de Tareas")
-def get_task_list_for_workorder(
-    task_list_id: int,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    """Obtiene los detalles de una lista de tareas específica."""
-    try:
-        task_list = db.query(TaskList).options(
-            joinedload(TaskList.steps)
-        ).filter(TaskList.id == task_list_id).first()
-        
-        if not task_list:
-            raise HTTPException(status_code=404, detail="Lista de tareas no encontrada")
-        
-        return task_list
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Error obteniendo lista de tareas {task_list_id}: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail="Error interno al obtener lista de tareas")
 
 
 

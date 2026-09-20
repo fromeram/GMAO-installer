@@ -214,7 +214,7 @@ const MantenimientoPreventivo = () => {
   useEffect(() => {
     // Se ejecuta si location.state tiene la instrucción y si ya hemos cargado los planes
     if (location.state?.editPlanId && allPlans.length > 0) {
-      const planToEdit = allPlans.find(p => p.id === location.state.editPlanId);
+      const planToEdit = allPlans.find(p => String(p.id) === String(location.state.editPlanId));
       if (planToEdit) {
         handleEdit(planToEdit); // Llama a la función que ya tienes para abrir el modal
         

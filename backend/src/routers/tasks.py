@@ -147,11 +147,15 @@ def create_task_list(
     summary="Obtener todas las Listas de Tareas Estándar"
 )
 def list_task_lists(
+    applies_to_type: Optional[str] = Query(None, description="Filtrar por tipo de aplicación"),
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user) # Permitir a usuarios logueados ver las listas
 ):
     """Devuelve una lista con la información básica de todas las listas de tareas."""
-    lists = db.query(TaskList).order_by(TaskList.name).all()
+    query = db.query(TaskList).options(joinedload(TaskList.steps))
+    if applies_to_type:
+        query = query.filter(TaskList.applies_to_type == applies_to_type)
+    lists = query.order_by(TaskList.name).all()
     return lists
 
 
